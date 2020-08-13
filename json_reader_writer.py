@@ -25,7 +25,7 @@ class JsonReaderWriter :
                 json.dump(data, outfile, indent=4)
                 outfile.close()
                        
-    def readAccountsFromJson(self) :
+    def readFromJson(self) :
         with open (self.file) as infile :
             if os.path.getsize(self.file) == 0:
                 infile.close()
