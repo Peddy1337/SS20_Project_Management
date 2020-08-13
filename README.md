@@ -27,6 +27,5 @@ all the conventions below apply only to handwriten code and not to generated cod
   * try to create only one class per file in order to prevent chaos
   * put at least one blank line between class and function definitions 
   * always try to make your code as readable as possible
-  * all class attributes get the prefix "m_" followed by a lowercase name ("m_*attributename*")
   * class names start with capital letters ("class Example :")
   * don't write endlessly long lines of code (rule of thumb : if you have to use the scroll bar then it 's bad)
