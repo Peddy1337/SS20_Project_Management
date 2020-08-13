@@ -23,6 +23,14 @@ class JsonReaderWriter :
                 outfile.seek(0)
                 json.dump(data, outfile, indent=4)
                        
+    def readAccountsFromJson(self) :
+        with open (self.file) as infile :
+            if os.path.getsize(self.file) == 0:
+                return False # return False when the file is empty
+            else :
+                data = json.load(infile) # return dict when file is not empty
+                return data
+        
     file = ''
 
 
