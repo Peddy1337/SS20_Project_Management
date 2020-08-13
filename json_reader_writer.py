@@ -41,7 +41,7 @@ class JsonReaderWriter :
         contents['rides'].append({
             'Name' : name,
             'Datum' : date,
-            'Abfangskilometerstand' : startKm,
+            'Anfangskilometerstand' : startKm,
             'Endkilometerstand' : endKm,
             'gefahrene Kilometer' : drivenKm,
             'Art der Fahrt' : typeOfRide,
@@ -68,7 +68,7 @@ class JsonReaderWriter :
         contents['header'].append({
             'Anfangsdatum' : startDate,
             'Enddatum' : endDate,
-            'Abfangskilometerstand' : startKm,
+            'Anfangskilometerstand' : startKm,
             'Endkilometerstand' : endKm,
             'KFZ-Kennzeichen' : licensePlate,
         })
