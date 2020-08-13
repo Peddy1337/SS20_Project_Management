@@ -19,6 +19,7 @@ Our main goals for this project are :
       * [doc] when you add, remove or fix documentation ("[doc] add team description to documentation")
       * [tidy] when you make small non code changes such as removing whitespaces ("[tidy] remove trailing spaces")
       * [comment] when you add, edit or remove a comment ("[comment] add ... comment")
+	  * [chore] when you add, edit or remove config files like .gitignore ("[chore] add .gitignore")
 
 # Coding Conventions
 all the conventions below apply only to handwriten code and not to generated code
