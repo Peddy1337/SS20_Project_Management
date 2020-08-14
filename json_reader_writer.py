@@ -27,6 +27,11 @@ class JsonReaderWriter :
                 json.dump(data, outfile, indent=4)
                 outfile.close()
                        
+    def overwriteAccountList(self,accDict) :
+        with open(self.file, 'w+') as outfile :
+            json.dump(accDict, outfile, indent=4)
+            outfile.close()
+
     def readFromJson(self) :
         with open (self.file) as infile :
             if os.path.getsize(self.file) == 0:

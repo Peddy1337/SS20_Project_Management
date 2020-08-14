@@ -6,6 +6,17 @@ readerRide = json_reader_writer.JsonReaderWriter('WWP399_2020.json')
 readerAcc.writeAccountToFile('Patrick','whatever.png','1234','Neverland')
 readerAcc.writeAccountToFile('Bastian','default.png','4321','Somewhere')
 
+data = {}
+data['accounts'] = []
+data['accounts'].append({
+    'name' : 'Accountüberschreiber',
+    'picture' : 'bamboozled.png',
+    'pin' : '1337',
+    'adress' : '....'
+    })
+
+readerAcc.overwriteAccountList(data)
+
 data1 = readerAcc.readFromJson()
 
 if data1 :
