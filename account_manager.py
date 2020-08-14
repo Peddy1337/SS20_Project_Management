@@ -39,6 +39,20 @@ class AccountManager :
             print('Account couldnt be deleted')
             return False
 
+    def selectAccount(self,targetAccName) :
+        search = self.searchAccount(targetAccName)
+        if search :
+            accountSelected = True
+            selectedAccount = accountList['accounts'][search]
+        else :
+            self.deselectAccount()
+            print('Account couldnt be selected')
+            return False
+        
+    def deselectAccount(self) :
+        selectedAccount = {}
+        accountSelected = False
+
 
     file = ''
     accountList = {}
