@@ -4,6 +4,8 @@ import json
 class JsonReaderWriter :
     def __init__(self,file) :
         self.file = file
+        crt = open(self.file, "a") # create file if it doesn't exist
+        crt.close()
 
     def writeAccountToFile(self,name,picturePath,pin,adress) :
         contents = {}
