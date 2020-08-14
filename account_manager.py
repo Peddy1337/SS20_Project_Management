@@ -9,6 +9,10 @@ class AccountManager :
     def loadAccountList(self) :
         self.accountList = self.jsonRW.readFromJson()
 
+    def addAccount(self,accDetails) :
+        self.jsonRW.writeAccountToFile(accDetails['name'],accDetails['picture'],accDetails['pin'],accDetails['adress'])
+        self.loadAccountList()
+
 
     file = ''
     accountList = {}
