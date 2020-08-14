@@ -30,6 +30,15 @@ class AccountManager :
         print('Account not found')
         return False
 
+    def deleteAccount(self,targetAccName) :
+        search = self.searchAccount(targetAccName)
+        if search :
+           del accountList['accounts'][search]
+           self.jsonRW.overwriteAccountList(self.accountList)
+        else :
+            print('Account couldnt be deleted')
+            return False
+
 
     file = ''
     accountList = {}
