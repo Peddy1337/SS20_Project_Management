@@ -53,6 +53,12 @@ class AccountManager :
         selectedAccount = {}
         accountSelected = False
 
+    def checkPin(self,inputPin) :
+        if self.accountSelected :
+            return inputPin == self.selectedAccount['pin']
+        else :
+            print('No Account selected')
+            return False
 
     file = ''
     accountList = {}
