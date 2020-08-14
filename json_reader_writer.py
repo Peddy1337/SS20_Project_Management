@@ -7,6 +7,7 @@ class JsonReaderWriter :
         crt = open(self.file, "a") # create file if it doesn't exist
         crt.close()
 
+    # adds an account to the accounts list
     def writeAccountToFile(self,name,picturePath,pin,adress) :
         contents = {}
         contents['accounts'] = []
@@ -26,12 +27,14 @@ class JsonReaderWriter :
                 outfile.seek(0)
                 json.dump(data, outfile, indent=4)
                 outfile.close()
-                       
+
+    # overwriting should be used for deleting and editing accounts
     def overwriteAccountList(self,accDict) :
         with open(self.file, 'w+') as outfile :
             json.dump(accDict, outfile, indent=4)
             outfile.close()
 
+    # reads from json file and returns a dict object if possible                   
     def readFromJson(self) :
         with open (self.file) as infile :
             if os.path.getsize(self.file) == 0:
@@ -42,6 +45,7 @@ class JsonReaderWriter :
                 infile.close()
                 return data
 
+    # adds a ride to the logbook if the file is not empty (e.g a header is set) otherwise returns false
     def writeRideToJson(self,name,date,startKm,endKm,drivenKm,typeOfRide,purpose,startTime,endTime,accepted) :
         contents = {}
         contents['rides'] = []
@@ -69,6 +73,7 @@ class JsonReaderWriter :
                 json.dump(data, outfile, indent=4)
                 outfile.close()
 
+    # adds a header to an empty logbook file. returns false if header is already set
     def writeLogbookHeaderToJson(self,startDate,endDate,startKm,endKm,licensePlate) :
         contents = {}
         contents['header'] = []
