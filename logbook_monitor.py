@@ -132,7 +132,7 @@ class LogbookMonitor :
     def signAllUnsignedRides(self) :
         for p in self.logbook['rides'] :
             if p['Bestaetigt'] == 'Nein' :
-                self.signRideAfterwards(p)
+                self.signRideAfterwards(self.logbook['rides'].index(p))
         
         print ('Signing of all rides finished\n')
             
