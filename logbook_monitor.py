@@ -47,6 +47,8 @@ class LogbookMonitor :
         while self.rideStarted :
             self.rSim.tlock.acquire()
             self.routeKm = str(self.rSim.routeKm)
+            index = self.routeKm.find('.')
+            self.routeKm = self.routeKm[0:index+2:]
             self.rSim.tlock.release()
             time.sleep(self.sleepTime)
 
@@ -71,6 +73,8 @@ class LogbookMonitor :
 
     def calculateKm(self) :
         self.endKm = str(float(self.startKm) +  float(self.routeKm))
+        index = self.endKm.find('.')
+        self.endKm = self.endKm[0:index+2:]
 
     def applySignature(self) :
         if self.signed :
