@@ -96,6 +96,8 @@ class LogbookMonitor :
                                  self.currentRide['Bestaetigt'])
 
 
+    def loadLogbook(self) :
+        self.logbook = self.jRW.readFromJson()
 
     file = ''
     logbook = {}
