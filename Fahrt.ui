@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: #404040;
+	color: #00CC00}
+QPushButton{
+	color: #FFFFCC; 
+	background-color: #006600;
+	border-style: inset;
+	border-color:black;
+	border-width: 1px;}
+QLineEdit{
+	color: #FFFFCC;
+	background-color: #4FC44F;
+	border-style: inset;
+	border-color:black;
+	border-width: 1px;}
+QLabel{
+	color: #FFFFCC;}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="Fahrart_andern">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>270</y>
+      <width>250</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Art der Fahrt andern</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Fahrt_beenden">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>350</y>
+      <width>250</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Fahrt beenden</string>
+    </property>
+   </widget>
+   <widget class="QWebView" name="webView">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>60</y>
+      <width>481</width>
+      <height>360</height>
+     </rect>
+    </property>
+    <property name="url">
+     <url>
+      <string>about:blank</string>
+     </url>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Name">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>200</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Art_der_Fahrt">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>10</y>
+      <width>200</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Art der Fahrt</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Uhrzeit_feld">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>40</y>
+      <width>115</width>
+      <height>32</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Datum_feld">
+    <property name="geometry">
+     <rect>
+      <x>675</x>
+      <y>40</y>
+      <width>115</width>
+      <height>32</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Gefahrende_KM_feld">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>122</y>
+      <width>250</width>
+      <height>32</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Fahrzeit_feld">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>204</y>
+      <width>250</width>
+      <height>32</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Uhrzeit_label">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>10</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Uhrzeit:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Datum_label">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>10</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Datum:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Gefahrende_KM_label">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>92</y>
+      <width>250</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gefahrende KM:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Fahrzeit_label">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>174</y>
+      <width>250</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Fahrzeit:</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKitWidgets/QWebView</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
