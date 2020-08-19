@@ -46,7 +46,7 @@ class LogbookMonitor :
     def update(self) :
         while self.rideStarted :
             self.rSim.tlock.acquire()
-            self.routeKm = str(self.rSim.routeKm())
+            self.routeKm = str(self.rSim.routeKm)
             self.rSim.tlock.release()
             time.sleep(self.sleepTime)
 
