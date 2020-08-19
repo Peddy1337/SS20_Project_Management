@@ -81,6 +81,7 @@ class LogbookMonitor :
         self.currentRide['gefahrene Kilometer'] = self.routeKm
         self.currentRide['Fahrtende'] = self.getTime()
         self.currentRide['Bestaetigt'] = self.applySignature()
+        self.updateHeader(self.endKm)
         self.documentRide()
 
     def documentRide(self) :
@@ -95,10 +96,17 @@ class LogbookMonitor :
                                  self.currentRide['Fahrtende'],
                                  self.currentRide['Bestaetigt'])
 
-
     def loadLogbook(self) :
         self.logbook = self.jRW.readFromJson()
 
+    def documentHeader(self,hStartKm,hLicensePlate) :
+        updateDate()
+        self.jRW.writeLogbookHeaderToJson(self.date,self.date,hStartKm,hStartKm,hLicensePlate)
+
+    def updateHeader(self,endKm) :
+        updateDate()
+        self.jRW.updateLogbookHeaderToJson(self.date,endKm)
+            
     file = ''
     logbook = {}
     currentRide = {}
