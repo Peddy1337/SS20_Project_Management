@@ -7,6 +7,13 @@ import time
 class LogbookMonitor :
     def __init__(self,file) :
         self.file = file
+        self.name = ''
+        self.typeOfRide = ''
+        self.purpose = ''
+        self.signed = False
+        self.date = ''
+        self.startKm = ''
+        self.endKm = ''
         self.routeKm = ''
         self.sleepTime = 5
         self.rSim = route_simulator.RouteSimulator()
