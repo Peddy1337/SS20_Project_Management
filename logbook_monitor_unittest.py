@@ -55,6 +55,8 @@ time.sleep(6)
 
 logbook.endRide()
 
+logbook.adjustEndKm(0.1)
+
 logbook.setSignature(True)
 
 logbook.documentRide()
