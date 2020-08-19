@@ -35,7 +35,7 @@ class LogbookMonitor :
     def updateStartKm(self) :
         self.loadLogbook()
         # startKm needs to be set to the endKm of the last ride
-        self.startKm = self.logbook['header']['Endkilometerstand']
+        self.startKm = self.logbook['header'][0]['Endkilometerstand']
 
     def updateDate(self) :
         self.date = datetime.today().strftime('%d.%m.%Y')

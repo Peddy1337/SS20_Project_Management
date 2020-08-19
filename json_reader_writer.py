@@ -97,8 +97,8 @@ class JsonReaderWriter :
     def updateLogbookHeaderToJson(self,endDate,endKm) :
         contents = self.readFromJson()
         if contents :
-            contents['header']['Enddatum'] = endDate
-            contents['header']['Endkilometerstand'] = endKm
+            contents['header'][0]['Enddatum'] = endDate
+            contents['header'][0]['Endkilometerstand'] = endKm
             with open(self.file, 'w+') as outfile :
                 json.dump(contents, outfile, indent=4)
                 outfile.close()
