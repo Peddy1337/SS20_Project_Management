@@ -85,7 +85,13 @@ class LogbookMonitor :
     def adjustEndKm(self,adjustment) :
         # adjustment should be of type float
         self.endKm = str(float(self.endKm)+ adjustment)
+        index = self.endKm.find('.')
+        self.endKm = self.endKm[0:index+2:]
         self.currentRide['Endkilometerstand'] = self.endKm
+        self.routeKm = str(float(self.routeKm)+ adjustment)
+        index = self.routeKm.find('.')
+        self.routeKm = self.routeKm[0:index+2:]
+        self.currentRide['gefahrene Kilometer'] = self.routeKm
 
     def endRide(self) :
         self.rideStarted = False
