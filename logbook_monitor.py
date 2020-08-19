@@ -78,6 +78,11 @@ class LogbookMonitor :
         else :
             return 'Nein'
 
+    def adjustEndKm(self,adjustment) :
+        # adjustment should be of type float
+        self.endKm = str(float(self.endKm)+ adjustment)
+        self.currentRide['Endkilometerstand'] = self.endKm
+
     def endRide(self) :
         self.rideStarted = False
         self.updateThread.join()
