@@ -7,8 +7,7 @@ class RouteSimulator :
         self.sleepTime = 5
         self.running = False
         self.simThread = threading.Thread(target = self.simulate , args=())
-        self.tlock() = threading.Lock()
-        self.startThread()
+        self.tlock = threading.Lock()
 
     def __del__(self) :
         self.stopThread()
@@ -20,6 +19,7 @@ class RouteSimulator :
     def stopThread(self) :
         self.running = False
         self.simThread.join()
+        self.simThread = threading.Thread(target = self.simulate , args=())
         self.routeKm = 0
 
     def simulate(self) :

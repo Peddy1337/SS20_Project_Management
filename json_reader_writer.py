@@ -92,7 +92,32 @@ class JsonReaderWriter :
             else :
                 print ('Logbook Header already exists\n')
                 return False # it is not permitted to change the Logbook Header of an existing Logbook
-        
+
+    # updates enddate and endkm from logbook header
+    def updateLogbookHeaderToJson(self,endDate,endKm) :
+        contents = self.readFromJson()
+        if contents :
+            contents['header'][0]['Enddatum'] = endDate
+            contents['header'][0]['Endkilometerstand'] = endKm
+            with open(self.file, 'w+') as outfile :
+                json.dump(contents, outfile, indent=4)
+                outfile.close()
+        else :
+            print('Header couldnt be updated\n')
+            return False
+
+    # add signature to ride after it was documented
+    def signatureToJsonRide(self,index) :
+        contents = self.readFromJson()
+        if contents :
+            contents['rides'][index]['Bestaetigt'] = 'Ja'
+            with open(self.file, 'w+') as outfile :
+                json.dump(contents, outfile, indent=4)
+                outfile.close()
+        else :
+            print('Signature couldnt be applied\n')
+            return False
+    
     file = ''
 
 
