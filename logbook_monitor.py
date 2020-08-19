@@ -43,6 +43,7 @@ class LogbookMonitor :
     def getTime(self) :
         return datetime.today().strftime('%H:%M:%S')
 
+    # update routeKm every 5 seconds
     def update(self) :
         while self.rideStarted :
             self.rSim.tlock.acquire()
@@ -52,6 +53,7 @@ class LogbookMonitor :
             self.rSim.tlock.release()
             time.sleep(self.sleepTime)
 
+    # start a new ride
     def newRide(self) :
         self.rideStarted = True
         self.updateStartKm()
@@ -71,17 +73,20 @@ class LogbookMonitor :
         self.rSim.startThread()
         self.updateThread.start()
 
+    # calculate endKm from startKm and routeKm
     def calculateKm(self) :
         self.endKm = str(float(self.startKm) +  float(self.routeKm))
         index = self.endKm.find('.')
         self.endKm = self.endKm[0:index+2:]
 
+    # check if signed is set and return the corresponding string
     def applySignature(self) :
         if self.signed :
             return 'Ja'
         else :
             return 'Nein'
 
+    # adjustment stop for endKm
     def adjustEndKm(self,adjustment) :
         # adjustment should be of type float
         self.endKm = str(float(self.endKm)+ adjustment)
@@ -93,6 +98,7 @@ class LogbookMonitor :
         self.routeKm = self.routeKm[0:index+2:]
         self.currentRide['gefahrene Kilometer'] = self.routeKm
 
+    # stop ride and stop both threads
     def endRide(self) :
         self.rideStarted = False
         self.updateThread.join()
@@ -103,6 +109,7 @@ class LogbookMonitor :
         self.currentRide['gefahrene Kilometer'] = self.routeKm
         self.currentRide['Fahrtende'] = self.getTime()
 
+    # document ride to json file
     def documentRide(self) :
         self.currentRide['Bestaetigt'] = self.applySignature()
         self.updateHeader(self.endKm)
@@ -117,21 +124,26 @@ class LogbookMonitor :
                                  self.currentRide['Fahrtende'],
                                  self.currentRide['Bestaetigt'])
 
+    # load the logbook from json
     def loadLogbook(self) :
         self.logbook = self.jRW.readFromJson()
 
+    # write logbook header to json file
     def documentHeader(self,hStartKm,hLicensePlate) :
         self.updateDate()
         self.jRW.writeLogbookHeaderToJson(self.date,self.date,hStartKm,hStartKm,hLicensePlate)
 
+    # update the logbook header enddate and endKm
     def updateHeader(self,endKm) :
         self.updateDate()
         self.jRW.updateLogbookHeaderToJson(self.date,endKm)
 
+    # sign ride after documentation
     def signRideAfterwards(self,index) :
         self.jRW.signatureToJsonRide(index)
         self.loadLogbook()
 
+    # check if there are usnigned rides
     def checkUnsignedRides(self) :
         for p in self.logbook['rides'] :
             if p['Bestaetigt'] == 'Nein' :
@@ -139,6 +151,7 @@ class LogbookMonitor :
         
         return False
 
+    # sign all unsigned rides
     def signAllUnsignedRides(self) :
         for p in self.logbook['rides'] :
             if p['Bestaetigt'] == 'Nein' :
