@@ -19,6 +19,7 @@ class RouteSimulator :
     def stopThread(self) :
         self.running = False
         self.simThread.join()
+        self.simThread = threading.Thread(target = self.simulate , args=())
         self.routeKm = 0
 
     def simulate(self) :

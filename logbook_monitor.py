@@ -87,6 +87,7 @@ class LogbookMonitor :
         self.rideStarted = False
         self.updateThread.join()
         self.rSim.stopThread()
+        self.updateThread = threading.Thread(target = self.update , args=())
         self.calculateKm()
         self.currentRide['Endkilometerstand'] = self.endKm
         self.currentRide['gefahrene Kilometer'] = self.routeKm
