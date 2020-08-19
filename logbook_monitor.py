@@ -32,6 +32,11 @@ class LogbookMonitor :
     def setSignature(self,signed) :
         self.signed = signed # should be bool
 
+    def updateStartKm(self) :
+        self.loadLogbook()
+        # startKm needs to be set to the endKm of the last ride
+        self.startKm = self.logbook['header']['Endkilometerstand']
+
     def updateDate(self) :
         self.date = datetime.today().strftime('%d.%m.%Y')
 
@@ -47,6 +52,7 @@ class LogbookMonitor :
 
     def newRide(self) :
         self.rideStarted = True
+        self.updateStartKm()
         self.updateDate()
         self.currentRide = {
             'Name' : self.name,
