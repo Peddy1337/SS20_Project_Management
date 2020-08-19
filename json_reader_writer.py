@@ -105,7 +105,19 @@ class JsonReaderWriter :
         else :
             print('Header couldnt be updated\n')
             return False
-               
+
+    # add signature to ride after it was documented
+    def signatureToJsonRide(self,index) :
+        contents = self.readFromJson()
+        if contents :
+            contents['rides'][index]['Bestaetigt'] = 'Ja'
+            with open(self.file, 'w+') as outfile :
+                json.dump(contents, outfile, indent=4)
+                outfile.close()
+        else :
+            print('Signature couldnt be applied\n')
+            return False
+    
     file = ''
 
 

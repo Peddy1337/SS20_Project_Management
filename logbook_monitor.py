@@ -112,6 +112,24 @@ class LogbookMonitor :
     def updateHeader(self,endKm) :
         updateDate()
         self.jRW.updateLogbookHeaderToJson(self.date,endKm)
+
+    def signRideAfterwards(self,index) :
+        self.jRW.signatureToJsonRide(index)
+        self.loadLogbook()
+
+    def checkUnsignedRides(self) :
+        for p in self.logbook['rides'] :
+            if p['Bestaetigt'] == 'Nein' :
+                return True
+        
+        return False
+
+    def signAllUnsignedRides(self) :
+        for p in self.logbook['rides'] :
+            if p['Bestaetigt'] == 'Nein' :
+                self.signRideAfterwards(p)
+        
+        print ('Signing of all rides finished\n')
             
     file = ''
     logbook = {}
