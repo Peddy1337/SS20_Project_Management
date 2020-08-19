@@ -110,11 +110,11 @@ class LogbookMonitor :
         self.logbook = self.jRW.readFromJson()
 
     def documentHeader(self,hStartKm,hLicensePlate) :
-        updateDate()
+        self.updateDate()
         self.jRW.writeLogbookHeaderToJson(self.date,self.date,hStartKm,hStartKm,hLicensePlate)
 
     def updateHeader(self,endKm) :
-        updateDate()
+        self.updateDate()
         self.jRW.updateLogbookHeaderToJson(self.date,endKm)
 
     def signRideAfterwards(self,index) :
