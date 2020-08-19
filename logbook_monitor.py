@@ -86,11 +86,10 @@ class LogbookMonitor :
         self.currentRide['Endkilometerstand'] = self.endKm
         self.currentRide['gefahrene Kilometer'] = self.routeKm
         self.currentRide['Fahrtende'] = self.getTime()
-        self.currentRide['Bestaetigt'] = self.applySignature()
-        self.updateHeader(self.endKm)
-        self.documentRide()
 
     def documentRide(self) :
+        self.currentRide['Bestaetigt'] = self.applySignature()
+        self.updateHeader(self.endKm)
         self.jRW.writeRideToJson(self.currentRide['Name'],
                                  self.currentRide['Datum'],
                                  self.currentRide['Anfangskilometerstand'],
