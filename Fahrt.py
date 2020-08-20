@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_MainWindow(object):
+class Fahrt(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -32,9 +32,13 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Fahrart_andern = QtWidgets.QPushButton(self.centralwidget)
+        self.Fahrart_andern.clicked.connect(
+            lambda: binding.Controlling.fahrt_fahrtbeginn(self,MainWindow))
         self.Fahrart_andern.setGeometry(QtCore.QRect(540, 270, 250, 70))
         self.Fahrart_andern.setObjectName("Fahrart_andern")
         self.Fahrt_beenden = QtWidgets.QPushButton(self.centralwidget)
+        self.Fahrt_beenden.clicked.connect(
+            lambda: binding.Controlling.fahrt_fahrtende(self,MainWindow))
         self.Fahrt_beenden.setGeometry(QtCore.QRect(540, 350, 250, 70))
         self.Fahrt_beenden.setObjectName("Fahrt_beenden")
         self.webView = QtWebKitWidgets.QWebView(self.centralwidget)
@@ -86,7 +90,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.Fahrart_andern.setText(_translate("MainWindow", "Art der Fahrt andern"))
+        self.Fahrart_andern.setText(_translate("MainWindow", "Art der Fahrt ändern"))
         self.Fahrt_beenden.setText(_translate("MainWindow", "Fahrt beenden"))
         self.Name.setText(_translate("MainWindow", "Name"))
         self.Art_der_Fahrt.setText(_translate("MainWindow", "Art der Fahrt"))
@@ -101,7 +105,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Fahrt()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

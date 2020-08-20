@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog(object):
+class Admin_Anmelden(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 480)
@@ -60,15 +60,15 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog", "PIN:"))
-        self.pushButton.setText(_translate("Dialog", "Zuruck"))
-        self.pushButton_2.setText(_translate("Dialog", "Bestatigen"))
+        self.pushButton.setText(_translate("Dialog", "Zurück"))
+        self.pushButton_2.setText(_translate("Dialog", "Bestätigen"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Admin_Anmelden()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

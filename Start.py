@@ -7,15 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Home import Ui_MainWindow as Ui_NextWindow #change from Home to Loginpage
-class Ui_MainWindow(object):
-
-    def openWindow(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_NextWindow()
-        self.ui.setupUi(self.window)
-        MainWindow.hide()
-        self.window.show()
+import binding
+class Start(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -39,7 +32,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.openWindow)
+        self.pushButton.clicked.connect(lambda: binding.Controlling.start_anmelden(self,MainWindow))
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(0, 70, 800, 131))
         font = QtGui.QFont()
@@ -73,7 +66,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Start()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

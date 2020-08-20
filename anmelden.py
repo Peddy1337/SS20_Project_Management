@@ -8,8 +8,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from numblock import Ui_Form as Form
-
-class Ui_MainWindow(object):
+import binding
+class anmelden(object):     
+        
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -36,13 +37,17 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(lambda:
+                        binding.Controlling.anmelden_start(self,MainWindow))
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(590, 320, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(25)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
-        self.lineEdit = LineEdit(self.centralwidget)
+        self.pushButton_2.clicked.connect(lambda:
+                        binding.Controlling.anmelden_home(self,MainWindow))
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(200, 20, 200, 32))
         font = QtGui.QFont()
         font.setPointSize(20)
@@ -82,12 +87,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "Zuruck"))
-        self.pushButton_2.setText(_translate("MainWindow", "Bestatigen"))
+        self.pushButton.setText(_translate("MainWindow", "Zurück"))
+        self.pushButton_2.setText(_translate("MainWindow", "Bestätigen"))
         self.lineEdit.setText(_translate("MainWindow", "Name"))
         self.lineEdit_2.setText(_translate("MainWindow", "Pin"))
         self.checkBox.setText(_translate("MainWindow", "Angemeldet bleiben"))
-        self.label.setText(_translate("MainWindow", "Dies ist ein Platyhalter fur das Bild "))
+        self.label.setText(_translate("MainWindow", "Dies ist ein Platzhalter für das Bild "))
 
 class LineEdit(QtWidgets.QLineEdit):
     
@@ -110,7 +115,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = anmelden()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

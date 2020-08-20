@@ -7,8 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-class Ui_MainWindow(object):
+import binding
+class Home(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -30,6 +30,8 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Neue_Fahrt = QtWidgets.QPushButton(self.centralwidget)
+        self.Neue_Fahrt.clicked.connect(
+            lambda: binding.Controlling.home_fahrtbeginn(self,MainWindow))
         self.Neue_Fahrt.setGeometry(QtCore.QRect(280, 170, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -38,6 +40,8 @@ class Ui_MainWindow(object):
         self.Neue_Fahrt.setFont(font)
         self.Neue_Fahrt.setObjectName("Neue_Fahrt")
         self.Angehoriger = QtWidgets.QPushButton(self.centralwidget)
+        self.Angehoriger.clicked.connect(
+            lambda: binding.Controlling.home_altersabfrage(self,MainWindow))
         self.Angehoriger.setGeometry(QtCore.QRect(280, 280, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -59,6 +63,8 @@ class Ui_MainWindow(object):
         self.Einstellung.setGeometry(QtCore.QRect(730, 10, 60, 60))
         self.Einstellung.setObjectName("Einstellung")
         self.Buch = QtWidgets.QPushButton(self.centralwidget)
+        self.Buch.clicked.connect(
+            lambda: binding.Controlling.home_fahrtenliste(self,MainWindow))
         self.Buch.setGeometry(QtCore.QRect(660, 10, 60, 60))
         self.Buch.setObjectName("Buch")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -77,7 +83,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.Neue_Fahrt.setText(_translate("MainWindow", "Neue Fahrt"))
-        self.Angehoriger.setText(_translate("MainWindow", "Angehoriger"))
+        self.Angehoriger.setText(_translate("MainWindow", "Angehöriger"))
         self.Profilbild.setText(_translate("MainWindow", "Platzhalter Profilbild"))
         self.Daten_Mitarbeiter.setText(_translate("MainWindow", "Name\n"
 "Adresse"))
@@ -89,7 +95,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Home()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
