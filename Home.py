@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Home.ui'
+# Form implementation generated from reading ui file 'Homedirty.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -14,8 +14,8 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 480)
         MainWindow.setStyleSheet("QWidget{\n"
 "    background-color: #404040;\n"
-"    color: #00CC00}\n"
-"QPushButton{\n"
+"    color: #FFFFCC}\n"
+"QPushButton,QComboBox{\n"
 "    color: #FFFFCC; \n"
 "    background-color: #006600;\n"
 "    border-style: inset;\n"
@@ -26,7 +26,9 @@ class Ui_MainWindow(object):
 "    background-color: #4FC44F;\n"
 "    border-style: inset;\n"
 "    border-color:black;\n"
-"    border-width: 1px;}")
+"    border-width: 1px;}\n"
+"QComboBox QAbstractItemView{\n"
+"    min-width: 200px; }")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Neue_Fahrt = QtWidgets.QPushButton(self.centralwidget)
@@ -55,12 +57,32 @@ class Ui_MainWindow(object):
         font.setPointSize(20)
         self.Daten_Mitarbeiter.setFont(font)
         self.Daten_Mitarbeiter.setObjectName("Daten_Mitarbeiter")
-        self.Einstellung = QtWidgets.QPushButton(self.centralwidget)
-        self.Einstellung.setGeometry(QtCore.QRect(730, 10, 60, 60))
-        self.Einstellung.setObjectName("Einstellung")
         self.Buch = QtWidgets.QPushButton(self.centralwidget)
-        self.Buch.setGeometry(QtCore.QRect(660, 10, 60, 60))
+        self.Buch.setGeometry(QtCore.QRect(730, 10, 60, 60))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        self.Buch.setFont(font)
         self.Buch.setObjectName("Buch")
+        self.Buch.setIcon(QtGui.QIcon('Buch.png'))
+        self.Buch.setIconSize(QtCore.QSize(60,60))
+        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox.setGeometry(QtCore.QRect(590, 10, 75, 60))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        self.comboBox.setFont(font)
+        self.comboBox.setStyleSheet("")
+        self.comboBox.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLengthWithIcon)
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(590, 11, 60, 59))
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("Zahnrad.png"))
+        self.label.setScaledContents(True)
+        self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 28))
@@ -81,8 +103,11 @@ class Ui_MainWindow(object):
         self.Profilbild.setText(_translate("MainWindow", "Platzhalter Profilbild"))
         self.Daten_Mitarbeiter.setText(_translate("MainWindow", "Name\n"
 "Adresse"))
-        self.Einstellung.setText(_translate("MainWindow", "Einstellung"))
-        self.Buch.setText(_translate("MainWindow", "Buch"))
+        #self.Buch.setText(_translate("MainWindow", "Buch"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "Abmelden"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "Admin"))
+        self.comboBox.setItemText(2, _translate("MainWindow", "Fahrten bestatigen"))
+        self.comboBox.setItemText(3, _translate("MainWindow", "Private Fahrten"))
 
 
 if __name__ == "__main__":
