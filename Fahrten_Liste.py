@@ -7,8 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-class Ui_Dialog(object):
+import binding
+class Fahrten_Liste(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 480)
@@ -88,6 +88,8 @@ class Ui_Dialog(object):
         self.horizontalLayout_2.setContentsMargins(10, 0, 10, 10)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.pushButton = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
+        self.pushButton.clicked.connect(
+            lambda: binding.Controlling.fahrtenliste_home(self,Dialog))
         self.pushButton.setMinimumSize(QtCore.QSize(100, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -148,8 +150,8 @@ class Ui_Dialog(object):
         self.Beginn.setText(_translate("Dialog", "01.01.2019"))
         self.Bis.setText(_translate("Dialog", "bis"))
         self.Ende.setText(_translate("Dialog", "31.12.2019"))
-        self.label.setText(_translate("Dialog", "zu bestatigen"))
-        self.pushButton.setText(_translate("Dialog", "Zuruck"))
+        self.label.setText(_translate("Dialog", "zu bestätigen"))
+        self.pushButton.setText(_translate("Dialog", "Zurück"))
         self.AnfangsKMStand_label.setText(_translate("Dialog", "Anfangskilometerstand:"))
         self.AnfangsKMStand_feld.setText(_translate("Dialog", "72.531 km"))
         self.EndKMStand_label.setText(_translate("Dialog", "Endkilometerstand:"))
@@ -160,7 +162,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Fahrten_Liste()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
