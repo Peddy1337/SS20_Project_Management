@@ -7,8 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-class Ui_MainWindow(object):
+import binding
+class Profilauswahl(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -30,12 +30,16 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.clicked.connect(
+            lambda: binding.Controlling.auswahl_adminanmelden(self,MainWindow))
         self.pushButton.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.clicked.connect(
+            lambda: binding.Controlling.auswahl_anmelden(self,MainWindow))
         self.pushButton_2.setGeometry(QtCore.QRect(590, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -97,7 +101,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Profilauswahl()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

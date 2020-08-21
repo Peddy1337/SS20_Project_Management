@@ -3,7 +3,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from Admin_Anmelden import Admin_Anmelden
 from Altersabfrage import Altersabfrage
 from anmelden import anmelden
-from Fahrt import Fahrt
+#from Fahrt import Fahrt
 from Fahrtbeginn import Fahrtbeginn
 from Fahrtende import Fahrtende
 from Fahrten_Liste import Fahrten_Liste
@@ -12,6 +12,9 @@ from Mitarbeiter_anlegen import Mitarbeiter_anlegen
 from Start import Start
 from Unter25 import Unter25
 from Zweck import Zweck
+from adminmenu import adminmenu
+from Mitarbeiter_verwalten import Mitarbeiter_verwalten
+from Profilauswahl import Profilauswahl
 
 class Controlling():
 
@@ -29,8 +32,8 @@ class Controlling():
         Dialog.hide()
         self.window.show()
         
-    def start_anmelden(self,MainWindow):
-        Controlling.bind(self,MainWindow,anmelden)
+    def start_auswahl(self,MainWindow):
+        Controlling.bind(self,MainWindow,Profilauswahl)
 
     def anmelden_start(self,MainWindow):
         Controlling.bind(self,MainWindow,Start)
@@ -72,7 +75,7 @@ class Controlling():
         Controlling.bind(self,MainWindow,Fahrtbeginn)
 
     def zweck_fahrt(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrt)
+        Controlling.bind(self,MainWindow,Fahrtende)#Fahrt)
 
     def fahrt_fahrtbeginn(self,MainWindow):
         Controlling.bind(self,MainWindow,Fahrtbeginn)
@@ -94,4 +97,34 @@ class Controlling():
 
     def home_fahrtenliste(self,MainWindow):
         Controlling.bind(self,MainWindow,Fahrten_Liste)
+
+    def adminanm_home(self,MainWindow):
+        Controlling.bind(self,MainWindow,Home)
+
+    def adminanm_adminmenu(self,MainWindow):
+        Controlling.bind(self,MainWindow,adminmenu)
+
+    def adminmenu_mitverwalten(self,MainWindow):
+        Controlling.bind(self,MainWindow,Mitarbeiter_verwalten)
+
+    def adminmenu_datenauslesen(self,MainWindow):
+        Controlling.bind(self,MainWindow,adminmenu)#Daten
+
+    def adminmenu_kennzeichen(self,MainWindow):
+        Controlling.bind(self,MainWindow,adminmenu)#Kennzeichen
+
+    def adminmenu_home(self,MainWindow):
+        Controlling.bind(self,MainWindow,Home)
+
+    def mitverw_neu(self,MainWindow):
+        Controlling.bind(self,MainWindow,Mitarbeiter_anlegen)
+
+    def mitverw_adminmenu(self,MainWindow):
+        Controlling.bind(self,MainWindow,adminmenu)
+
+    def auswahl_adminanmelden(self,MainWindow):
+        Controlling.bind(self,MainWindow,Admin_Anmelden)
+
+    def auswahl_anmelden(self,MainWindow):
+        Controlling.bind(self,MainWindow,anmelden)
         

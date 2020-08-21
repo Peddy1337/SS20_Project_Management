@@ -7,8 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-class Ui_MainWindow(object):
+import binding
+class Mitarbeiter_verwalten(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -30,18 +30,23 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Zuruck = QtWidgets.QPushButton(self.centralwidget)
+        self.Zuruck.clicked.connect(
+            lambda: binding.Controlling.mitverw_adminmenu(self,MainWindow))
         self.Zuruck.setGeometry(QtCore.QRect(10, 490, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.Zuruck.setFont(font)
         self.Zuruck.setObjectName("Zuruck")
         self.bearbeiten = QtWidgets.QPushButton(self.centralwidget)
+        #window für bearbeiten
         self.bearbeiten.setGeometry(QtCore.QRect(290, 10, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.bearbeiten.setFont(font)
         self.bearbeiten.setObjectName("bearbeiten")
         self.Neu = QtWidgets.QPushButton(self.centralwidget)
+        self.Neu.clicked.connect(
+            lambda: binding.Controlling.mitverw_neu(self,MainWindow))
         self.Neu.setGeometry(QtCore.QRect(10, 10, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -54,6 +59,7 @@ class Ui_MainWindow(object):
         self.suche.setFont(font)
         self.suche.setObjectName("suche")
         self.loschen = QtWidgets.QPushButton(self.centralwidget)
+        #function für löschen
         self.loschen.setGeometry(QtCore.QRect(520, 10, 41, 50))
         self.loschen.setText("")
         icon = QtGui.QIcon()
@@ -87,7 +93,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.Zuruck.setText(_translate("MainWindow", "Zuruck"))
+        self.Zuruck.setText(_translate("MainWindow", "Zurück"))
         self.bearbeiten.setText(_translate("MainWindow", "Bearbeiten"))
         self.Neu.setText(_translate("MainWindow", "Neu"))
         self.suche.setText(_translate("MainWindow", "Suche"))
@@ -97,7 +103,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Mitarbeiter_verwalten()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
