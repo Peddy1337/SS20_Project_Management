@@ -85,4 +85,13 @@ class Controlling():
 
     def fahrtende_home(self,MainWindow):
         Controlling.bind(self,MainWindow,Home)
+
+    def home_start(self,MainWindow):
+        Controlling.bind(self,MainWindow,Start)
+
+    def home_adminanmelden(self,MainWindow):
+        Controlling.bind(self,MainWindow,Admin_Anmelden)
+
+    def home_fahrtenliste(self,MainWindow):
+        Controlling.bind(self,MainWindow,Fahrten_Liste)
         
