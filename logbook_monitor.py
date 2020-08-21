@@ -1,5 +1,6 @@
 import route_simulator
 import json_reader_writer
+import pdf_writer
 from datetime import datetime
 import threading
 import time
@@ -7,6 +8,7 @@ import time
 class LogbookMonitor :
     def __init__(self,file) :
         self.file = file
+        self.pdf_file = file[0:file.rfind('.')+1]+ 'pdf'
         self.name = ''
         self.typeOfRide = ''
         self.purpose = ''
@@ -18,7 +20,8 @@ class LogbookMonitor :
         self.sleepTime = 5
         self.rSim = route_simulator.RouteSimulator()
         self.jRW = json_reader_writer.JsonReaderWriter(self.file)
-        self.updateThread = threading.Thread(target = self.update , args=()) 
+        self.updateThread = threading.Thread(target = self.update , args=())
+        self.pdfExporter = pdf_writer.PDFWriter()
 
     def setDriverName(self, name) :
         self.name = name
@@ -158,9 +161,16 @@ class LogbookMonitor :
                 self.signRideAfterwards(self.logbook['rides'].index(p))
         
         print ('Signing of all rides finished\n')
+
+    def exportToPDF(self) :
+        self.loadLogbook()
+        if self.checkUnsignedRides :
+            self.pdfExporter.writeToPDF(self.pdf_file,self.logbook)
+        else :
+            print ('Some rides havent been signed yet\n')
+            return False
             
     file = ''
     logbook = {}
     currentRide = {}
     rideStarted = False
-
