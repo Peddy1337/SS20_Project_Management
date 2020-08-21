@@ -3,7 +3,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from Admin_Anmelden import Admin_Anmelden
 from Altersabfrage import Altersabfrage
 from anmelden import anmelden
-#from Fahrt import Fahrt
+from Fahrt import Fahrt
 from Fahrtbeginn import Fahrtbeginn
 from Fahrtende import Fahrtende
 from Fahrten_Liste import Fahrten_Liste
@@ -22,7 +22,7 @@ class Controlling():
         self.window = QtWidgets.QMainWindow()
         self.ui = to()
         self.ui.setupUi(self.window)
-        MainWindow.hide()
+        MainWindow.close()#hide()
         self.window.show()
 
     def bind_dialog(self,Dialog,to):
@@ -75,7 +75,7 @@ class Controlling():
         Controlling.bind(self,MainWindow,Fahrtbeginn)
 
     def zweck_fahrt(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrtende)#Fahrt)
+        Controlling.bind(self,MainWindow,Fahrt)
 
     def fahrt_fahrtbeginn(self,MainWindow):
         Controlling.bind(self,MainWindow,Fahrtbeginn)
