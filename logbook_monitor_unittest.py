@@ -20,7 +20,7 @@ print(logbook.logbook)
 print ('--------------------------')
 
 
-logbook.setDriverName('Bastian')
+logbook.setDriverName('Bastian Spurzem')
 
 logbook.setTypeOfRide('Privat')
 
@@ -43,7 +43,7 @@ print(logbook.logbook)
 print ('--------------------------')
 
 
-logbook.setDriverName('Patrick')
+logbook.setDriverName('Patrick Zöller')
 
 logbook.setTypeOfRide('Geschaeftlich')
 
@@ -76,3 +76,6 @@ logbook.loadLogbook()
 print(logbook.logbook)
 
 print ('--------------------------')
+
+
+logbook.exportToPDF()
