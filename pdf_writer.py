@@ -1,7 +1,6 @@
 from pdfdocument.document import PDFDocument
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER
-from reportlab.lib.units import cm, mm
 
 class PDFWriter :
  
