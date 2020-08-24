@@ -162,6 +162,7 @@ class LogbookMonitor :
         
         print ('Signing of all rides finished\n')
 
+    # export logbook data to pdf
     def exportToPDF(self) :
         self.loadLogbook()
         if not(self.checkUnsignedRides()) :
