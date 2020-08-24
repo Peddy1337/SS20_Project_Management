@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import binding
 class Fahrt(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -41,10 +41,6 @@ class Fahrt(object):
             lambda: binding.Controlling.fahrt_fahrtende(self,MainWindow))
         self.Fahrt_beenden.setGeometry(QtCore.QRect(540, 350, 250, 70))
         self.Fahrt_beenden.setObjectName("Fahrt_beenden")
-        self.webView = QtWebKitWidgets.QWebView(self.centralwidget)
-        self.webView.setGeometry(QtCore.QRect(30, 60, 481, 360))
-        self.webView.setUrl(QtCore.QUrl("about:blank"))
-        self.webView.setObjectName("webView")
         self.Name = QtWidgets.QLineEdit(self.centralwidget)
         self.Name.setGeometry(QtCore.QRect(10, 10, 200, 40))
         self.Name.setObjectName("Name")
@@ -99,7 +95,6 @@ class Fahrt(object):
         self.Gefahrende_KM_label.setText(_translate("MainWindow", "Gefahrende KM:"))
         self.Fahrzeit_label.setText(_translate("MainWindow", "Fahrzeit:"))
 
-from PyQt5 import QtWebKitWidgets
 
 if __name__ == "__main__":
     import sys
