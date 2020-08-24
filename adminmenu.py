@@ -73,10 +73,10 @@ class adminmenu(object):
         self.Mitarbeiter_verwalten.setText(_translate("MainWindow", "Mitarbeiter \n"
 "verwalten"))
         self.pushButton_2.setText(_translate("MainWindow", "Kennzeichen \n"
-"andern"))
+"ändern"))
         self.Daten_auslesen.setText(_translate("MainWindow", "Daten \n"
 "auslesen"))
-        self.zuruck.setText(_translate("MainWindow", "Zuruck"))
+        self.zuruck.setText(_translate("MainWindow", "Zurück"))
 
 
 if __name__ == "__main__":
