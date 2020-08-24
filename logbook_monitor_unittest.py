@@ -8,9 +8,6 @@ logbook.updateDate()
 
 print (logbook.date)
 
-print (logbook.getTime())
-
-
 logbook.documentHeader('5370.0','WWP399')
 
 logbook.loadLogbook()

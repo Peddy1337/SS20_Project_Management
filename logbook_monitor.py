@@ -43,8 +43,8 @@ class LogbookMonitor :
     def updateDate(self) :
         self.date = datetime.today().strftime('%d.%m.%Y')
 
-    def getTime(self) :
-        return datetime.today().strftime('%H:%M:%S')
+    def getPlace(self, without = None) :
+        return self.rSim.randomPlace(without)
 
     # update routeKm every 5 seconds
     def update(self) :
@@ -61,6 +61,7 @@ class LogbookMonitor :
         self.rideStarted = True
         self.updateStartKm()
         self.updateDate()
+        self.startPlace = self.getPlace()
         self.currentRide = {
             'Name' : self.name,
             'Datum' : self.date,
@@ -69,7 +70,7 @@ class LogbookMonitor :
             'gefahrene Kilometer' : '0',
             'Art der Fahrt' : self.typeOfRide,
             'Zweck der Fahrt' : self.purpose,
-            'Fahrtanfang' : self.getTime(),
+            'Fahrtanfang' : self.startPlace,
             'Fahrtende' : '',
             'Bestaetigt' : ''
             }
@@ -110,7 +111,7 @@ class LogbookMonitor :
         self.calculateKm()
         self.currentRide['Endkilometerstand'] = self.endKm
         self.currentRide['gefahrene Kilometer'] = self.routeKm
-        self.currentRide['Fahrtende'] = self.getTime()
+        self.currentRide['Fahrtende'] = self.getPlace(self.startPlace)
 
     # document ride to json file
     def documentRide(self) :

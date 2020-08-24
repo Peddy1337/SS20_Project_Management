@@ -30,7 +30,7 @@ class PDFWriter :
         
         content = [['Name', 'Datum','Anfangskilometerstand','Endkilometerstand',
                     'gefahrene Kilometer','Art der Fahrt','Zweck der Fahrt',
-                    'Fahrtanfang','Fahrtende']]
+                    'Fahrtanfang','Fahrtziel']]
         for p in data['rides'] :
             row = []
             for d in p :
