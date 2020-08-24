@@ -8,9 +8,6 @@ logbook.updateDate()
 
 print (logbook.date)
 
-print (logbook.getTime())
-
-
 logbook.documentHeader('5370.0','WWP399')
 
 logbook.loadLogbook()
@@ -20,13 +17,13 @@ print(logbook.logbook)
 print ('--------------------------')
 
 
-logbook.setDriverName('Bastian')
+logbook.setDriverName('Bastian Spurzem')
 
 logbook.setTypeOfRide('Privat')
 
 logbook.setPurpose('Privat')
 
-logbook.newRide()
+logbook.newRide('Koblenz-Güls, Am Zehnthof 11')
 
 time.sleep(11)
 
@@ -36,6 +33,8 @@ logbook.setSignature(False)
 
 logbook.documentRide()
 
+logbook.exportToPDF()
+
 logbook.loadLogbook()
 
 print(logbook.logbook)
@@ -43,7 +42,7 @@ print(logbook.logbook)
 print ('--------------------------')
 
 
-logbook.setDriverName('Patrick')
+logbook.setDriverName('Patrick Zöller')
 
 logbook.setTypeOfRide('Geschaeftlich')
 
@@ -76,3 +75,6 @@ logbook.loadLogbook()
 print(logbook.logbook)
 
 print ('--------------------------')
+
+
+logbook.exportToPDF()

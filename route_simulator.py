@@ -1,5 +1,6 @@
 import threading
 import time
+import random
 
 class RouteSimulator :
     def __init__(self) :
@@ -29,3 +30,16 @@ class RouteSimulator :
             self.tlock.release()
             time.sleep(self.sleepTime)
             
+    def randomPlace(self,without = None) :
+        places = ['Ransbach-Baumbach, Bergstraße 39a','Koblenz-Güls, Am Zehnthof 12',
+                'Remagen, Joseph-Rovan-Allee 2', 'Koblenz, Bahnhofplatz 2',
+                'Koblenz, Konrad-Zuse-Straße 1', 'Mülheim-Kärlich, Otto-Hahn-Straße 2-6']
+        if without and without in places :
+            places.remove(without)
+            
+        selection = random.choice(places)
+        if without :
+            places.append(without)
+
+        return selection
+        
