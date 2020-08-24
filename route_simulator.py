@@ -34,7 +34,7 @@ class RouteSimulator :
         places = ['Ransbach-Baumbach, Bergstraße 39a','Koblenz-Güls, Am Zehnthof 12',
                 'Remagen, Joseph-Rovan-Allee 2', 'Koblenz, Bahnhofplatz 2',
                 'Koblenz, Konrad-Zuse-Straße 1', 'Mülheim-Kärlich, Otto-Hahn-Straße 2-6']
-        if without :
+        if without and without in places :
             places.remove(without)
             
         selection = random.choice(places)

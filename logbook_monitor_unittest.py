@@ -23,7 +23,7 @@ logbook.setTypeOfRide('Privat')
 
 logbook.setPurpose('Privat')
 
-logbook.newRide()
+logbook.newRide('Koblenz-Güls, Am Zehnthof 11')
 
 time.sleep(11)
 

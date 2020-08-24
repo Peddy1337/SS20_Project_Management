@@ -57,11 +57,11 @@ class LogbookMonitor :
             time.sleep(self.sleepTime)
 
     # start a new ride
-    def newRide(self) :
+    def newRide(self, place = None) :
         self.rideStarted = True
         self.updateStartKm()
         self.updateDate()
-        self.startPlace = self.getPlace()
+        self.startPlace = place or self.getPlace()
         self.currentRide = {
             'Name' : self.name,
             'Datum' : self.date,
@@ -103,7 +103,7 @@ class LogbookMonitor :
         self.currentRide['gefahrene Kilometer'] = self.routeKm
 
     # stop ride and stop both threads
-    def endRide(self) :
+    def endRide(self, place = None) :
         self.rideStarted = False
         self.updateThread.join()
         self.rSim.stopThread()
@@ -111,7 +111,7 @@ class LogbookMonitor :
         self.calculateKm()
         self.currentRide['Endkilometerstand'] = self.endKm
         self.currentRide['gefahrene Kilometer'] = self.routeKm
-        self.currentRide['Fahrtende'] = self.getPlace(self.startPlace)
+        self.currentRide['Fahrtende'] = place or self.getPlace(self.startPlace)
 
     # document ride to json file
     def documentRide(self) :
