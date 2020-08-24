@@ -36,6 +36,8 @@ logbook.setSignature(False)
 
 logbook.documentRide()
 
+logbook.exportToPDF()
+
 logbook.loadLogbook()
 
 print(logbook.logbook)
