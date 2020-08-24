@@ -3,7 +3,8 @@ from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER
 
 class PDFWriter :
- 
+
+    # set newline when a string has a certain length 
     def adjustStringLength(self,string) :
         if(len(string) > 20) :
            spaceIndex = string.rfind(' ',0,20)
@@ -12,7 +13,8 @@ class PDFWriter :
            string = string[0:max(spaceIndex,hyphenIndex,commaIndex)]+'\n'+string[max(spaceIndex,hyphenIndex,commaIndex)+1:len(string)]
 
         return string
-    
+
+    # generate pdf file in logbook format
     def writeToPDF(self,path,data) :
         pdf = PDFDocument(path)
         pdf.init_report()
