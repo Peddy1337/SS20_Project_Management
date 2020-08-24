@@ -10,7 +10,7 @@ class PDFWriter :
            spaceIndex = string.rfind(' ',0,20)
            hyphenIndex = string.rfind('-',0,20)
            commaIndex = string.rfind(',',0,20)           
-           string = string[0:max(spaceIndex,hyphenIndex,commaIndex)]+'\n'+string[max(spaceIndex,hyphenIndex,commaIndex)+1:len(string)]
+           string = string[0:max(spaceIndex,hyphenIndex,commaIndex)+1]+'\n'+string[max(spaceIndex,hyphenIndex,commaIndex)+1:len(string)]
 
         return string
 
