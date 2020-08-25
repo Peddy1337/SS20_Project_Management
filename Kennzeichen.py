@@ -7,8 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-class Ui_Dialog(object):
+import binding
+class Kennzeichen(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 480)
@@ -32,12 +32,16 @@ class Ui_Dialog(object):
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton.setFont(font)
+        self.pushButton.clicked.connect(
+            lambda: binding.Controlling.kennzeichen_adminmenu(self,Dialog))
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
         self.pushButton_2.setGeometry(QtCore.QRect(590, 320, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_2.setFont(font)
+        self.pushButton_2.clicked.connect(
+            lambda: binding.Controlling.kennzeichen_home(self,Dialog))
         self.pushButton_2.setObjectName("pushButton_2")
         self.kennzeichen = QtWidgets.QLabel(Dialog)
         self.kennzeichen.setGeometry(QtCore.QRect(170, 30, 200, 30))
@@ -70,8 +74,8 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.pushButton.setText(_translate("Dialog", "Zuruck"))
-        self.pushButton_2.setText(_translate("Dialog", "Bestatigen"))
+        self.pushButton.setText(_translate("Dialog", "Zurück"))
+        self.pushButton_2.setText(_translate("Dialog", "Bestätigen"))
         self.kennzeichen.setText(_translate("Dialog", "Neues Kennzeichen"))
         self.startkilometerstand.setText(_translate("Dialog", "Startkilometerstand"))
 
@@ -80,7 +84,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Kennzeichen()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

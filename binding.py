@@ -15,6 +15,7 @@ from Zweck import Zweck
 from adminmenu import adminmenu
 from Mitarbeiter_verwalten import Mitarbeiter_verwalten
 from Profilauswahl import Profilauswahl
+from Kennzeichen import Kennzeichen
 
 class Controlling():
 
@@ -111,7 +112,7 @@ class Controlling():
         Controlling.bind(self,MainWindow,adminmenu)#Daten
 
     def adminmenu_kennzeichen(self,MainWindow):
-        Controlling.bind(self,MainWindow,adminmenu)#Kennzeichen
+        Controlling.bind(self,MainWindow,Kennzeichen)
 
     def adminmenu_home(self,MainWindow):
         Controlling.bind(self,MainWindow,Home)
@@ -127,4 +128,11 @@ class Controlling():
 
     def auswahl_anmelden(self,MainWindow):
         Controlling.bind(self,MainWindow,anmelden)
+
+    def kennzeichen_adminmenu(self,MainWindow):
+        Controlling.bind(self,MainWindow,adminmenu)
+
+    def kennzeichen_home(self,MainWindow):
+        Controlling.bind(self,MainWindow,Home)
+
         
