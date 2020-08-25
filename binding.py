@@ -33,7 +33,7 @@ class Controlling():
         Dialog.hide()
         self.window.show()
 
-   def bindfahrtbeginn(self,MainWindow,to):
+    def bindfahrtbeginn(self,MainWindow,to):
         self.window = QtWidgets.QMainWindow()
         self.ui = to()
         self.ui.setupUi(self.window,1)
