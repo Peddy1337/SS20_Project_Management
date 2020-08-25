@@ -34,7 +34,7 @@ class Zweck(object):
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.clicked.connect(
             lambda: binding.Controlling.zweck_fahrtbeginn(self,Dialog))
-        self.pushButton.setGeometry(QtCore.QRect(10, 320, 200, 100))
+        self.pushButton.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton.setFont(font)
@@ -42,7 +42,7 @@ class Zweck(object):
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
         self.pushButton_2.clicked.connect(
             lambda: binding.Controlling.zweck_fahrt(self,Dialog))
-        self.pushButton_2.setGeometry(QtCore.QRect(590, 320, 200, 100))
+        self.pushButton_2.setGeometry(QtCore.QRect(590, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_2.setFont(font)

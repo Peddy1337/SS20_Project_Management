@@ -32,7 +32,7 @@ class Unter25(object):
         self.zuruck = QtWidgets.QPushButton(Dialog)
         self.zuruck.clicked.connect(
             lambda: binding.Controlling.unter25_home(self,Dialog))
-        self.zuruck.setGeometry(QtCore.QRect(300, 300, 200, 100))
+        self.zuruck.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.zuruck.setFont(font)

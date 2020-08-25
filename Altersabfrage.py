@@ -50,7 +50,7 @@ class Altersabfrage(object):
         self.pushButton_3 = QtWidgets.QPushButton(Dialog)
         self.pushButton_3.clicked.connect(
             lambda: binding.Controlling.altersabfrage_home(self,Dialog))
-        self.pushButton_3.setGeometry(QtCore.QRect(300, 360, 200, 100))
+        self.pushButton_3.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_3.setFont(font)

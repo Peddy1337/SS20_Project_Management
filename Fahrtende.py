@@ -64,7 +64,7 @@ class Fahrtende(object):
         self.pushButton_4 = QtWidgets.QPushButton(Dialog)
         self.pushButton_4.clicked.connect(
             lambda: binding.Controlling.fahrtende_home(self,Dialog))
-        self.pushButton_4.setGeometry(QtCore.QRect(590, 350, 200, 100))
+        self.pushButton_4.setGeometry(QtCore.QRect(590, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_4.setFont(font)

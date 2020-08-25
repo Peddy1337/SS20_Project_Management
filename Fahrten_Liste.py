@@ -90,7 +90,7 @@ class Fahrten_Liste(object):
         self.pushButton = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
         self.pushButton.clicked.connect(
             lambda: binding.Controlling.fahrtenliste_home(self,Dialog))
-        self.pushButton.setMinimumSize(QtCore.QSize(100, 50))
+        self.pushButton.setMinimumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton.setFont(font)
@@ -152,9 +152,9 @@ class Fahrten_Liste(object):
         self.Ende.setText(_translate("Dialog", "31.12.2019"))
         self.label.setText(_translate("Dialog", "zu bestätigen"))
         self.pushButton.setText(_translate("Dialog", "Zurück"))
-        self.AnfangsKMStand_label.setText(_translate("Dialog", "Anfangskilometerstand:"))
+        self.AnfangsKMStand_label.setText(_translate("Dialog", "Anfangskmstand:"))
         self.AnfangsKMStand_feld.setText(_translate("Dialog", "72.531 km"))
-        self.EndKMStand_label.setText(_translate("Dialog", "Endkilometerstand:"))
+        self.EndKMStand_label.setText(_translate("Dialog", "Endkmstand:"))
         self.EndKMStand_feld.setText(_translate("Dialog", "103.475 km"))
 
 
