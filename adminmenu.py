@@ -50,7 +50,7 @@ class adminmenu(object):
         self.zuruck = QtWidgets.QPushButton(self.centralwidget)
         self.zuruck.clicked.connect(
             lambda: binding.Controlling.adminmenu_home(self,MainWindow))
-        self.zuruck.setGeometry(QtCore.QRect(10, 370, 200, 50))
+        self.zuruck.setGeometry(QtCore.QRect(10, 320, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.zuruck.setFont(font)
