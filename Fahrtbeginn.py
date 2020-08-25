@@ -8,8 +8,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import binding
+
+
 class Fahrtbeginn(object):
-    def setupUi(self, MainWindow):
+
+    #modus: 0 kommt von Fahrt, 1 kommt von Angehörige
+    def setupUi(self, MainWindow, modus=0):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
         MainWindow.setStyleSheet("QWidget{\n"
@@ -42,8 +46,6 @@ class Fahrtbeginn(object):
         self.Zuruck.setFont(font)
         self.Zuruck.setObjectName("Zuruck")
         self.Bestatigen = QtWidgets.QPushButton(self.centralwidget)
-        self.Bestatigen.clicked.connect(
-            lambda: binding.Controlling.fahrtbeginn_zweck(self,MainWindow))
         self.Bestatigen.setGeometry(QtCore.QRect(590, 320, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -84,6 +86,9 @@ class Fahrtbeginn(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+        if modus == 1:
+            self.comboBox.setCurrentIndex(2)
+            self.comboBox.setDisabled(True)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 28))
@@ -95,6 +100,18 @@ class Fahrtbeginn(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.comboBox.currentTextChanged.connect(lambda: self.changed(MainWindow))
+        if modus == 1:
+            self.Bestatigen.clicked.connect(lambda: binding.Controlling.fahrtbeginn_fahrt(self,MainWindow))
+
+    def changed(self,MainWindow):
+        if self.comboBox.currentText() == "Dienstlich":
+            self.Bestatigen.clicked.connect(lambda: binding.Controlling.fahrtbeginn_zweck(self,MainWindow))
+        elif self.comboBox.currentText() == "Art der Fahrt":
+            print("Wählen sie etwas aus")
+        else:
+            self.Bestatigen.clicked.connect(lambda: binding.Controlling.fahrtbeginn_fahrt(self,MainWindow))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
