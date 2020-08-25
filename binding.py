@@ -32,6 +32,13 @@ class Controlling():
         self.ui.setupUi(self.window)
         Dialog.hide()
         self.window.show()
+
+   def bindfahrtbeginn(self,MainWindow,to):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = to()
+        self.ui.setupUi(self.window,1)
+        MainWindow.close()#hide()
+        self.window.show()
         
     def start_auswahl(self,MainWindow):
         Controlling.bind(self,MainWindow,Profilauswahl)
@@ -54,6 +61,9 @@ class Controlling():
     def fahrtbeginn_home(self,MainWindow):
         Controlling.bind(self,MainWindow,Home)
 
+    def fahrtbeginn_fahrt(self,MainWindow):
+        Controlling.bind(self,MainWindow,Fahrt)
+
     def fahrtbeginn_zweck(self,MainWindow):
         Controlling.bind(self,MainWindow,Zweck)
 
@@ -61,7 +71,7 @@ class Controlling():
         Controlling.bind_dialog(self,MainWindow,Unter25)
 
     def altersabfrage_fahrtbeginn(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrtbeginn)
+        Controlling.bindfahrtbeginn(self,MainWindow,Fahrtbeginn)
 
     def altersabfrage_home(self,MainWindow):
         Controlling.bind(self,MainWindow,Home)
