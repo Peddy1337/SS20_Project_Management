@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import binding
 class adminmenu(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow,modus=0):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
         MainWindow.setStyleSheet("QWidget{\n"
@@ -48,8 +48,12 @@ class adminmenu(object):
         self.Daten_auslesen.setFont(font)
         self.Daten_auslesen.setObjectName("Daten_auslesen")
         self.zuruck = QtWidgets.QPushButton(self.centralwidget)
-        self.zuruck.clicked.connect(
-            lambda: binding.Controlling.adminmenu_home(self,MainWindow))
+        if modus == 1:
+            self.zuruck.clicked.connect(
+                lambda: binding.Controlling.adminmenu_auswahl(self,MainWindow))
+        else:
+            self.zuruck.clicked.connect(
+                lambda: binding.Controlling.adminmenu_home(self,MainWindow))
         self.zuruck.setGeometry(QtCore.QRect(10, 320, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)

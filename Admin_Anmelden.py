@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import binding
 class Admin_Anmelden(object):
-    def setupUi(self, Dialog):
+    def setupUi(self, Dialog, modus=0):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 480)
         Dialog.setStyleSheet("QWidget{\n"
@@ -41,16 +41,24 @@ class Admin_Anmelden(object):
         self.lineEdit.setFont(font)
         self.lineEdit.setObjectName("lineEdit")
         self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.clicked.connect(
-            lambda: binding.Controlling.adminanm_home(self,Dialog))
+        if modus == 1:
+            self.pushButton.clicked.connect(
+                lambda: binding.Controlling.adminanm_auswahl(self,Dialog))
+        else:
+            self.pushButton.clicked.connect(
+                lambda: binding.Controlling.adminanm_home(self,Dialog))
         self.pushButton.setGeometry(QtCore.QRect(10, 320, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.clicked.connect(
-            lambda: binding.Controlling.adminanm_adminmenu(self,Dialog))
+        if modus == 1:
+            self.pushButton_2.clicked.connect(
+                lambda: binding.Controlling.adminanm_adminmenu1(self,Dialog))
+        else:
+            self.pushButton_2.clicked.connect(
+                lambda: binding.Controlling.adminanm_adminmenu(self,Dialog))
         self.pushButton_2.setGeometry(QtCore.QRect(590, 320, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)

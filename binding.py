@@ -26,17 +26,17 @@ class Controlling():
         MainWindow.close()#hide()
         self.window.show()
 
-    def bind_dialog(self,Dialog,to):
-        self.window = QtWidgets.QDialog()
-        self.ui = to()
-        self.ui.setupUi(self.window)
-        Dialog.hide()
-        self.window.show()
-
-    def bindfahrtbeginn(self,MainWindow,to):
+    def bind_option(self,MainWindow,to):
         self.window = QtWidgets.QMainWindow()
         self.ui = to()
         self.ui.setupUi(self.window,1)
+        MainWindow.close()#hide()
+        self.window.show()
+
+    def bind_second(self,MainWindow,to):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = to()
+        self.ui.setupUi(self.window,2)
         MainWindow.close()#hide()
         self.window.show()
         
@@ -64,14 +64,17 @@ class Controlling():
     def fahrtbeginn_fahrt(self,MainWindow):
         Controlling.bind(self,MainWindow,Fahrt)
 
+    def fahrtbeginn_fahrt(self,MainWindow):
+        Controlling.bind(self,MainWindow,Fahrt)
+
     def fahrtbeginn_zweck(self,MainWindow):
         Controlling.bind(self,MainWindow,Zweck)
 
     def altersabfrage_unter25(self,MainWindow):
-        Controlling.bind_dialog(self,MainWindow,Unter25)
+        Controlling.bind(self,MainWindow,Unter25)
 
     def altersabfrage_fahrtbeginn(self,MainWindow):
-        Controlling.bindfahrtbeginn(self,MainWindow,Fahrtbeginn)
+        Controlling.bind_option(self,MainWindow,Fahrtbeginn)
 
     def altersabfrage_home(self,MainWindow):
         Controlling.bind(self,MainWindow,Home)
@@ -89,7 +92,7 @@ class Controlling():
         Controlling.bind(self,MainWindow,Fahrt)
 
     def fahrt_fahrtbeginn(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrtbeginn)
+        Controlling.bind_second(self,MainWindow,Fahrtbeginn)
 
     def fahrt_fahrtende(self,MainWindow):
         Controlling.bind(self,MainWindow,Fahrtende)
@@ -112,8 +115,14 @@ class Controlling():
     def adminanm_home(self,MainWindow):
         Controlling.bind(self,MainWindow,Home)
 
+    def adminanm_auswahl(self,MainWindow):
+        Controlling.bind(self,MainWindow,Profilauswahl)
+
     def adminanm_adminmenu(self,MainWindow):
         Controlling.bind(self,MainWindow,adminmenu)
+
+    def adminanm_adminmenu1(self,MainWindow):
+        Controlling.bind_option(self,MainWindow,adminmenu)
 
     def adminmenu_mitverwalten(self,MainWindow):
         Controlling.bind(self,MainWindow,Mitarbeiter_verwalten)
@@ -127,6 +136,9 @@ class Controlling():
     def adminmenu_home(self,MainWindow):
         Controlling.bind(self,MainWindow,Home)
 
+    def adminmenu_auswahl(self,MainWindow):
+        Controlling.bind(self,MainWindow,Profilauswahl)
+
     def mitverw_neu(self,MainWindow):
         Controlling.bind(self,MainWindow,Mitarbeiter_anlegen)
 
@@ -134,7 +146,7 @@ class Controlling():
         Controlling.bind(self,MainWindow,adminmenu)
 
     def auswahl_adminanmelden(self,MainWindow):
-        Controlling.bind(self,MainWindow,Admin_Anmelden)
+        Controlling.bind_option(self,MainWindow,Admin_Anmelden)
 
     def auswahl_anmelden(self,MainWindow):
         Controlling.bind(self,MainWindow,anmelden)
