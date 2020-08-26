@@ -5,6 +5,7 @@ class LogbookController :
     def __init__(self) :
         self.accountFile = 'accounts.json'
         self.workAdress = 'Remagen, Joseph-Rovan-Allee 6'
+        self.adminPin = '1234'
         self.licensePlate = LoadLicensePlateFromConfig()
         self.startKm = LoadStartKmFromConfig()
         self.logbookFile = generateLogbookFileName()
@@ -19,6 +20,9 @@ class LogbookController :
 
     def LoadStartKmFromConfig() :
         return ''
+
+    def checkAdminPin(self,pin) :
+        return pin == self.adminPin
 
     def selectAccount(self,name) :
         self.accManager.selectAccount(name)
