@@ -106,7 +106,6 @@ class LogbookController :
         self.lbMonitor.setSignature(False)
         self.lbMonitor.documentRide()
 
-
     def signRideAfterwards(self, index) :
         self.lbMonitor.signRideAfterwards(index)
 
