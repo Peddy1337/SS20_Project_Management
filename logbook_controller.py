@@ -27,7 +27,7 @@ class LogbookController :
     def selectAccount(self,name) :
         self.accManager.selectAccount(name)
 
-    def deselectAccount(self) :
+    def logout(self) :
         self.accManager.deselectAccount()
 
     def checkPin(self,pin) :
