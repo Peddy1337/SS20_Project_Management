@@ -64,9 +64,6 @@ class LogbookController :
         if not(self.lbMonitor.rideStarted) :
             self.lbMonitor.setPurpose(purpose)
 
-    def setSignature(self,signature) :
-        self.lbMonitor.setSignature(signature)
-
     def startRideFamilyMember(self):
         self.lbMonitor.setDriverName(self.accManager.selectedAccount['name']+ ' Angehörige/r')
         self.setTypeOfRide('privat')
@@ -96,6 +93,15 @@ class LogbookController :
 
     def writeHeader(self) :
         self.lbMonitor.documentHeader(self.startKm, self.licensePlate)
+
+    def finishRideWithSignature(self) :
+        self.lbMonitor.setSignature(True)
+        self.lbMonitor.documentRide()
+
+    def finishRideWithoutSignature(self) :
+        self.lbMonitor.setSignature(False)
+        self.lbMonitor.documentRide()
+
 
     def signRideAfterwards(self, index) :
         self.lbMonitor.signRideAfterwards(index)
