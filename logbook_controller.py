@@ -67,6 +67,12 @@ class LogbookController :
     def setSignature(self,signature) :
         self.lbMonitor.setSignature(signature)
 
+    def startRideFamilyMember(self):
+        self.lbMonitor.setDriverName(self.accManager.selectedAccount['name']+ ' Angehörige/r')
+        self.setTypeOfRide('privat')
+        self.setPurpose('privat')
+        self.startRide()
+
     def startRide(self) :
         self.lbMonitor.newRide()
 
