@@ -68,7 +68,7 @@ class LogbookController :
         self.lbMonitor.setSignature(signature)
 
     def startRide(self) :
-            self.lbMonitor.newRide()
+        self.lbMonitor.newRide()
 
     def endRide(self) :
         if self.lbMonitor.typeOfRide == 'geschäftlich' or self.lbMonitor.typeOfRide == 'privat' :
