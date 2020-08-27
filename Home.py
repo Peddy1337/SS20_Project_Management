@@ -81,8 +81,8 @@ class Home(object):
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("0")
         self.comboBox.addItem("1")
-        self.comboBox.addItem("2")
-        self.comboBox.addItem("3")
+        #self.comboBox.addItem("2")
+        #self.comboBox.addItem("3")
         self.comboBox.activated.connect(
             lambda: self.indexChanged(MainWindow))
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -125,8 +125,8 @@ class Home(object):
         #self.Buch.setText(_translate("MainWindow", "Buch"))
         self.comboBox.setItemText(0, _translate("MainWindow", "Abmelden"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Admin"))
-        self.comboBox.setItemText(2, _translate("MainWindow", "Fahrten bestätigen"))
-        self.comboBox.setItemText(3, _translate("MainWindow", "Private Fahrten"))
+        #self.comboBox.setItemText(2, _translate("MainWindow", "Fahrten bestätigen"))
+        #self.comboBox.setItemText(3, _translate("MainWindow", "Private Fahrten"))
 
 
 if __name__ == "__main__":
