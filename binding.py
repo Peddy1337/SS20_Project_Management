@@ -43,8 +43,8 @@ class Controlling():
     def start_auswahl(self,MainWindow):
         Controlling.bind(self,MainWindow,Profilauswahl)
 
-    def anmelden_start(self,MainWindow):
-        Controlling.bind(self,MainWindow,Start)
+    def anmelden_auswahl(self,MainWindow):
+        Controlling.bind(self,MainWindow,Profilauswahl)
 
     def anmelden_home(self,MainWindow):
         Controlling.bind(self,MainWindow,Home)

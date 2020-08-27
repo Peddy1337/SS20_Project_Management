@@ -38,7 +38,7 @@ class anmelden(object):
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.pushButton.clicked.connect(lambda:
-                        binding.Controlling.anmelden_start(self,MainWindow))
+                        binding.Controlling.anmelden_auswahl(self,MainWindow))
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(590, 370, 200, 50))
         font = QtGui.QFont()
