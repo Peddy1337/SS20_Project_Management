@@ -1,5 +1,7 @@
 from account_manager import AccountManager
 from logbook_monitor import LogbookMonitor
+from car_manager import CarManager
+from zweck_manager import ZweckManager
 
 class LogbookController :
     def __init__(self) :
@@ -11,15 +13,22 @@ class LogbookController :
         self.logbookFile = generateLogbookFileName()
         self.accManager = AccountManager(self.accountFile)
         self.lbMonitor = LogbookMonitor(self.logbookFile)
+        self.carFile = 'Car.json'
+        self.carManager = CarManager(self.carFile)
+        self.purposeFile = 'purpose.json'
+        self.purpManager = ZweckManager(self.purposeFile)
         
     def generateLogbookFileName(self) :
         return self.licensePlate + '_' + self.startKm + '.json'
 
-    def LoadLicensePlateFromConfig() :
+    def LoadLicensePlateAndStartKmFromConfig(self,licensePlate,startKm) :
+        return self.carManager(licensePlate,startKm)
+
+    def AddPurposes(purpose) :
         return ''
 
-    def LoadStartKmFromConfig() :
-        return ''
+    def LoadPurposes():
+        return''
 
     def checkAdminPin(self,pin) :
         return pin == self.adminPin
