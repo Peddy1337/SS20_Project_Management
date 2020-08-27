@@ -117,7 +117,44 @@ class JsonReaderWriter :
         else :
             print('Signature couldnt be applied\n')
             return False
-    
-    file = ''
 
+    #adds purposes to purpose-list
+    def addPurpose(self,purpose) :
+        contents = {}
+        contents['purposes'] = []
+        contents['purposes'].append({
+            'Zweck der Fahrt' : purpose
+        })
+        with open(self.file, 'a+') as outfile :
+            if os.path.getsize(self.file) == 0:
+                json.dump(contents, outfile, indent=4)
+                outfile.close();
+            else :
+                data = json.load(outfile)
+                data['purposes'].extend(contents['purposes'])
+                outfile.seek(0)
+                json.dump(data, outfile, indent=4)
+                outfile.close()
+                
+    #updates purposeList
+    def updatePurposeList(self,purpDict) :
+        with open(self.file, 'w+') as outfile :
+            json.dump(purpDict, outfile, indent=4)
+            outfile.close()
+
+    #saves licensePlate and startKm
+    def saveLicensePlateAndStartKm(self,licensePlate,startKm) :
+        contents = {}
+        contents['headerParts'] = []
+        contents['headerParts'].append({
+            'StartKm' : startKm,
+            'KFZ-Kennzeichen' : licensePlate
+        })
+        with open(self.file, 'w+') as outfile :
+            json.dump(contents, outfile, indent=4)
+            outfile.close()
+
+
+    file = ''
+    
 
