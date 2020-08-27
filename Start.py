@@ -7,7 +7,6 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
 class Start(object):
 
     def setupUi(self, MainWindow):
@@ -32,8 +31,6 @@ class Start(object):
         font.setWeight(75)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(
-            lambda: binding.Controlling.start_auswahl(self,MainWindow))
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(0, 70, 800, 131))
         font = QtGui.QFont()

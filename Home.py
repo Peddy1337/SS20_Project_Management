@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class Home(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -32,8 +32,6 @@ class Home(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Neue_Fahrt = QtWidgets.QPushButton(self.centralwidget)
-        self.Neue_Fahrt.clicked.connect(
-            lambda: binding.Controlling.home_fahrtbeginn(self,MainWindow))
         self.Neue_Fahrt.setGeometry(QtCore.QRect(280, 170, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -42,8 +40,6 @@ class Home(object):
         self.Neue_Fahrt.setFont(font)
         self.Neue_Fahrt.setObjectName("Neue_Fahrt")
         self.Angehoriger = QtWidgets.QPushButton(self.centralwidget)
-        self.Angehoriger.clicked.connect(
-            lambda: binding.Controlling.home_altersabfrage(self,MainWindow))
         self.Angehoriger.setGeometry(QtCore.QRect(280, 280, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -62,8 +58,6 @@ class Home(object):
         self.Daten_Mitarbeiter.setFont(font)
         self.Daten_Mitarbeiter.setObjectName("Daten_Mitarbeiter")
         self.Buch = QtWidgets.QPushButton(self.centralwidget)
-        self.Buch.clicked.connect(
-            lambda: binding.Controlling.home_fahrtenliste(self,MainWindow))
         self.Buch.setGeometry(QtCore.QRect(730, 10, 60, 60))
         font = QtGui.QFont()
         font.setPointSize(17)
@@ -81,10 +75,6 @@ class Home(object):
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("0")
         self.comboBox.addItem("1")
-        #self.comboBox.addItem("2")
-        #self.comboBox.addItem("3")
-        self.comboBox.activated.connect(
-            lambda: self.indexChanged(MainWindow))
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(590, 11, 60, 59))
         self.label.setText("")
@@ -102,18 +92,7 @@ class Home(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        
-    def indexChanged(self, MainWindow):
-        index = self.comboBox.currentIndex()
-        if  index == 0:
-            binding.Controlling.home_start(self,MainWindow)
-        elif index == 1:
-            binding.Controlling.home_adminanmelden(self,MainWindow)
-        elif index == 2:
-            binding.Controlling.home_fahrtenliste(self,MainWindow)
-        elif index == 3:
-            binding.Controlling.home_fahrtenliste(self,MainWindow)
-
+   
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -125,9 +104,7 @@ class Home(object):
         #self.Buch.setText(_translate("MainWindow", "Buch"))
         self.comboBox.setItemText(0, _translate("MainWindow", "Abmelden"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Admin"))
-        #self.comboBox.setItemText(2, _translate("MainWindow", "Fahrten bestätigen"))
-        #self.comboBox.setItemText(3, _translate("MainWindow", "Private Fahrten"))
-
+        
 
 if __name__ == "__main__":
     import sys

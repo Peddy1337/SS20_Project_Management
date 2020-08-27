@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class Altersabfrage(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -32,24 +32,18 @@ class Altersabfrage(object):
         self.Frage.setWordWrap(True)
         self.Frage.setObjectName("Frage")
         self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.clicked.connect(
-            lambda: binding.Controlling.altersabfrage_fahrtbeginn(self,Dialog))
         self.pushButton.setGeometry(QtCore.QRect(175, 230, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.clicked.connect(
-            lambda: binding.Controlling.altersabfrage_unter25(self,Dialog))
         self.pushButton_2.setGeometry(QtCore.QRect(425, 230, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_3 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_3.clicked.connect(
-            lambda: binding.Controlling.altersabfrage_home(self,Dialog))
         self.pushButton_3.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)

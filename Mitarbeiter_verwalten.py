@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class Mitarbeiter_verwalten(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -30,8 +30,6 @@ class Mitarbeiter_verwalten(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Zuruck = QtWidgets.QPushButton(self.centralwidget)
-        self.Zuruck.clicked.connect(
-            lambda: binding.Controlling.mitverw_adminmenu(self,MainWindow))
         self.Zuruck.setGeometry(QtCore.QRect(10, 490, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -45,8 +43,6 @@ class Mitarbeiter_verwalten(object):
         self.bearbeiten.setFont(font)
         self.bearbeiten.setObjectName("bearbeiten")
         self.Neu = QtWidgets.QPushButton(self.centralwidget)
-        self.Neu.clicked.connect(
-            lambda: binding.Controlling.mitverw_neu(self,MainWindow))
         self.Neu.setGeometry(QtCore.QRect(10, 10, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)

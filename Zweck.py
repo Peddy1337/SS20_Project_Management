@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class Zweck(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -32,16 +32,12 @@ class Zweck(object):
 "    background-color: #999999;\n"
 "    border: none;}")
         self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.clicked.connect(
-            lambda: binding.Controlling.zweck_fahrtbeginn(self,Dialog))
         self.pushButton.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.clicked.connect(
-            lambda: binding.Controlling.zweck_fahrt(self,Dialog))
         self.pushButton_2.setGeometry(QtCore.QRect(590, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)

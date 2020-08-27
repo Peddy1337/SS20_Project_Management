@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class Fahrt(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -32,16 +32,12 @@ class Fahrt(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Fahrart_andern = QtWidgets.QPushButton(self.centralwidget)
-        self.Fahrart_andern.clicked.connect(
-            lambda: binding.Controlling.fahrt_fahrtbeginn(self,MainWindow))
         font = QtGui.QFont()
         font.setPointSize(17)
         self.Fahrart_andern.setFont(font)
         self.Fahrart_andern.setGeometry(QtCore.QRect(540, 270, 250, 70))
         self.Fahrart_andern.setObjectName("Fahrart_andern")
         self.Fahrt_beenden = QtWidgets.QPushButton(self.centralwidget)
-        self.Fahrt_beenden.clicked.connect(
-            lambda: binding.Controlling.fahrt_fahrtende(self,MainWindow))
         font = QtGui.QFont()
         font.setPointSize(17)
         self.Fahrt_beenden.setFont(font)

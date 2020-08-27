@@ -17,144 +17,215 @@ from Mitarbeiter_verwalten import Mitarbeiter_verwalten
 from Profilauswahl import Profilauswahl
 from Kennzeichen import Kennzeichen
 
-class Controlling():
-
-    def bind(self,MainWindow,to):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = to()
-        self.ui.setupUi(self.window)
-        MainWindow.close()#hide()
-        self.window.show()
-
-    def bind_option(self,MainWindow,to):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = to()
-        self.ui.setupUi(self.window,1)
-        MainWindow.close()#hide()
-        self.window.show()
-
-    def bind_second(self,MainWindow,to):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = to()
-        self.ui.setupUi(self.window,2)
-        MainWindow.close()#hide()
-        self.window.show()
+class Controlling(QtWidgets.QMainWindow):
         
-    def start_auswahl(self,MainWindow):
-        Controlling.bind(self,MainWindow,Profilauswahl)
+    def __init__(self, parent=None):
+        super(Controlling, self).__init__(parent)
 
-    def anmelden_auswahl(self,MainWindow):
-        Controlling.bind(self,MainWindow,Profilauswahl)
+        start = Start()
+        start.setupUi(self)
+        start.pushButton.clicked.connect(self.auswahl)
+        
+    #Start
+    def start(self):
+        self.window = QtWidgets.QMainWindow()
+        window = Start()
+        window.setupUi(self.window)
+        window.pushButton.clicked.connect(self.auswahl)
+        self.close()
+        self.window.show()
 
-    def anmelden_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
+    #Profilauswahl
+    def auswahl(self):
+        self.window = QtWidgets.QMainWindow()
+        window = Profilauswahl()
+        window.setupUi(self.window)
+        window.pushButton.clicked.connect(lambda:self.adminanm(1))
+        window.pushButton_2.clicked.connect(self.anmelden)
+        self.close()
+        self.window.show()
 
-    def home_fahrtbeginn(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrtbeginn)
+    #anmelden
+    def anmelden(self):
+        self.window = QtWidgets.QMainWindow()
+        window = anmelden()
+        window.setupUi(self.window)
+        window.pushButton.clicked.connect(self.auswahl)
+        window.pushButton_2.clicked.connect(self.home)
+        self.close()
+        self.window.show()
 
-    def home_altersabfrage(self,MainWindow):
-        Controlling.bind(self,MainWindow,Altersabfrage)
+    #adminanmelden
+    def adminanm(self,modus):
+        self.window = QtWidgets.QDialog()
+        window = Admin_Anmelden()
+        window.setupUi(self.window)
+        if modus == 1:
+            window.pushButton.clicked.connect(self.auswahl)
+        else:
+            window.pushButton.clicked.connect(self.home)
+        window.pushButton_2.clicked.connect(lambda: self.adminmenu(modus))
+        self.close()
+        self.window.show()
 
-    def home_fahrtenliste(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrten_Liste)
+    #home
+    def home(self):
+        self.window = QtWidgets.QMainWindow()
+        window = Home()
+        window.setupUi(self.window)
+        window.Neue_Fahrt.clicked.connect(lambda: self.fahrtbeginn(1))
+        window.Angehoriger.clicked.connect(self.altersabfrage)
+        window.Buch.clicked.connect(self.fahrtenliste)
+        window.comboBox.activated.connect(
+            lambda: self.indexChanged(window))
+        self.close()
+        self.window.show()
 
-    def fahrtbeginn_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
+    #Hilfsfunktion combobox
+    def indexChanged(self,window):
+        index = window.comboBox.currentIndex()
+        print(index)
+        if  index == 0:
+            self.start()
+        elif index == 1:
+            self.adminanm(0)
+        
+    #adminmenu
+    def adminmenu(self,modus):
+        self.window = QtWidgets.QMainWindow()
+        window = adminmenu()
+        window.setupUi(self.window)
+        window.Mitarbeiter_verwalten.clicked.connect(self.mitarbeiter_verwalten)
+        window.pushButton_2.clicked.connect(self.kennzeichen)
+        window.Daten_auslesen.clicked.connect(self.adminmenu)#TODO
+        if modus == 1:
+            window.zuruck.clicked.connect(self.auswahl)
+        else:
+            window.zuruck.clicked.connect(self.home)
+        self.close()
+        self.window.show()
 
-    def fahrtbeginn_fahrt(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrt)
+    #altersabfrage
+    def altersabfrage(self):
+        self.window = QtWidgets.QDialog()
+        window = Altersabfrage()
+        window.setupUi(self.window)
+        window.pushButton.clicked.connect(lambda: self.fahrtbeginn(2))
+        window.pushButton_2.clicked.connect(self.unter25)
+        window.pushButton_3.clicked.connect(self.home)
+        self.close()
+        self.window.show()
 
-    def fahrtbeginn_fahrt(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrt)
+    #fahrt
+    def fahrt(self):
+        self.window = QtWidgets.QMainWindow()
+        window = Fahrt()
+        window.setupUi(self.window)
+        window.Fahrtart_andern.clicked.connect(lambda: self.fahrtbeginn(0))
+        window.Fahrt_beenden.clicked.connect(self.fahrtende)
+        self.close()
+        self.window.show()
 
-    def fahrtbeginn_zweck(self,MainWindow):
-        Controlling.bind(self,MainWindow,Zweck)
+    #fahrtbeginn
+    def fahrtbeginn(self,back):
+        self.window = QtWidgets.QMainWindow()
+        window = Fahrtbeginn()
+        window.setupUi(self.window)
+        if back == 2:
+            window.comboBox.setCurrentIndex(2)
+            window.comboBox.setDisabled(True)
+        if back == 1 or back == 2:
+            window.Zuruck.clicked.connect(self.home)
+        elif back == 0:
+            window.Zuruck.clicked.connect(self.fahrt)
+        window.comboBox.activated.connect(lambda: self.changed(window))
+        self.close()
+        self.window.show()
 
-    def altersabfrage_unter25(self,MainWindow):
-        Controlling.bind(self,MainWindow,Unter25)
+    #Hilfsfunktion combobox 
+    def changed(self,window):
+        if window.comboBox.currentText() == "Dienstlich":
+            window.Bestatigen.clicked.connect(self.zweck)
+        elif window.comboBox.currentText() == "Art der Fahrt":
+            print("andern")
+        else:
+            window.Bestatigen.clicked.connect(self.fahrt)
 
-    def altersabfrage_fahrtbeginn(self,MainWindow):
-        Controlling.bind_option(self,MainWindow,Fahrtbeginn)
+    
+    #fahrtenliste
+    def fahrtenliste(self):
+        self.window = QtWidgets.QDialog()
+        window = Fahrten_Liste()
+        window.setupUi(self.window)
+        window.pushButton.clicked.connect(self.home)
+        self.close()
+        self.window.show()
 
-    def altersabfrage_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
+    #fahrtende
+    def fahrtende(self):
+        self.window = QtWidgets.QDialog()
+        window = Fahrtende()
+        window.setupUi(self.window)
+        window.pushButton_3.clicked.connect(self.home)
+        window.pushButton_4.clicked.connect(self.home)
+        self.close()
+        self.window.show()
 
-    def unter25_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
+    #kennzeichen
+    def kennzeichen(self):
+        self.window = QtWidgets.QDialog()
+        window = Kennzeichen()
+        window.setupUi(self.window)
+        window.pushButton.clicked.connect(self.adminmenu)
+        window.pushButton_2.clicked.connect(self.home)
+        self.close()
+        self.window.show()
 
-    def fahrtenliste_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
+    #mitarbeiter_anlegen
+    def mitarbeiter_anlegen(self):
+        self.window = QtWidgets.QMainWindow()
+        window = Mitarbeiter_anlegen()
+        window.setupUi(self.window)
+        window.pushButton.clicked.connect(self.adminmenu)
+        window.pushButton_2.clicked.connect(self.adminmenu)#TODO
+        self.close()
+        self.window.show()
 
-    def zweck_fahrtbeginn(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrtbeginn)
+    #mitarbeiter_verwalten
+    def mitarbeiter_verwalten(self):
+        self.window = QtWidgets.QMainWindow()
+        window = Mitarbeiter_verwalten()
+        window.setupUi(self.window)
+        window.Zuruck.clicked.connect(self.adminmenu)
+        window.Neu.clicked.connect(self.mitarbeiter_anlegen)
+        window.bearbeiten.clicked.connect(self.mitarbeiter_anlegen)#TODO
+        self.close()
+        self.window.show()
 
-    def zweck_fahrt(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrt)
+    #unter25
+    def unter25(self):
+        self.window = QtWidgets.QDialog()
+        window = Unter25()
+        window.setupUi(self.window)
+        window.zuruck.clicked.connect(self.home)
+        self.close()
+        self.window.show()
 
-    def fahrt_fahrtbeginn(self,MainWindow):
-        Controlling.bind_second(self,MainWindow,Fahrtbeginn)
-
-    def fahrt_fahrtende(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrtende)
-
-    def fahrtende_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
-
-    def fahrtende_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
-
-    def home_start(self,MainWindow):
-        Controlling.bind(self,MainWindow,Start)
-
-    def home_adminanmelden(self,MainWindow):
-        Controlling.bind(self,MainWindow,Admin_Anmelden)
-
-    def home_fahrtenliste(self,MainWindow):
-        Controlling.bind(self,MainWindow,Fahrten_Liste)
-
-    def adminanm_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
-
-    def adminanm_auswahl(self,MainWindow):
-        Controlling.bind(self,MainWindow,Profilauswahl)
-
-    def adminanm_adminmenu(self,MainWindow):
-        Controlling.bind(self,MainWindow,adminmenu)
-
-    def adminanm_adminmenu1(self,MainWindow):
-        Controlling.bind_option(self,MainWindow,adminmenu)
-
-    def adminmenu_mitverwalten(self,MainWindow):
-        Controlling.bind(self,MainWindow,Mitarbeiter_verwalten)
-
-    def adminmenu_datenauslesen(self,MainWindow):
-        Controlling.bind(self,MainWindow,adminmenu)#Daten
-
-    def adminmenu_kennzeichen(self,MainWindow):
-        Controlling.bind(self,MainWindow,Kennzeichen)
-
-    def adminmenu_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
-
-    def adminmenu_auswahl(self,MainWindow):
-        Controlling.bind(self,MainWindow,Profilauswahl)
-
-    def mitverw_neu(self,MainWindow):
-        Controlling.bind(self,MainWindow,Mitarbeiter_anlegen)
-
-    def mitverw_adminmenu(self,MainWindow):
-        Controlling.bind(self,MainWindow,adminmenu)
-
-    def auswahl_adminanmelden(self,MainWindow):
-        Controlling.bind_option(self,MainWindow,Admin_Anmelden)
-
-    def auswahl_anmelden(self,MainWindow):
-        Controlling.bind(self,MainWindow,anmelden)
-
-    def kennzeichen_adminmenu(self,MainWindow):
-        Controlling.bind(self,MainWindow,adminmenu)
-
-    def kennzeichen_home(self,MainWindow):
-        Controlling.bind(self,MainWindow,Home)
+    #zweck
+    def zweck(self):
+        self.window = QtWidgets.QDialog()
+        window = Zweck()
+        window.setupUi(self.window)
+        window.pushButton.clicked.connect(self.fahrtbeginn)
+        window.pushButton_2.clicked.connect(self.fahrt)
+        self.close()
+        self.window.show()
 
         
+if __name__ == "__main__":
+    app = QtWidgets.QApplication([])
+    gui = Controlling()
+    gui.show()
+    app.exec_()
+
+    

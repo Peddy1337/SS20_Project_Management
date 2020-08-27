@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class Fahrtende(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -54,16 +54,12 @@ class Fahrtende(object):
         self.minus.setFont(font)
         self.minus.setObjectName("minus")
         self.pushButton_3 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_3.clicked.connect(
-            lambda: binding.Controlling.fahrtende_home(self,Dialog))
         self.pushButton_3.setGeometry(QtCore.QRect(590, 10, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_3.setFont(font)
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_4.clicked.connect(
-            lambda: binding.Controlling.fahrtende_home(self,Dialog))
         self.pushButton_4.setGeometry(QtCore.QRect(590, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)

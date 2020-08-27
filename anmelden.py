@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from numblock import Ui_Form as Form
-import binding
+
 class anmelden(object):     
         
     def setupUi(self, MainWindow):
@@ -37,16 +37,12 @@ class anmelden(object):
         font.setPointSize(25)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(lambda:
-                        binding.Controlling.anmelden_auswahl(self,MainWindow))
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(590, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(25)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.clicked.connect(lambda:
-                        binding.Controlling.anmelden_home(self,MainWindow))
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(200, 20, 200, 40))
         font = QtGui.QFont()

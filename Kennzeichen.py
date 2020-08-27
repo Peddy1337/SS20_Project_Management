@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class Kennzeichen(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -32,16 +32,12 @@ class Kennzeichen(object):
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton.setFont(font)
-        self.pushButton.clicked.connect(
-            lambda: binding.Controlling.kennzeichen_adminmenu(self,Dialog))
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
         self.pushButton_2.setGeometry(QtCore.QRect(590, 320, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_2.setFont(font)
-        self.pushButton_2.clicked.connect(
-            lambda: binding.Controlling.kennzeichen_home(self,Dialog))
         self.pushButton_2.setObjectName("pushButton_2")
         self.kennzeichen = QtWidgets.QLabel(Dialog)
         self.kennzeichen.setGeometry(QtCore.QRect(170, 30, 200, 30))

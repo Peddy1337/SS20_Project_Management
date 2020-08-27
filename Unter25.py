@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class Unter25(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -30,8 +30,6 @@ class Unter25(object):
         self.label.setWordWrap(True)
         self.label.setObjectName("label")
         self.zuruck = QtWidgets.QPushButton(Dialog)
-        self.zuruck.clicked.connect(
-            lambda: binding.Controlling.unter25_home(self,Dialog))
         self.zuruck.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)

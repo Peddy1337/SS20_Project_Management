@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class Fahrten_Liste(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -88,8 +88,6 @@ class Fahrten_Liste(object):
         self.horizontalLayout_2.setContentsMargins(10, 0, 10, 10)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.pushButton = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
-        self.pushButton.clicked.connect(
-            lambda: binding.Controlling.fahrtenliste_home(self,Dialog))
         self.pushButton.setMinimumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)

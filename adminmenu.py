@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
+
 class adminmenu(object):
     def setupUi(self, MainWindow,modus=0):
         MainWindow.setObjectName("MainWindow")
@@ -24,36 +24,24 @@ class adminmenu(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Mitarbeiter_verwalten = QtWidgets.QPushButton(self.centralwidget)
-        self.Mitarbeiter_verwalten.clicked.connect(
-            lambda: binding.Controlling.adminmenu_mitverwalten(self,MainWindow))
         self.Mitarbeiter_verwalten.setGeometry(QtCore.QRect(180, 90, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.Mitarbeiter_verwalten.setFont(font)
         self.Mitarbeiter_verwalten.setObjectName("Mitarbeiter_verwalten")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.clicked.connect(
-            lambda: binding.Controlling.adminmenu_kennzeichen(self,MainWindow))
         self.pushButton_2.setGeometry(QtCore.QRect(430, 90, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
         self.Daten_auslesen = QtWidgets.QPushButton(self.centralwidget)
-        self.Daten_auslesen.clicked.connect(
-            lambda: binding.Controlling.adminmenu_datenauslesen(self,MainWindow))
         self.Daten_auslesen.setGeometry(QtCore.QRect(300, 210, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.Daten_auslesen.setFont(font)
         self.Daten_auslesen.setObjectName("Daten_auslesen")
         self.zuruck = QtWidgets.QPushButton(self.centralwidget)
-        if modus == 1:
-            self.zuruck.clicked.connect(
-                lambda: binding.Controlling.adminmenu_auswahl(self,MainWindow))
-        else:
-            self.zuruck.clicked.connect(
-                lambda: binding.Controlling.adminmenu_home(self,MainWindow))
         self.zuruck.setGeometry(QtCore.QRect(10, 320, 200, 100))
         font = QtGui.QFont()
         font.setPointSize(26)

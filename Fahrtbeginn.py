@@ -7,12 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import binding
-
 
 class Fahrtbeginn(object):
 
-    #modus: 0 kommt von Fahrt, 1 kommt von Angehörige
     def setupUi(self, MainWindow, modus=0):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -38,12 +35,6 @@ class Fahrtbeginn(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Zuruck = QtWidgets.QPushButton(self.centralwidget)
-        if modus == 2:
-            self.Zuruck.clicked.connect(
-                lambda: binding.Controlling.fahrtbeginn_fahrt(self,MainWindow))
-        else:
-            self.Zuruck.clicked.connect(
-                lambda: binding.Controlling.fahrtbeginn_home(self,MainWindow))
         self.Zuruck.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -66,9 +57,6 @@ class Fahrtbeginn(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
-        if modus == 1:
-            self.comboBox.setCurrentIndex(2)
-            self.comboBox.setDisabled(True)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 28))
@@ -80,18 +68,6 @@ class Fahrtbeginn(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-        self.comboBox.currentTextChanged.connect(lambda: self.changed(MainWindow))
-        if modus == 1:
-            self.Bestatigen.clicked.connect(lambda: binding.Controlling.fahrtbeginn_fahrt(self,MainWindow))
-
-    def changed(self,MainWindow):
-        if self.comboBox.currentText() == "Dienstlich":
-            self.Bestatigen.clicked.connect(lambda: binding.Controlling.fahrtbeginn_zweck(self,MainWindow))
-        elif self.comboBox.currentText() == "Art der Fahrt":
-            print("Wählen sie etwas aus")
-        else:
-            self.Bestatigen.clicked.connect(lambda: binding.Controlling.fahrtbeginn_fahrt(self,MainWindow))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
