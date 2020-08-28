@@ -10,7 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Fahrtbeginn(object):
 
-    def setupUi(self, MainWindow, modus=0):
+    def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
         MainWindow.setStyleSheet("QWidget{\n"

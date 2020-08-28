@@ -121,7 +121,7 @@ class Controlling(QtWidgets.QMainWindow):
         self.window = QtWidgets.QMainWindow()
         window = Fahrt()
         window.setupUi(self.window)
-        window.Fahrtart_andern.clicked.connect(lambda: self.fahrtbeginn(0))
+        window.Fahrart_andern.clicked.connect(lambda: self.fahrtbeginn(0))
         window.Fahrt_beenden.clicked.connect(self.fahrtende)
         self.close()
         self.window.show()
@@ -134,6 +134,7 @@ class Controlling(QtWidgets.QMainWindow):
         if back == 2:
             window.comboBox.setCurrentIndex(2)
             window.comboBox.setDisabled(True)
+            window.Bestatigen.clicked.connect(self.fahrt)
         if back == 1 or back == 2:
             window.Zuruck.clicked.connect(self.home)
         elif back == 0:
@@ -144,9 +145,10 @@ class Controlling(QtWidgets.QMainWindow):
 
     #Hilfsfunktion combobox 
     def changed(self,window):
-        if window.comboBox.currentText() == "Dienstlich":
+        text = window.comboBox.currentText()
+        if text == "Dienstlich":
             window.Bestatigen.clicked.connect(self.zweck)
-        elif window.comboBox.currentText() == "Art der Fahrt":
+        elif text == "Art der Fahrt":
             print("andern")
         else:
             window.Bestatigen.clicked.connect(self.fahrt)

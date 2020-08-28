@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Admin_Anmelden(object):
-    def setupUi(self, Dialog, modus=0):
+    def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 480)
         Dialog.setStyleSheet("QWidget{\n"
