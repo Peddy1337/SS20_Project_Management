@@ -24,11 +24,11 @@ class LogbookController :
     def LoadLicensePlateAndStartKmFromConfig(self,licensePlate,startKm) :
         return self.carManager(licensePlate,startKm)
 
-    def AddPurposes(purpose) :
-        return ''
+    def AddPurposes(self,purpose) :
+        self.purpManager.addPurpose(purpose)
 
-    def LoadPurposes():
-        return''
+    def LoadPurposes(self):
+        self.purpManager.loadPurposeList()
 
     def checkAdminPin(self,pin) :
         return pin == self.adminPin
