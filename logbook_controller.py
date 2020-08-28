@@ -21,13 +21,13 @@ class LogbookController :
     def generateLogbookFileName(self) :
         return self.licensePlate + '_' + self.startKm + '.json'
 
-    def LoadLicensePlateAndStartKmFromConfig(self,licensePlate,startKm) :
+    def loadLicensePlateAndStartKmFromConfig(self,licensePlate,startKm) :
         return self.carManager(licensePlate,startKm)
 
-    def AddPurposes(self,purpose) :
+    def addPurposes(self,purpose) :
         self.purpManager.addPurpose(purpose)
 
-    def LoadPurposes(self):
+    def loadPurposes(self):
         self.purpManager.loadPurposeList()
 
     def checkAdminPin(self,pin) :
