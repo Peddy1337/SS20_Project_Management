@@ -21,6 +21,9 @@ class LogbookController :
     def generateLogbookFileName(self) :
         return self.licensePlate + '_' + self.startKm + '.json'
 
+    def writeLicensePlateAndStartKmToConfig(self,licenseP, startKm) :
+        self.purpManager.saveData(licenseP,startKm)
+
     def loadLicensePlateAndStartKmFromConfig(self,licensePlate,startKm) :
         return self.carManager(licensePlate,startKm)
 
