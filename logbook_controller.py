@@ -13,7 +13,7 @@ class LogbookController :
         self.logbookFile = generateLogbookFileName()
         self.accManager = AccountManager(self.accountFile)
         self.lbMonitor = LogbookMonitor(self.logbookFile)
-        self.carFile = 'Car.json'
+        self.carFile = 'car.json'
         self.carManager = CarManager(self.carFile)
         self.purposeFile = 'purpose.json'
         self.purpManager = ZweckManager(self.purposeFile)
