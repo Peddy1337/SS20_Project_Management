@@ -84,7 +84,6 @@ class Controlling(QtWidgets.QMainWindow):
     #Hilfsfunktion combobox
     def indexChanged(self,window):
         index = window.comboBox.currentIndex()
-        print(index)
         if  index == 0:
             self.start()
         elif index == 1:
