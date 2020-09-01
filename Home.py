@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Home.ui'
+# Form implementation generated from reading ui file 'Homedirty.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -105,6 +105,7 @@ class Home(object):
         self.comboBox.setItemText(0, _translate("MainWindow", "Abmelden"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Admin"))
         
+
 
 if __name__ == "__main__":
     import sys

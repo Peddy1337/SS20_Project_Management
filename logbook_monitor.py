@@ -1,5 +1,6 @@
 import route_simulator
 import json_reader_writer
+import pdf_writer
 from datetime import datetime
 import threading
 import time
@@ -7,6 +8,7 @@ import time
 class LogbookMonitor :
     def __init__(self,file) :
         self.file = file
+        self.pdf_file = file[0:file.rfind('.')+1]+ 'pdf'
         self.name = ''
         self.typeOfRide = ''
         self.purpose = ''
@@ -18,7 +20,8 @@ class LogbookMonitor :
         self.sleepTime = 5
         self.rSim = route_simulator.RouteSimulator()
         self.jRW = json_reader_writer.JsonReaderWriter(self.file)
-        self.updateThread = threading.Thread(target = self.update , args=()) 
+        self.updateThread = threading.Thread(target = self.update , args=())
+        self.pdfExporter = pdf_writer.PDFWriter()
 
     def setDriverName(self, name) :
         self.name = name
@@ -40,8 +43,8 @@ class LogbookMonitor :
     def updateDate(self) :
         self.date = datetime.today().strftime('%d.%m.%Y')
 
-    def getTime(self) :
-        return datetime.today().strftime('%H:%M:%S')
+    def getPlace(self, without = None) :
+        return self.rSim.randomPlace(without)
 
     # update routeKm every 5 seconds
     def update(self) :
@@ -54,10 +57,11 @@ class LogbookMonitor :
             time.sleep(self.sleepTime)
 
     # start a new ride
-    def newRide(self) :
+    def newRide(self, place = None) :
         self.rideStarted = True
         self.updateStartKm()
         self.updateDate()
+        self.startPlace = place or self.getPlace()
         self.currentRide = {
             'Name' : self.name,
             'Datum' : self.date,
@@ -66,7 +70,7 @@ class LogbookMonitor :
             'gefahrene Kilometer' : '0',
             'Art der Fahrt' : self.typeOfRide,
             'Zweck der Fahrt' : self.purpose,
-            'Fahrtanfang' : self.getTime(),
+            'Fahrtanfang' : self.startPlace,
             'Fahrtende' : '',
             'Bestaetigt' : ''
             }
@@ -99,7 +103,7 @@ class LogbookMonitor :
         self.currentRide['gefahrene Kilometer'] = self.routeKm
 
     # stop ride and stop both threads
-    def endRide(self) :
+    def endRide(self, place = None) :
         self.rideStarted = False
         self.updateThread.join()
         self.rSim.stopThread()
@@ -107,7 +111,7 @@ class LogbookMonitor :
         self.calculateKm()
         self.currentRide['Endkilometerstand'] = self.endKm
         self.currentRide['gefahrene Kilometer'] = self.routeKm
-        self.currentRide['Fahrtende'] = self.getTime()
+        self.currentRide['Fahrtende'] = place or self.getPlace(self.startPlace)
 
     # document ride to json file
     def documentRide(self) :
@@ -158,9 +162,17 @@ class LogbookMonitor :
                 self.signRideAfterwards(self.logbook['rides'].index(p))
         
         print ('Signing of all rides finished\n')
+
+    # export logbook data to pdf
+    def exportToPDF(self) :
+        self.loadLogbook()
+        if not(self.checkUnsignedRides()) :
+            self.pdfExporter.writeToPDF(self.pdf_file,self.logbook)
+        else :
+            print ('Some rides havent been signed yet\n')
+            return False
             
     file = ''
     logbook = {}
     currentRide = {}
     rideStarted = False
-
