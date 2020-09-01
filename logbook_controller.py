@@ -8,13 +8,13 @@ class LogbookController :
         self.accountFile = 'accounts.json'
         self.workAdress = 'Remagen, Joseph-Rovan-Allee 6'
         self.adminPin = '1234'
-        self.licensePlate = LoadLicensePlateFromConfig()
-        self.startKm = LoadStartKmFromConfig()
-        self.logbookFile = generateLogbookFileName()
-        self.accManager = AccountManager(self.accountFile)
-        self.lbMonitor = LogbookMonitor(self.logbookFile)
         self.carFile = 'car.json'
         self.carManager = CarManager(self.carFile)
+        self.licensePlate = self.loadLicensePlateFromConfig()
+        self.startKm = self.loadStartKmFromConfig()
+        self.logbookFile = self.generateLogbookFileName()
+        self.accManager = AccountManager(self.accountFile)
+        self.lbMonitor = LogbookMonitor(self.logbookFile)
         self.purposeFile = 'purpose.json'
         self.purpManager = ZweckManager(self.purposeFile)
         
@@ -22,15 +22,25 @@ class LogbookController :
         return self.licensePlate + '_' + self.startKm + '.json'
 
     def writeLicensePlateAndStartKmToConfig(self,licenseP, startKm) :
-        self.purpManager.saveData(licenseP,startKm)
+        self.carManager.saveData(licenseP,startKm)
 
     def loadStartKmFromConfig(self) :
-        self.carManager.loadData()
-        return self.carManager.data['StartKm']
+        success = self.carManager.loadData()
+        if success :
+            return self.carManager.data['headerParts'][0]['StartKm']
+        else :
+            self.writeLicensePlateAndStartKmToConfig('Dummy Value', 'Dummy Value')
+            self.carManager.loadData()
+            return self.carManager.data['headerParts'][0]['StartKm']
 
     def loadLicensePlateFromConfig(self) :
-        self.carManager.loadData()
-        return self.carManager.data['KFZ-Kennzeichen']
+        success = self.carManager.loadData()
+        if success :
+            return self.carManager.data['headerParts'][0]['KFZ-Kennzeichen']
+        else :
+            self.writeLicensePlateAndStartKmToConfig('Dummy Value', 'Dummy Value')
+            self.carManager.loadData()
+            return self.carManager.data['headerParts'][0]['KFZ-Kennzeichen']
 
     def addPurposes(self,purpose) :
         self.purpManager.addPurpose(purpose)
@@ -135,3 +145,6 @@ class LogbookController :
     def exportLogbook(self) :
         self.lbMonitor.exportToPDF()
         
+
+
+s = LogbookController()
