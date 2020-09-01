@@ -9,6 +9,9 @@ class AccountManager :
     # load account list from file
     def loadAccountList(self) :
         self.accountList = self.jsonRW.readFromJson()
+        if not(self.accountList) :
+            self.accountList = {}
+            self.accountList['accounts'] = []
 
     # add account to file and load new list afterwards
     def addAccount(self,accDetails) :
