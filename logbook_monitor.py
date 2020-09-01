@@ -131,6 +131,18 @@ class LogbookMonitor :
     # load the logbook from json
     def loadLogbook(self) :
         self.logbook = self.jRW.readFromJson()
+        if not(self.logbook) :
+            self.logbook = {}
+            self.logbook['header'] = []
+            self.logbook['header'].append({
+            'Anfangsdatum' : 'Not initated',
+            'Enddatum' : 'Not initated',
+            'Anfangskilometerstand' : 'Not initated',
+            'Endkilometerstand' : 'Not initated',
+            'KFZ-Kennzeichen' : 'Not initated',
+            })
+            return False
+            
 
     # write logbook header to json file
     def documentHeader(self,hStartKm,hLicensePlate) :
