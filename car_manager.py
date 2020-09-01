@@ -8,8 +8,12 @@ class CarManager :
 
     def loadData(self) :
         self.data = self.jsonRW.readFromJson()
+        if not(self.data) :
+            return False
+        else :
+            return True
 
-    def saveData(self,licensePlate,startKm)
+    def saveData(self,licensePlate,startKm) :
         self.jsonRW.saveLicensePlateAndStartKm(licensePlate,startKm)
 
     data = {}
