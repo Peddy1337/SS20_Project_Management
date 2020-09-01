@@ -16,10 +16,12 @@ from adminmenu import adminmenu
 from Mitarbeiter_verwalten import Mitarbeiter_verwalten
 from Profilauswahl import Profilauswahl
 from Kennzeichen import Kennzeichen
+from logbook_controller import LogbookController
 
 class Controlling(QtWidgets.QMainWindow):
         
     def __init__(self, parent=None):
+        self.backend = LogbookController()
         super(Controlling, self).__init__(parent)
 
         start = Start()
@@ -42,6 +44,19 @@ class Controlling(QtWidgets.QMainWindow):
         window.setupUi(self.window)
         window.pushButton.clicked.connect(lambda:self.adminanm(1))
         window.pushButton_2.clicked.connect(self.anmelden)
+
+        self.backend.accManager.loadAccountList()
+        for i in self.backend.accManager.accountList['accounts'] :
+            listItem = QtWidgets.QListWidgetItem()
+            icon = QtGui.QIcon()
+            icon.addFile(i['picture'])
+            listItem.setIcon(icon)
+            listItem.setText(i['name'])
+            listItem.setTextAlignment(0x0004)
+            listItem.setFont(QtGui.QFont("MS Shell Dlg 2",17))
+            window.list.setIconSize(QtCore.QSize(30,30))
+            window.list.addItem(listItem)
+
         self.close()
         self.window.show()
 
