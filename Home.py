@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_MainWindow(object):
+class Home(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -73,10 +73,8 @@ class Ui_MainWindow(object):
         self.comboBox.setStyleSheet("")
         self.comboBox.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLengthWithIcon)
         self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
+        self.comboBox.addItem("0")
+        self.comboBox.addItem("1")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(590, 11, 60, 59))
         self.label.setText("")
@@ -94,27 +92,26 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
+   
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.Neue_Fahrt.setText(_translate("MainWindow", "Neue Fahrt"))
-        self.Angehoriger.setText(_translate("MainWindow", "Angehoriger"))
+        self.Angehoriger.setText(_translate("MainWindow", "Angehöriger"))
         self.Profilbild.setText(_translate("MainWindow", "Platzhalter Profilbild"))
         self.Daten_Mitarbeiter.setText(_translate("MainWindow", "Name\n"
 "Adresse"))
         #self.Buch.setText(_translate("MainWindow", "Buch"))
         self.comboBox.setItemText(0, _translate("MainWindow", "Abmelden"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Admin"))
-        self.comboBox.setItemText(2, _translate("MainWindow", "Fahrten bestatigen"))
-        self.comboBox.setItemText(3, _translate("MainWindow", "Private Fahrten"))
+        
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Home()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog(object):
+class Unter25(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 480)
@@ -30,7 +30,7 @@ class Ui_Dialog(object):
         self.label.setWordWrap(True)
         self.label.setObjectName("label")
         self.zuruck = QtWidgets.QPushButton(Dialog)
-        self.zuruck.setGeometry(QtCore.QRect(300, 300, 200, 100))
+        self.zuruck.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.zuruck.setFont(font)
@@ -43,14 +43,14 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog", "Fur Fahrer unter 25 gilt kein Versicherungsschutz!!!"))
-        self.zuruck.setText(_translate("Dialog", "Zuruck"))
+        self.zuruck.setText(_translate("Dialog", "Zurück"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Unter25()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

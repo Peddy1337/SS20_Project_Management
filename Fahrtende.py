@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog(object):
+class Fahrtende(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 480)
@@ -60,7 +60,7 @@ class Ui_Dialog(object):
         self.pushButton_3.setFont(font)
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_4.setGeometry(QtCore.QRect(590, 350, 200, 100))
+        self.pushButton_4.setGeometry(QtCore.QRect(590, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_4.setFont(font)
@@ -75,16 +75,16 @@ class Ui_Dialog(object):
         self.End_KMStand_label.setText(_translate("Dialog", "End KM-Stand:"))
         self.plus.setText(_translate("Dialog", "+"))
         self.minus.setText(_translate("Dialog", "-"))
-        self.pushButton_3.setText(_translate("Dialog", "spater\n"
+        self.pushButton_3.setText(_translate("Dialog", "später\n"
 "Bestatigen"))
-        self.pushButton_4.setText(_translate("Dialog", "Bestatigen"))
+        self.pushButton_4.setText(_translate("Dialog", "Bestätigen"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Fahrtende()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

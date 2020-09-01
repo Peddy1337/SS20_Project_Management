@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog(object):
+class Altersabfrage(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 480)
@@ -44,7 +44,7 @@ class Ui_Dialog(object):
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_3 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_3.setGeometry(QtCore.QRect(300, 360, 200, 100))
+        self.pushButton_3.setGeometry(QtCore.QRect(10, 370, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.pushButton_3.setFont(font)
@@ -59,14 +59,14 @@ class Ui_Dialog(object):
         self.Frage.setText(_translate("Dialog", "Sind Sie mindestens 25 Jahre alt?"))
         self.pushButton.setText(_translate("Dialog", "Ja"))
         self.pushButton_2.setText(_translate("Dialog", "Nein"))
-        self.pushButton_3.setText(_translate("Dialog", "Zuruck"))
+        self.pushButton_3.setText(_translate("Dialog", "Zurück"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Altersabfrage()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

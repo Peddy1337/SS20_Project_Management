@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_MainWindow(object):
+class Mitarbeiter_anlegen(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 480)
@@ -89,7 +89,7 @@ class Ui_MainWindow(object):
 "Profilbild"))
         self.Name.setText(_translate("MainWindow", "Name"))
         self.PIN_label.setText(_translate("MainWindow", "PIN:"))
-        self.pushButton.setText(_translate("MainWindow", "Zuruck"))
+        self.pushButton.setText(_translate("MainWindow", "Zurück"))
         self.pushButton_2.setText(_translate("MainWindow", "speichern"))
         self.Adresse.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Mitarbeiter_anlegen()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
