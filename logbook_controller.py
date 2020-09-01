@@ -145,6 +145,3 @@ class LogbookController :
     def exportLogbook(self) :
         self.lbMonitor.exportToPDF()
         
-
-
-s = LogbookController()
