@@ -193,18 +193,33 @@ class Controlling(QtWidgets.QMainWindow):
         window.setupUi(self.window)
         window.pushButton.clicked.connect(self.home)
 
-        #self.backend.logbook_monitor.loadLogbook()
-        #for i in self.backend.logbook_monitor.logbook['accounts'] :
-        #    listItem = QtWidgets.QListWidgetItem("name")
-        #    icon = QtGui.QIcon()
-        #    icon.addFile(i['picture'])
-        #    listItem.setIcon(icon)
-        #    listItem.setText(i['name'])
-        #    listItem.setTextAlignment(0x0004)
-        #    listItem.setFont(QtGui.QFont("MS Shell Dlg 2",17))
-        #    window.list.setIconSize(QtCore.QSize(30,30))
-        #    window.list.addItem(listItem)
-            
+        self.backend.lbMonitor.loadLogbook()
+        window.table.setRowCount(len(self.backend.lbMonitor.logbook['rides'])+1)
+        window.table.setColumnCount(10)
+        index = 0
+        
+        for i in self.backend.lbMonitor.logbook['rides'] :
+            window.table.setItem(index,0,QtWidgets.QTableWidgetItem(i['Name']))
+            window.table.setItem(index,1,QtWidgets.QTableWidgetItem(i['Datum']))
+            window.table.setItem(index,2,QtWidgets.QTableWidgetItem(i['Anfangskilometerstand']))
+            window.table.setItem(index,3,QtWidgets.QTableWidgetItem(i['Endkilometerstand']))
+            window.table.setItem(index,4,QtWidgets.QTableWidgetItem(i['gefahrene Kilometer']))
+            window.table.setItem(index,5,QtWidgets.QTableWidgetItem(i['Art der Fahrt']))
+            window.table.setItem(index,6,QtWidgets.QTableWidgetItem(i['Zweck der Fahrt']))
+            window.table.setItem(index,7,QtWidgets.QTableWidgetItem(i['Fahrtanfang']))
+            window.table.setItem(index,8,QtWidgets.QTableWidgetItem(i['Fahrtende']))
+            if i['Bestaetigt'] == 'Ja' :
+                window.table.setItem(index,9,QtWidgets.QTableWidgetItem(i['Bestaetigt']))
+            else :
+                window.listbutton = QtWidgets.QPushButton('bestätigen')
+                window.listbutton.setFlat(True)
+                window.listbutton.clicked.connect(lambda index: self.backend.signRideAfterwards(index))
+                window.table.setCellWidget(index,9,window.listbutton)
+                
+            index += 1
+        
+        window.table.verticalHeader().hide()
+        window.table.resizeColumnsToContents()
         self.close()
         self.window.show()
 

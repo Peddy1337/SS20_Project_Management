@@ -122,9 +122,9 @@ class Fahrten_Liste(object):
         self.EndKMStand_feld.setFont(font)
         self.EndKMStand_feld.setObjectName("EndKMStand_feld")
         self.horizontalLayout_2.addWidget(self.EndKMStand_feld)
-        self.list = QtWidgets.QListWidget(Dialog)
-        self.list.setGeometry(QtCore.QRect(10, 40, 781, 361))
-        self.list.setObjectName("listArea")
+        self.table = QtWidgets.QTableWidget(parent = Dialog)
+        self.table.setGeometry(QtCore.QRect(10, 40, 781, 361))
+        self.table.setObjectName("tableArea")
       
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
