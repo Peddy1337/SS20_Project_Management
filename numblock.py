@@ -50,6 +50,9 @@ class Ui_Form(object):
         self.pushButton_10 = QtWidgets.QPushButton(Form)
         self.pushButton_10.setGeometry(QtCore.QRect(80, 220, 60, 60))
         self.pushButton_10.setObjectName("pushButton_10")
+        self.pushButton_11 = QtWidgets.QPushButton(Form)
+        self.pushButton_11.setGeometry(QtCore.QRect(150, 220, 60, 60))
+        self.pushButton_11.setObjectName("pushButton_11")
 
         self.pushButton.clicked.connect(lambda: function(self.pushButton))
         self.pushButton_2.clicked.connect(lambda: function(self.pushButton_2))
@@ -61,6 +64,7 @@ class Ui_Form(object):
         self.pushButton_8.clicked.connect(lambda: function(self.pushButton_8))
         self.pushButton_9.clicked.connect(lambda: function(self.pushButton_9))
         self.pushButton_10.clicked.connect(lambda: function(self.pushButton_10))
+        self.pushButton_11.clicked.connect(lambda: function(self.pushButton_11))
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -78,6 +82,7 @@ class Ui_Form(object):
         self.pushButton_8.setText(_translate("Form", "8"))
         self.pushButton_9.setText(_translate("Form", "9"))
         self.pushButton_10.setText(_translate("Form", "0"))
+        self.pushButton_11.setText(_translate("Form", "Delete"))
 
 if __name__ == "__main__":
     import sys
