@@ -43,11 +43,10 @@ class Controlling(QtWidgets.QMainWindow):
         window = Profilauswahl()
         window.setupUi(self.window)
         window.pushButton.clicked.connect(lambda:self.adminanm(1))
-        window.pushButton_2.clicked.connect(self.anmelden)
 
         self.backend.accManager.loadAccountList()
         for i in self.backend.accManager.accountList['accounts'] :
-            listItem = QtWidgets.QListWidgetItem()
+            listItem = QtWidgets.QListWidgetItem("name")
             icon = QtGui.QIcon()
             icon.addFile(i['picture'])
             listItem.setIcon(icon)
@@ -56,20 +55,33 @@ class Controlling(QtWidgets.QMainWindow):
             listItem.setFont(QtGui.QFont("MS Shell Dlg 2",17))
             window.list.setIconSize(QtCore.QSize(30,30))
             window.list.addItem(listItem)
-
+        window.list.itemSelectionChanged.connect(lambda: self.selectedUser(window))
         self.close()
         self.window.show()
 
+    #Nutzer wurde ausgewählt
+    def selectedUser(self,window):
+        accName = window.list.currentItem().text()
+        self.backend.accManager.selectAccount(accName)
+        window.pushButton_2.clicked.connect(self.anmelden)
+        
     #anmelden
     def anmelden(self):
         self.window = QtWidgets.QMainWindow()
         window = anmelden()
         window.setupUi(self.window)
+        selectedAcc = str(self.backend.accManager.selectedAccount)
+        window.lineEdit.setText(selectedAcc)
         window.pushButton.clicked.connect(self.auswahl)
+        #window.pushButton_2.clicked.connect(lambda: self.checkIt(window))
         window.pushButton_2.clicked.connect(self.home)
         self.close()
         self.window.show()
 
+    def checkIt(self,window):
+        if self.backend.accManager.checkPin(window.lineEdit_2.text()):
+            self.home()
+        
     #adminanmelden
     def adminanm(self,modus):
         self.window = QtWidgets.QDialog()
@@ -174,6 +186,19 @@ class Controlling(QtWidgets.QMainWindow):
         window = Fahrten_Liste()
         window.setupUi(self.window)
         window.pushButton.clicked.connect(self.home)
+
+        #self.backend.logbook_monitor.loadLogbook()
+        #for i in self.backend.logbook_monitor.logbook['accounts'] :
+        #    listItem = QtWidgets.QListWidgetItem("name")
+        #    icon = QtGui.QIcon()
+        #    icon.addFile(i['picture'])
+        #    listItem.setIcon(icon)
+        #    listItem.setText(i['name'])
+        #    listItem.setTextAlignment(0x0004)
+        #    listItem.setFont(QtGui.QFont("MS Shell Dlg 2",17))
+        #    window.list.setIconSize(QtCore.QSize(30,30))
+        #    window.list.addItem(listItem)
+            
         self.close()
         self.window.show()
 
