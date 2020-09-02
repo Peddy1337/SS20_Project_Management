@@ -218,7 +218,9 @@ class Controlling(QtWidgets.QMainWindow):
             else :
                 window.listbutton = QtWidgets.QPushButton('bestätigen')
                 window.listbutton.setFlat(True)
-                window.listbutton.clicked.connect(lambda index: self.backend.signRideAfterwards(index))
+                window.listbutton.clicked.connect(lambda index : self.backend.signRideAfterwards(index))
+                window.listbutton.clicked.connect(lambda index: window.table.removeCellWidget(index,9))
+                window.listbutton.clicked.connect(lambda index : window.table.setItem(index,9,QtWidgets.QTableWidgetItem('Ja')))
                 window.table.setCellWidget(index,9,window.listbutton)
                 
             index += 1
