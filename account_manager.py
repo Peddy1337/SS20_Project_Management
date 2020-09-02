@@ -21,7 +21,7 @@ class AccountManager :
     # edit an account and overwrite file
     def changeAccount(self,targetAccName,accDetails) :
         search = self.searchAccount(targetAccName)
-        if search :
+        if type(search) == int :
             self.accountList['accounts'][search] = accDetails
             self.jsonRW.overwriteAccountList(self.accountList)
         else :
@@ -40,7 +40,7 @@ class AccountManager :
     # deletes account and overwrite file
     def deleteAccount(self,targetAccName) :
         search = self.searchAccount(targetAccName)
-        if search :
+        if type(search) == int :
            del self.accountList['accounts'][search]
            self.jsonRW.overwriteAccountList(self.accountList)
         else :
@@ -50,7 +50,7 @@ class AccountManager :
     # select account for login return false if account doesn't exists
     def selectAccount(self,targetAccName) :
         search = self.searchAccount(targetAccName)
-        if search :
+        if type(search) == int :
             self.accountSelected = True
             self.selectedAccount = self.accountList['accounts'][search]
         else :
