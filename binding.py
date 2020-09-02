@@ -70,15 +70,16 @@ class Controlling(QtWidgets.QMainWindow):
         self.window = QtWidgets.QMainWindow()
         window = anmelden()
         window.setupUi(self.window)
-        selectedAcc = str(self.backend.accManager.selectedAccount)
+        selectedAcc = str(self.backend.accManager.selectedAccount['name'])
         window.lineEdit.setText(selectedAcc)
         window.pushButton.clicked.connect(self.auswahl)
-        #window.pushButton_2.clicked.connect(lambda: self.checkIt(window))
-        window.pushButton_2.clicked.connect(self.home)
+        window.pushButton_2.clicked.connect(lambda: self.verifyPin(window))
+        pixmap = QtGui.QPixmap(self.backend.accManager.selectedAccount['picture'])
+        window.label.setPixmap(pixmap)
         self.close()
         self.window.show()
 
-    def checkIt(self,window):
+    def verifyPin(self,window):
         if self.backend.accManager.checkPin(window.lineEdit_2.text()):
             self.home()
         
@@ -100,6 +101,11 @@ class Controlling(QtWidgets.QMainWindow):
         self.window = QtWidgets.QMainWindow()
         window = Home()
         window.setupUi(self.window)
+        selName = str(self.backend.accManager.selectedAccount['name'])
+        selAdress = str(self.backend.accManager.selectedAccount['adress'])
+        window.Daten_Mitarbeiter.setText(selName + "\n" + selAdress)
+        pixmap = QtGui.QPixmap(self.backend.accManager.selectedAccount['picture'])
+        window.Profilbild.setPixmap(pixmap)
         window.Neue_Fahrt.clicked.connect(lambda: self.fahrtbeginn(1))
         window.Angehoriger.clicked.connect(self.altersabfrage)
         window.Buch.clicked.connect(self.fahrtenliste)
