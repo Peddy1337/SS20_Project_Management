@@ -62,7 +62,7 @@ class Controlling(QtWidgets.QMainWindow):
     #Nutzer wurde ausgewählt
     def selectedUser(self,window):
         accName = window.list.currentItem().text()
-        self.backend.accManager.selectAccount(accName)
+        self.backend.selectAccount(accName)
         window.pushButton_2.clicked.connect(self.anmelden)
         
     #anmelden
@@ -80,7 +80,7 @@ class Controlling(QtWidgets.QMainWindow):
         self.window.show()
 
     def verifyPin(self,window):
-        if self.backend.accManager.checkPin(window.lineEdit_2.text()):
+        if self.backend.checkPin(window.lineEdit_2.text()):
             self.home()
         
     #adminanmelden
@@ -92,10 +92,14 @@ class Controlling(QtWidgets.QMainWindow):
             window.pushButton.clicked.connect(self.auswahl)
         else:
             window.pushButton.clicked.connect(self.home)
-        window.pushButton_2.clicked.connect(lambda: self.adminmenu(modus))
+        window.pushButton_2.clicked.connect(lambda: self.verifyAdminPin(window,modus))
         self.close()
         self.window.show()
 
+    def verifyAdminPin(self,window,modus):
+        if self.backend.checkAdminPin(window.lineEdit.text()):
+            self.adminmenu(modus)
+        
     #home
     def home(self):
         self.window = QtWidgets.QMainWindow()
@@ -119,6 +123,7 @@ class Controlling(QtWidgets.QMainWindow):
         index = window.comboBox.currentIndex()
         if  index == 0:
             self.start()
+            self.backend.logout()
         elif index == 1:
             self.adminanm(0)
         
