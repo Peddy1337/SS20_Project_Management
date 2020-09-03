@@ -49,7 +49,7 @@ class Zweck(object):
         font.setPointSize(14)
         self.lineEdit.setFont(font)
         self.lineEdit.setObjectName("lineEdit")
-        self.listView = QtWidgets.QListView(Dialog)
+        self.listView = QtWidgets.QListWidget(Dialog)
         self.listView.setGeometry(QtCore.QRect(270, 80, 256, 211))
         self.listView.setObjectName("listView")
 

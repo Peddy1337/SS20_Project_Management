@@ -134,7 +134,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.setupUi(self.window)
         window.Mitarbeiter_verwalten.clicked.connect(self.mitarbeiter_verwalten)
         window.pushButton_2.clicked.connect(self.kennzeichen)
-        window.Daten_auslesen.clicked.connect(self.backend.exportLogbook)
+        window.Daten_auslesen.clicked.connect(self.adminmenu)#TODO
         if modus == 1:
             window.zuruck.clicked.connect(self.auswahl)
         else:
@@ -176,7 +176,7 @@ class Controlling(QtWidgets.QMainWindow):
             window.Zuruck.clicked.connect(self.home)
         elif back == 0:
             window.Zuruck.clicked.connect(self.fahrt)
-        window.comboBox.activated.connect(lambda: self.changed(window))
+        window.Bestatigen.clicked.connect(lambda: self.changed(window))
         self.close()
         self.window.show()
 
@@ -184,11 +184,13 @@ class Controlling(QtWidgets.QMainWindow):
     def changed(self,window):
         text = window.comboBox.currentText()
         if text == "Dienstlich":
-            window.Bestatigen.clicked.connect(self.zweck)
+            self.backend.setTypeOfRide(text)
+            self.zweck()
         elif text == "Art der Fahrt":
-            print("andern")
+            window.textandern.setHidden(False)
         else:
-            window.Bestatigen.clicked.connect(self.fahrt)
+            self.backend.setTypeOfRide(text)
+            self.fahrt()
 
     
     #fahrtenliste
@@ -202,7 +204,14 @@ class Controlling(QtWidgets.QMainWindow):
         window.table.setRowCount(len(self.backend.lbMonitor.logbook['rides']))
         window.table.setColumnCount(10)
         index = 0
-        
+
+        for j in self.backend.lbMonitor.logbook['header']:
+            window.KFZ_feld.setText(j['KFZ-Kennzeichen'])
+            window.Beginn.setText(j['Anfangsdatum'])
+            window.Ende.setText(j['Enddatum'])
+            window.AnfangsKMStand_feld.setText(j['Anfangskilometerstand'])
+            window.EndKMStand_feld.setText(j['Endkilometerstand'])
+            
         for i in self.backend.lbMonitor.logbook['rides'] :
             window.table.setItem(index,0,QtWidgets.QTableWidgetItem(i['Name']))
             window.table.setItem(index,1,QtWidgets.QTableWidgetItem(i['Datum']))
@@ -245,7 +254,7 @@ class Controlling(QtWidgets.QMainWindow):
     def kennzeichen(self):
         self.window = QtWidgets.QDialog()
         window = Kennzeichen()
-        window.setupUi(self.window)
+        window.setupUi(self.window)   
         window.pushButton.clicked.connect(self.adminmenu)
         window.pushButton_2.clicked.connect(lambda: self.backend.writeLicensePlateAndStartKmToConfig(window.lineEdit.text(),window.lineEdit_2.text()))
         window.pushButton_2.clicked.connect(self.adminmenu)
@@ -282,6 +291,7 @@ class Controlling(QtWidgets.QMainWindow):
             self.backend.deleteAccount(window.list.currentItem().text())
             window.list.takeItem(window.list.row(window.list.currentItem()))
 
+
     #mitarbeiter_verwalten
     def mitarbeiter_verwalten(self):
         self.window = QtWidgets.QMainWindow()
@@ -304,7 +314,6 @@ class Controlling(QtWidgets.QMainWindow):
             window.list.setIconSize(QtCore.QSize(30,30))
             window.list.addItem(listItem)
         window.list.itemSelectionChanged.connect(lambda: self.backend.selectAccount(window.list.currentItem().text()))
-        
         self.close()
         self.window.show()
 
@@ -322,6 +331,16 @@ class Controlling(QtWidgets.QMainWindow):
         self.window = QtWidgets.QDialog()
         window = Zweck()
         window.setupUi(self.window)
+        
+        self.backend.loadPurposes()
+        for i in self.backend.purpManager.purposeList['purposes'] :
+            listItem = QtWidgets.QListWidgetItem("name")
+            listItem.setText(i['Zweck der Fahrt'])
+            listItem.setTextAlignment(0x0004)
+            listItem.setFont(QtGui.QFont("MS Shell Dlg 2",17))
+            window.listView.addItem(listItem)
+        if window.lineEdit.text() != "Zweck der Fahrt":
+            window.pushButton_2.clicked.connect(lambda :self.backend.addPurposes(window.lineEdit.text()))
         window.pushButton.clicked.connect(self.fahrtbeginn)
         window.pushButton_2.clicked.connect(self.fahrt)
         self.close()

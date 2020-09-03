@@ -8,5 +8,30 @@
             "KFZ-Kennzeichen": "WWP399"
         }
     ],
-    "rides": []
+    "rides": [
+{
+            "Name": "Bastian Spurzem",
+            "Datum": "03.09.2020",
+            "Anfangskilometerstand": "5370.0",
+            "Endkilometerstand": "5370.3",
+            "gefahrene Kilometer": "0.3",
+            "Art der Fahrt": "Privat",
+            "Zweck der Fahrt": "Privat",
+            "Fahrtanfang": "Koblenz-G\u00fcls, Am Zehnthof 11",
+            "Fahrtende": "Ransbach-Baumbach, Bergstra\u00dfe 39a",
+            "Bestaetigt": "Ja"
+        },
+        {
+            "Name": "Patrick Z\u00f6ller",
+            "Datum": "03.09.2020",
+            "Anfangskilometerstand": "5370.3",
+            "Endkilometerstand": "5370.6",
+            "gefahrene Kilometer": "0.3",
+            "Art der Fahrt": "Geschaeftlich",
+            "Zweck der Fahrt": "Kundentermin Firma RAC",
+            "Fahrtanfang": "Koblenz-G\u00fcls, Am Zehnthof 12",
+            "Fahrtende": "Koblenz, Bahnhofplatz 2",
+            "Bestaetigt": "Ja"
+        }
+]
 }
