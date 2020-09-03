@@ -134,7 +134,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.setupUi(self.window)
         window.Mitarbeiter_verwalten.clicked.connect(self.mitarbeiter_verwalten)
         window.pushButton_2.clicked.connect(self.kennzeichen)
-        window.Daten_auslesen.clicked.connect(self.adminmenu)#TODO
+        window.Daten_auslesen.clicked.connect(self.backend.exportLogbook)
         if modus == 1:
             window.zuruck.clicked.connect(self.auswahl)
         else:
@@ -199,7 +199,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton.clicked.connect(self.home)
 
         self.backend.lbMonitor.loadLogbook()
-        window.table.setRowCount(len(self.backend.lbMonitor.logbook['rides'])+1)
+        window.table.setRowCount(len(self.backend.lbMonitor.logbook['rides']))
         window.table.setColumnCount(10)
         index = 0
         
@@ -226,6 +226,7 @@ class Controlling(QtWidgets.QMainWindow):
             index += 1
         
         window.table.verticalHeader().hide()
+        window.table.horizontalHeader().hide()
         window.table.resizeColumnsToContents()
         self.close()
         self.window.show()
@@ -246,19 +247,40 @@ class Controlling(QtWidgets.QMainWindow):
         window = Kennzeichen()
         window.setupUi(self.window)
         window.pushButton.clicked.connect(self.adminmenu)
-        window.pushButton_2.clicked.connect(self.home)
+        window.pushButton_2.clicked.connect(lambda: self.backend.writeLicensePlateAndStartKmToConfig(window.lineEdit.text(),window.lineEdit_2.text()))
+        window.pushButton_2.clicked.connect(self.adminmenu)
         self.close()
         self.window.show()
 
     #mitarbeiter_anlegen
-    def mitarbeiter_anlegen(self):
+    def mitarbeiter_anlegen(self, account = None):
         self.window = QtWidgets.QMainWindow()
         window = Mitarbeiter_anlegen()
         window.setupUi(self.window)
-        window.pushButton.clicked.connect(self.adminmenu)
-        window.pushButton_2.clicked.connect(self.adminmenu)#TODO
+        if account :
+            window.PIN_feld.setText(account['pin'])
+            window.Name.setText(account['name'])
+            window.Adresse.setText(account['adress'])
+            window.PIC.setText(account['picture'])
+            window.pushButton.clicked.connect(self.mitarbeiter_verwalten)
+            window.pushButton_2.clicked.connect(lambda :self.backend.editAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.toPlainText()))
+            window.pushButton_2.clicked.connect(self.mitarbeiter_verwalten)
+        else:
+            window.pushButton.clicked.connect(self.mitarbeiter_verwalten)
+            window.pushButton_2.clicked.connect(lambda :self.backend.addAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.toPlainText()))
+            window.pushButton_2.clicked.connect(self.mitarbeiter_verwalten)
         self.close()
         self.window.show()
+
+    def accountSelection(self,window) :
+        if window.list.currentItem() :
+            self.mitarbeiter_anlegen(self.backend.accManager.selectedAccount)
+        
+
+    def accountDeletion(self,window) :
+        if window.list.currentItem() :
+            self.backend.deleteAccount(window.list.currentItem().text())
+            window.list.takeItem(window.list.row(window.list.currentItem()))
 
     #mitarbeiter_verwalten
     def mitarbeiter_verwalten(self):
@@ -266,8 +288,23 @@ class Controlling(QtWidgets.QMainWindow):
         window = Mitarbeiter_verwalten()
         window.setupUi(self.window)
         window.Zuruck.clicked.connect(self.adminmenu)
-        window.Neu.clicked.connect(self.mitarbeiter_anlegen)
-        window.bearbeiten.clicked.connect(self.mitarbeiter_anlegen)#TODO
+        window.Neu.clicked.connect(self.mitarbeiter_anlegen) 
+        window.bearbeiten.clicked.connect(lambda : self.accountSelection(window))
+        window.loschen.clicked.connect(lambda : self.accountDeletion(window))
+        
+        self.backend.accManager.loadAccountList()
+        for i in self.backend.accManager.accountList['accounts'] :
+            listItem = QtWidgets.QListWidgetItem("name")
+            icon = QtGui.QIcon()
+            icon.addFile(i['picture'])
+            listItem.setIcon(icon)
+            listItem.setText(i['name'])
+            listItem.setTextAlignment(0x0004)
+            listItem.setFont(QtGui.QFont("MS Shell Dlg 2",17))
+            window.list.setIconSize(QtCore.QSize(30,30))
+            window.list.addItem(listItem)
+        window.list.itemSelectionChanged.connect(lambda: self.backend.selectAccount(window.list.currentItem().text()))
+        
         self.close()
         self.window.show()
 

@@ -23,6 +23,11 @@ class LogbookController :
 
     def writeLicensePlateAndStartKmToConfig(self,licenseP, startKm) :
         self.carManager.saveData(licenseP,startKm)
+        self.licensePlate = licenseP
+        self.startKm = startKm
+        self.logbookFile = self.generateLogbookFileName()
+        self.lbMonitor = LogbookMonitor(self.logbookFile)
+        self.writeHeader()
 
     def loadStartKmFromConfig(self) :
         success = self.carManager.loadData()
@@ -76,7 +81,7 @@ class LogbookController :
             'pin' : pin,
             'adress' : adress
             }
-        self.accManager.changeAccount(accDetails)
+        self.accManager.changeAccount(name,accDetails)
 
     def deleteAccount(self,name) :
         self.accManager.deleteAccount(name)

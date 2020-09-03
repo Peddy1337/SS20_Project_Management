@@ -11,7 +11,8 @@ class RouteSimulator :
         self.tlock = threading.Lock()
 
     def __del__(self) :
-        self.stopThread()
+        if self.running :
+            self.stopThread()
 
     def startThread(self) :
         self.running = True
