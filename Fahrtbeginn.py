@@ -85,8 +85,8 @@ class Fahrtbeginn(object):
         self.comboBox.setItemText(0, _translate("MainWindow", "Art der Fahrt"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Dienstlich"))
         self.comboBox.setItemText(2, _translate("MainWindow", "Privat"))
-        self.comboBox.setItemText(3, _translate("MainWindow", "Von aktuellem Standort"))
-        self.comboBox.setItemText(4, _translate("MainWindow", "Nach Hause"))
+        self.comboBox.setItemText(3, _translate("MainWindow", "zur Arbeit"))
+        self.comboBox.setItemText(4, _translate("MainWindow", "nach Hause"))
 
 
 if __name__ == "__main__":
