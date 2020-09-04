@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Form(object):
-    def setupUi(self, Form, function):
+    def setupUi(self, Form, function,delFunction):
         Form.setObjectName("Form")
         Form.resize(220, 290)
         Form.setStyleSheet("QWidget{background-color: #999999}\n"
@@ -64,7 +64,7 @@ class Ui_Form(object):
         self.pushButton_8.clicked.connect(lambda: function(self.pushButton_8))
         self.pushButton_9.clicked.connect(lambda: function(self.pushButton_9))
         self.pushButton_10.clicked.connect(lambda: function(self.pushButton_10))
-        self.pushButton_11.clicked.connect(lambda: function(self.pushButton_11))
+        self.pushButton_11.clicked.connect(delFunction)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

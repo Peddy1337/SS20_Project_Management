@@ -62,7 +62,7 @@ class Controlling(QtWidgets.QMainWindow):
     #Nutzer wurde ausgewählt
     def selectedUser(self,window):
         accName = window.list.currentItem().text()
-        self.backend.selectAccount(accName)
+        self.backend.selectDriver(accName)
         window.pushButton_2.clicked.connect(self.anmelden)
         
     #anmelden
@@ -105,11 +105,12 @@ class Controlling(QtWidgets.QMainWindow):
         self.window = QtWidgets.QMainWindow()
         window = Home()
         window.setupUi(self.window)
-        selName = str(self.backend.accManager.selectedAccount['name'])
-        selAdress = str(self.backend.accManager.selectedAccount['adress'])
+        selName = str(self.backend.driverInfo['name'])
+        selAdress = str(self.backend.driverInfo['adress'])
         window.Daten_Mitarbeiter.setText(selName + "\n" + selAdress)
-        pixmap = QtGui.QPixmap(self.backend.accManager.selectedAccount['picture'])
+        pixmap = QtGui.QPixmap(self.backend.driverInfo['picture'])
         window.Profilbild.setPixmap(pixmap)
+        window.Neue_Fahrt.clicked.connect(self.backend.passDriverName)
         window.Neue_Fahrt.clicked.connect(lambda: self.fahrtbeginn(1))
         window.Angehoriger.clicked.connect(self.altersabfrage)
         window.Buch.clicked.connect(self.fahrtenliste)
@@ -147,6 +148,7 @@ class Controlling(QtWidgets.QMainWindow):
         self.window = QtWidgets.QDialog()
         window = Altersabfrage()
         window.setupUi(self.window)
+        window.pushButton.clicked.connect(self.backend.passNameFamilyMember)
         window.pushButton.clicked.connect(lambda: self.fahrtbeginn(2))
         window.pushButton_2.clicked.connect(self.unter25)
         window.pushButton_3.clicked.connect(self.home)
@@ -158,7 +160,9 @@ class Controlling(QtWidgets.QMainWindow):
         self.window = QtWidgets.QMainWindow()
         window = Fahrt()
         window.setupUi(self.window)
+        window.Fahrart_andern.clicked.connect(self.backend.finishRideWithoutSignature)
         window.Fahrart_andern.clicked.connect(lambda: self.fahrtbeginn(0))
+        window.Fahrt_beenden.clicked.connect(self.backend.endRide)
         window.Fahrt_beenden.clicked.connect(self.fahrtende)
         self.close()
         self.window.show()
@@ -171,6 +175,7 @@ class Controlling(QtWidgets.QMainWindow):
         if back == 2:
             window.comboBox.setCurrentIndex(2)
             window.comboBox.setDisabled(True)
+            window.Bestatigen.clicked.connect(self.backend.startRide)
             window.Bestatigen.clicked.connect(self.fahrt)
         if back == 1 or back == 2:
             window.Zuruck.clicked.connect(self.home)
@@ -190,6 +195,8 @@ class Controlling(QtWidgets.QMainWindow):
             window.textandern.setHidden(False)
         else:
             self.backend.setTypeOfRide(text)
+            self.backend.setPurpose(text)
+            self.backend.startRide()
             self.fahrt()
 
     
@@ -245,7 +252,14 @@ class Controlling(QtWidgets.QMainWindow):
         self.window = QtWidgets.QDialog()
         window = Fahrtende()
         window.setupUi(self.window)
+        window.End_KMStand_feld.setText(self.backend.lbMonitor.endKm)
+        window.plus.clicked.connect(self.backend.adjustKmPositive)
+        window.plus.clicked.connect(lambda: window.End_KMStand_feld.setText(self.backend.lbMonitor.endKm))
+        window.minus.clicked.connect(self.backend.adjustKmNegative)
+        window.minus.clicked.connect(lambda: window.End_KMStand_feld.setText(self.backend.lbMonitor.endKm))
+        window.pushButton_3.clicked.connect(self.backend.finishRideWithoutSignature)
         window.pushButton_3.clicked.connect(self.home)
+        window.pushButton_4.clicked.connect(self.backend.finishRideWithSignature)
         window.pushButton_4.clicked.connect(self.home)
         self.close()
         self.window.show()
@@ -272,11 +286,11 @@ class Controlling(QtWidgets.QMainWindow):
             window.Adresse.setText(account['adress'])
             window.PIC.setText(account['picture'])
             window.pushButton.clicked.connect(self.mitarbeiter_verwalten)
-            window.pushButton_2.clicked.connect(lambda :self.backend.editAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.toPlainText()))
+            window.pushButton_2.clicked.connect(lambda :self.backend.editAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.text()))
             window.pushButton_2.clicked.connect(self.mitarbeiter_verwalten)
         else:
             window.pushButton.clicked.connect(self.mitarbeiter_verwalten)
-            window.pushButton_2.clicked.connect(lambda :self.backend.addAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.toPlainText()))
+            window.pushButton_2.clicked.connect(lambda :self.backend.addAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.text()))
             window.pushButton_2.clicked.connect(self.mitarbeiter_verwalten)
         self.close()
         self.window.show()
@@ -297,7 +311,7 @@ class Controlling(QtWidgets.QMainWindow):
         self.window = QtWidgets.QMainWindow()
         window = Mitarbeiter_verwalten()
         window.setupUi(self.window)
-        window.Zuruck.clicked.connect(self.adminmenu)
+        window.Zuruck.clicked.connect(lambda :self.adminmenu(1))
         window.Neu.clicked.connect(self.mitarbeiter_anlegen) 
         window.bearbeiten.clicked.connect(lambda : self.accountSelection(window))
         window.loschen.clicked.connect(lambda : self.accountDeletion(window))
@@ -327,8 +341,14 @@ class Controlling(QtWidgets.QMainWindow):
         self.window.show()
 
     def zweckSelection(self,window) :
-        if window.lineEdit.text() != "Zweck der Fahrt" or len(window.listView.selectedItems()) != 0 :
+        if window.lineEdit.text() != "Zweck der Fahrt" :
             self.backend.addPurposes(window.lineEdit.text())
+            self.backend.setPurpose(window.lineEdit.text())
+            self.backend.startRide()
+            self.fahrt()
+        elif len(window.listView.selectedItems()) != 0 :
+            self.backend.setPurpose(window.listView.currentItem().text())
+            self.backend.startRide()
             self.fahrt()
 
     #zweck

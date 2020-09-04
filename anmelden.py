@@ -98,13 +98,16 @@ class LineEdit(QtWidgets.QLineEdit):
         
         self.dialog = QtWidgets.QWidget()
         self.dialog.ui = Form()
-        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot)
+        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
         self.dialog.move(self.pos().x(),self.pos().y()+80)
         self.dialog.show()
         super(LineEdit,self).mousePressEvent(event)
         
     def editTextFromSlot(self,button) :
         self.insert(button.text())
+
+    def deleteCharFromSlot(self) :
+        self.backspace()
 
         
 if __name__ == "__main__":

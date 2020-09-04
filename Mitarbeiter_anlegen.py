@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from numblock import Ui_Form as Form
+from eigene_Tastatur import Keyboard
 
 class Mitarbeiter_anlegen(object):
     def setupUi(self, MainWindow):
@@ -34,13 +36,13 @@ class Mitarbeiter_anlegen(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(30, 10, 150, 150))
         self.label.setObjectName("label")
-        self.PIC = QtWidgets.QLineEdit(self.centralwidget)
+        self.PIC = LineEditK(self.centralwidget)
         self.PIC.setGeometry(QtCore.QRect(60, 0, 113, 32))
         font = QtGui.QFont()
         font.setPointSize(17)
         self.PIC.setFont(font)
         self.PIC.setObjectName("Name")
-        self.Name = QtWidgets.QLineEdit(self.centralwidget)
+        self.Name = LineEditK(self.centralwidget)
         self.Name.setGeometry(QtCore.QRect(190, 0, 113, 32))
         font = QtGui.QFont()
         font.setPointSize(17)
@@ -52,7 +54,7 @@ class Mitarbeiter_anlegen(object):
         font.setPointSize(17)
         self.PIN_label.setFont(font)
         self.PIN_label.setObjectName("PIN_label")
-        self.PIN_feld = QtWidgets.QLineEdit(self.centralwidget)
+        self.PIN_feld = LineEditN(self.centralwidget)
         self.PIN_feld.setGeometry(QtCore.QRect(590, 50, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(17)
@@ -70,7 +72,7 @@ class Mitarbeiter_anlegen(object):
         font.setPointSize(26)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
-        self.Adresse = QtWidgets.QTextEdit(self.centralwidget)
+        self.Adresse = LineEditK(self.centralwidget)
         self.Adresse.setGeometry(QtCore.QRect(190, 40, 361, 121))
         font = QtGui.QFont()
         font.setPointSize(17)
@@ -102,6 +104,44 @@ class Mitarbeiter_anlegen(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'PibotoLt\'; font-size:17pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">Adresse</span></p></body></html>"))
+
+class LineEditK(QtWidgets.QLineEdit):
+    
+    def mousePressEvent(self,event):
+        if(self.text() == 'Zweck der Fahrt') :            
+            self.clear()
+        
+        self.dialog = QtWidgets.QWidget()
+        self.dialog.ui = Keyboard()
+        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot, self.deleteCharFromSlot)
+        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.show()
+        super(LineEdit,self).mousePressEvent(event)
+        
+    def editTextFromSlot(self,text) :
+        self.insert(text)
+
+    def deleteCharFromSlot(self) :
+        self.backspace()
+
+class LineEditN(QtWidgets.QLineEdit):
+    
+    def mousePressEvent(self,event):
+        if(self.text() == 'Pin') :            
+            self.clear()
+        
+        self.dialog = QtWidgets.QWidget()
+        self.dialog.ui = Form()
+        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
+        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.show()
+        super(LineEdit,self).mousePressEvent(event)
+        
+    def editTextFromSlot(self,button) :
+        self.insert(button.text())
+
+    def deleteCharFromSlot(self) :
+        self.backspace()
 
 
 if __name__ == "__main__":

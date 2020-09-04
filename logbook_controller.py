@@ -17,6 +17,7 @@ class LogbookController :
         self.lbMonitor = LogbookMonitor(self.logbookFile)
         self.purposeFile = 'purpose.json'
         self.purpManager = ZweckManager(self.purposeFile)
+        self.driverInfo = {}
         
     def generateLogbookFileName(self) :
         return self.licensePlate + '_' + self.startKm + '.json'
@@ -59,8 +60,13 @@ class LogbookController :
     def selectAccount(self,name) :
         self.accManager.selectAccount(name)
 
+    def selectDriver(self,name) :
+        self.selectAccount(name)
+        self.driverInfo = self.accManager.selectedAccount
+
     def logout(self) :
         self.accManager.deselectAccount()
+        self.diverInfo = {}
 
     def checkPin(self,pin) :
         return self.accManager.checkPin(pin)
@@ -87,8 +93,8 @@ class LogbookController :
         self.accManager.deleteAccount(name)
 
     def passDriverName(self) :
-        if self.accManager.accountSelected and not(self.lbMonitor.rideStarted) :
-            self.lbMonitor.setDriverName(self.accManager.selectedAccount['name'])
+        if self.driverInfo and not(self.lbMonitor.rideStarted) :
+            self.lbMonitor.setDriverName(self.driverInfo['name'])
         else :
             print('No Account selected or Ride already started\n')
 
@@ -100,20 +106,17 @@ class LogbookController :
         if not(self.lbMonitor.rideStarted) :
             self.lbMonitor.setPurpose(purpose)
 
-    def startRideFamilyMember(self):
-        self.lbMonitor.setDriverName(self.accManager.selectedAccount['name']+ ' Angehörige/r')
-        self.setTypeOfRide('privat')
-        self.setPurpose('privat')
-        self.startRide()
+    def passNameFamilyMember(self):
+        self.lbMonitor.setDriverName(self.driverInfo['name']+ ' Angehörige/r')
 
     def startRide(self) :
         self.lbMonitor.newRide()
 
     def endRide(self) :
-        if self.lbMonitor.typeOfRide == 'geschäftlich' or self.lbMonitor.typeOfRide == 'privat' :
+        if self.lbMonitor.typeOfRide == 'Dienstlich' or self.lbMonitor.typeOfRide == 'Privat' :
             self.lbMonitor.endRide()
         elif self.lbMonitor.typeOfRide == 'nach Hause' :
-            self.lbMonitor.endRide(self.accManager.selectedAccount['adress'])
+            self.lbMonitor.endRide(self.driverInfo['adress'])
         elif self.lbMonitor.typeOfRide == 'zur Arbeit' :
             self.lbMonitor.endRide(self.workAdress)
         else :
