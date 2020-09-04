@@ -339,8 +339,7 @@ class Controlling(QtWidgets.QMainWindow):
             listItem.setTextAlignment(0x0004)
             listItem.setFont(QtGui.QFont("MS Shell Dlg 2",17))
             window.listView.addItem(listItem)
-        if window.lineEdit.text() != "Zweck der Fahrt":
-            window.pushButton_2.clicked.connect(lambda :self.backend.addPurposes(window.lineEdit.text()))
+        window.pushButton_2.clicked.connect(lambda :self.backend.addPurposes(window.lineEdit.text()))
         window.pushButton.clicked.connect(self.fahrtbeginn)
         window.pushButton_2.clicked.connect(self.fahrt)
         self.close()

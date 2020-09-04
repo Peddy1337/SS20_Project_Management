@@ -125,7 +125,7 @@ class JsonReaderWriter :
         contents['purposes'].append({
             'Zweck der Fahrt' : purpose
         })
-        with open(self.file, 'a+') as outfile :
+        with open(self.file, 'r+') as outfile :
             if os.path.getsize(self.file) == 0:
                 json.dump(contents, outfile, indent=4)
                 outfile.close();
