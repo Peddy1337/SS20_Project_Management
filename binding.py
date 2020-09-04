@@ -326,6 +326,11 @@ class Controlling(QtWidgets.QMainWindow):
         self.close()
         self.window.show()
 
+    def zweckSelection(self,window) :
+        if window.lineEdit.text() != "Zweck der Fahrt" or len(window.listView.selectedItems()) != 0 :
+            self.backend.addPurposes(window.lineEdit.text())
+            self.fahrt()
+
     #zweck
     def zweck(self):
         self.window = QtWidgets.QDialog()
@@ -339,9 +344,8 @@ class Controlling(QtWidgets.QMainWindow):
             listItem.setTextAlignment(0x0004)
             listItem.setFont(QtGui.QFont("MS Shell Dlg 2",17))
             window.listView.addItem(listItem)
-        window.pushButton_2.clicked.connect(lambda :self.backend.addPurposes(window.lineEdit.text()))
         window.pushButton.clicked.connect(self.fahrtbeginn)
-        window.pushButton_2.clicked.connect(self.fahrt)
+        window.pushButton_2.clicked.connect(lambda:self.zweckSelection(window))
         self.close()
         self.window.show()
 
