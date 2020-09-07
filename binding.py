@@ -164,6 +164,10 @@ class Controlling(QtWidgets.QMainWindow):
         window.Fahrart_andern.clicked.connect(lambda: self.fahrtbeginn(0))
         window.Fahrt_beenden.clicked.connect(self.backend.endRide)
         window.Fahrt_beenden.clicked.connect(self.fahrtende)
+        window.Name.setText(self.backend.lbMonitor.name)
+        window.Art_der_Fahrt.setText(self.backend.lbMonitor.typeOfRide)
+        window.Datum_feld.setText(self.backend.lbMonitor.date)
+        window.Anfangs_KM_feld.setText(self.backend.lbMonitor.startKm)
         self.close()
         self.window.show()
 
