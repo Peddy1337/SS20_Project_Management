@@ -279,6 +279,13 @@ class Controlling(QtWidgets.QMainWindow):
         self.close()
         self.window.show()
 
+    def changePicture(self,window) :
+        file = QtWidgets.QFileDialog.getOpenFileName()[0]
+        window.PIC.setText(file)
+        pixmap = QtGui.QPixmap(file)
+        window.label.setPixmap(pixmap.scaled(150,150))
+        
+    
     #mitarbeiter_anlegen
     def mitarbeiter_anlegen(self, account = None):
         self.window = QtWidgets.QMainWindow()
@@ -289,10 +296,14 @@ class Controlling(QtWidgets.QMainWindow):
             window.Name.setText(account['name'])
             window.Adresse.setText(account['adress'])
             window.PIC.setText(account['picture'])
+            pixmap = QtGui.QPixmap(account['picture'])
+            window.label.setPixmap(pixmap.scaled(150,150))
+            window.dir_button.clicked.connect(lambda: self.changePicture(window))
             window.pushButton.clicked.connect(self.mitarbeiter_verwalten)
             window.pushButton_2.clicked.connect(lambda :self.backend.editAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.text()))
             window.pushButton_2.clicked.connect(self.mitarbeiter_verwalten)
         else:
+            window.dir_button.clicked.connect(lambda: self.changePicture(window))
             window.pushButton.clicked.connect(self.mitarbeiter_verwalten)
             window.pushButton_2.clicked.connect(lambda :self.backend.addAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.text()))
             window.pushButton_2.clicked.connect(self.mitarbeiter_verwalten)
