@@ -99,11 +99,7 @@ class Mitarbeiter_anlegen(object):
         self.PIN_label.setText(_translate("MainWindow", "PIN:"))
         self.pushButton.setText(_translate("MainWindow", "Zurück"))
         self.pushButton_2.setText(_translate("MainWindow", "speichern"))
-        self.Adresse.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'PibotoLt\'; font-size:17pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">Adresse</span></p></body></html>"))
+        self.Adresse.setText(_translate("MainWindow", "Adresse"))
 
 class LineEditK(QtWidgets.QLineEdit):
     
@@ -116,7 +112,7 @@ class LineEditK(QtWidgets.QLineEdit):
         self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot, self.deleteCharFromSlot)
         self.dialog.move(self.pos().x(),self.pos().y()+80)
         self.dialog.show()
-        super(LineEdit,self).mousePressEvent(event)
+        super(LineEditK,self).mousePressEvent(event)
         
     def editTextFromSlot(self,text) :
         self.insert(text)
@@ -135,7 +131,7 @@ class LineEditN(QtWidgets.QLineEdit):
         self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
         self.dialog.move(self.pos().x(),self.pos().y()+80)
         self.dialog.show()
-        super(LineEdit,self).mousePressEvent(event)
+        super(LineEditN,self).mousePressEvent(event)
         
     def editTextFromSlot(self,button) :
         self.insert(button.text())
