@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from numblock import Ui_Form as Form
+from eigene_Tastatur import Keyboard
 
 class Kennzeichen(object):
     def setupUi(self, Dialog):
@@ -45,7 +47,7 @@ class Kennzeichen(object):
         font.setPointSize(17)
         self.neuesKennzeichen.setFont(font)
         self.neuesKennzeichen.setObjectName("neuesKennzeichen")
-        self.lineEdit = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit = LineEditK(Dialog)
         self.lineEdit.setGeometry(QtCore.QRect(400, 80, 200, 32))
         font = QtGui.QFont()
         font.setPointSize(17)
@@ -57,7 +59,7 @@ class Kennzeichen(object):
         font.setPointSize(17)
         self.startkilometerstand.setFont(font)
         self.startkilometerstand.setObjectName("startkilometerstand")
-        self.lineEdit_2 = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_2 = LineEditN(Dialog)
         self.lineEdit_2.setGeometry(QtCore.QRect(400, 130, 200, 32))
         font = QtGui.QFont()
         font.setPointSize(17)
@@ -75,6 +77,43 @@ class Kennzeichen(object):
         self.neuesKennzeichen.setText(_translate("Dialog", "Neues Kennzeichen"))
         self.startkilometerstand.setText(_translate("Dialog", "Startkilometerstand"))
 
+class LineEditK(QtWidgets.QLineEdit):
+    
+    def mousePressEvent(self,event):
+        if(self.text() == 'Name' or self.text() == 'Adresse') :            
+            self.clear()
+        
+        self.dialog = QtWidgets.QWidget()
+        self.dialog.ui = Keyboard()
+        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot, self.deleteCharFromSlot)
+        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.show()
+        super(LineEditK,self).mousePressEvent(event)
+        
+    def editTextFromSlot(self,text) :
+        self.insert(text)
+
+    def deleteCharFromSlot(self) :
+        self.backspace()
+
+class LineEditN(QtWidgets.QLineEdit):
+    
+    def mousePressEvent(self,event):
+        if(self.text() == 'Pin') :            
+            self.clear()
+        
+        self.dialog = QtWidgets.QWidget()
+        self.dialog.ui = Form()
+        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
+        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.show()
+        super(LineEditN,self).mousePressEvent(event)
+        
+    def editTextFromSlot(self,button) :
+        self.insert(button.text())
+
+    def deleteCharFromSlot(self) :
+        self.backspace()
 
 if __name__ == "__main__":
     import sys
