@@ -127,6 +127,11 @@ class Controlling(QtWidgets.QMainWindow):
             self.backend.logout()
         elif index == 1:
             self.adminanm(0)
+
+    def export(self) :
+        file = QtWidgets.QFileDialog.getExistingDirectory()
+        print(file)
+        self.backend.exportLogbook(file)
         
     #adminmenu
     def adminmenu(self,modus):
@@ -135,7 +140,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.setupUi(self.window)
         window.Mitarbeiter_verwalten.clicked.connect(self.mitarbeiter_verwalten)
         window.pushButton_2.clicked.connect(self.kennzeichen)
-        window.Daten_auslesen.clicked.connect(self.adminmenu)#TODO
+        window.Daten_auslesen.clicked.connect(self.export)
         if modus == 1:
             window.zuruck.clicked.connect(self.auswahl)
         else:

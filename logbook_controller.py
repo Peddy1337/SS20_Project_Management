@@ -150,6 +150,6 @@ class LogbookController :
     def signAllRides(self) :
         self.lbMonitor.signAllUnsignedRides()
 
-    def exportLogbook(self) :
-        self.lbMonitor.exportToPDF()
+    def exportLogbook(self, path) :
+        self.lbMonitor.exportToPDF(path)
         

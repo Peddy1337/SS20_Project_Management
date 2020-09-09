@@ -1,3 +1,4 @@
+import os
 import route_simulator
 import json_reader_writer
 import pdf_writer
@@ -176,10 +177,11 @@ class LogbookMonitor :
         print ('Signing of all rides finished\n')
 
     # export logbook data to pdf
-    def exportToPDF(self) :
+    def exportToPDF(self, path = os.getcwd() ) :
         self.loadLogbook()
         if not(self.checkUnsignedRides()) :
-            self.pdfExporter.writeToPDF(self.pdf_file,self.logbook)
+            file = path + '/'+self.pdf_file
+            self.pdfExporter.writeToPDF(file,self.logbook)
         else :
             print ('Some rides havent been signed yet\n')
             return False
