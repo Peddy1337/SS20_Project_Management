@@ -75,7 +75,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton.clicked.connect(self.auswahl)
         window.pushButton_2.clicked.connect(lambda: self.verifyPin(window))
         pixmap = QtGui.QPixmap(self.backend.accManager.selectedAccount['picture'])
-        window.label.setPixmap(pixmap)
+        window.label.setPixmap(pixmap.scaled(161,161))
         self.close()
         self.window.show()
 
@@ -109,7 +109,7 @@ class Controlling(QtWidgets.QMainWindow):
         selAdress = str(self.backend.driverInfo['adress'])
         window.Daten_Mitarbeiter.setText(selName + "\n" + selAdress)
         pixmap = QtGui.QPixmap(self.backend.driverInfo['picture'])
-        window.Profilbild.setPixmap(pixmap)
+        window.Profilbild.setPixmap(pixmap.scaled(100,100))
         window.Neue_Fahrt.clicked.connect(self.backend.passDriverName)
         window.Neue_Fahrt.clicked.connect(lambda: self.fahrtbeginn(1))
         window.Angehoriger.clicked.connect(self.altersabfrage)
