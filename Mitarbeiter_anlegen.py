@@ -112,7 +112,7 @@ class Mitarbeiter_anlegen(object):
 class LineEditK(QtWidgets.QLineEdit):
     
     def mousePressEvent(self,event):
-        if(self.text() == 'Zweck der Fahrt') :            
+        if(self.text() == 'Name' or self.text() == 'Adresse') :            
             self.clear()
         
         self.dialog = QtWidgets.QWidget()
