@@ -130,7 +130,6 @@ class Controlling(QtWidgets.QMainWindow):
 
     def export(self) :
         file = QtWidgets.QFileDialog.getExistingDirectory()
-        print(file)
         self.backend.exportLogbook(file)
         
     #adminmenu
