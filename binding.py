@@ -183,12 +183,10 @@ class Controlling(QtWidgets.QMainWindow):
         if back == 2:
             window.comboBox.setCurrentIndex(2)
             window.comboBox.setDisabled(True)
-            window.Bestatigen.clicked.connect(self.backend.startRide)
-            window.Bestatigen.clicked.connect(self.fahrt)
         if back == 1 or back == 2:
             window.Zuruck.clicked.connect(self.home)
         elif back == 0:
-            window.Zuruck.clicked.connect(self.fahrt)
+            window.Zuruck.clicked.connect(self.home)
         window.Bestatigen.clicked.connect(lambda: self.changed(window))
         self.close()
         self.window.show()

@@ -2,9 +2,9 @@
     "header": [
         {
             "Anfangsdatum": "03.09.2020",
-            "Enddatum": "04.09.2020",
+            "Enddatum": "09.09.2020",
             "Anfangskilometerstand": "71235",
-            "Endkilometerstand": "71237.0",
+            "Endkilometerstand": "71237.7",
             "KFZ-Kennzeichen": "WWP399"
         }
     ],
@@ -67,6 +67,30 @@
             "Zweck der Fahrt": "Extra kauen",
             "Fahrtanfang": "Koblenz, Konrad-Zuse-Stra\u00dfe 1",
             "Fahrtende": "Koblenz-G\u00fcls, Am Zehnthof 12",
+            "Bestaetigt": "Ja"
+        },
+        {
+            "Name": "Max Mustermann Angeh\u00f6rige/r",
+            "Datum": "09.09.2020",
+            "Anfangskilometerstand": "71237.0",
+            "Endkilometerstand": "71237.3",
+            "gefahrene Kilometer": "0.3",
+            "Art der Fahrt": "Privat",
+            "Zweck der Fahrt": "Privat",
+            "Fahrtanfang": "M\u00fclheim-K\u00e4rlich, Otto-Hahn-Stra\u00dfe 2-6",
+            "Fahrtende": "Koblenz, Konrad-Zuse-Stra\u00dfe 1",
+            "Bestaetigt": "Nein"
+        },
+        {
+            "Name": "Max Mustermann",
+            "Datum": "09.09.2020",
+            "Anfangskilometerstand": "71237.3",
+            "Endkilometerstand": "71237.7",
+            "gefahrene Kilometer": "0.4",
+            "Art der Fahrt": "zur Arbeit",
+            "Zweck der Fahrt": "zur Arbeit",
+            "Fahrtanfang": "Koblenz-G\u00fcls, Am Zehnthof 12",
+            "Fahrtende": "Remagen, Joseph-Rovan-Allee 6",
             "Bestaetigt": "Ja"
         }
     ]
