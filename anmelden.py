@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from numblock import Ui_Form as Form
+from numblock import LineEditP as LineEdit
 
 class anmelden(object):     
         
@@ -89,27 +89,6 @@ class anmelden(object):
         self.lineEdit_2.setText(_translate("MainWindow", "Pin"))
         self.checkBox.setText(_translate("MainWindow", "Angemeldet bleiben"))
         self.label.setText(_translate("MainWindow", "Dies ist ein Platzhalter für das Bild "))
-
-class LineEdit(QtWidgets.QLineEdit):
-    
-    def mousePressEvent(self,event):
-        if(self.text() == 'Pin') :            
-            self.clear()
-            self.setEchoMode(QtWidgets.QLineEdit.Password)
-        
-        self.dialog = QtWidgets.QWidget()
-        self.dialog.ui = Form()
-        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
-        self.dialog.move(self.pos().x(),self.pos().y()+80)
-        self.dialog.show()
-        super(LineEdit,self).mousePressEvent(event)
-        
-    def editTextFromSlot(self,button) :
-        self.insert(button.text())
-
-    def deleteCharFromSlot(self) :
-        self.backspace()
-
         
 if __name__ == "__main__":
     import sys

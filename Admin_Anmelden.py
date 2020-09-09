@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from numblock import Ui_Form as Form
+from numblock import LineEditP as LineEdit
 
 class Admin_Anmelden(object):
     def setupUi(self, Dialog):
@@ -41,7 +41,6 @@ class Admin_Anmelden(object):
         font.setPointSize(17)
         self.lineEdit.setFont(font)
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(10, 320, 200, 100))
         font = QtGui.QFont()
@@ -64,23 +63,6 @@ class Admin_Anmelden(object):
         self.label.setText(_translate("Dialog", "PIN:"))
         self.pushButton.setText(_translate("Dialog", "Zurück"))
         self.pushButton_2.setText(_translate("Dialog", "Bestätigen"))
-
-class LineEdit(QtWidgets.QLineEdit):
-    
-    def mousePressEvent(self,event):
-        
-        self.dialog = QtWidgets.QWidget()
-        self.dialog.ui = Form()
-        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
-        self.dialog.move(self.pos().x(),self.pos().y()+80)
-        self.dialog.show()
-        super(LineEdit,self).mousePressEvent(event)
-
-    def editTextFromSlot(self,button) :
-        self.insert(button.text())
-
-    def deleteCharFromSlot(self) :
-        self.backspace()
 
    
 if __name__ == "__main__":

@@ -84,11 +84,41 @@ class Ui_Form(object):
         self.pushButton_10.setText(_translate("Form", "0"))
         self.pushButton_11.setText(_translate("Form", "Delete"))
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+class LineEditP(QtWidgets.QLineEdit):
+    
+    def mousePressEvent(self,event):
+        if(self.text() == 'Pin') :            
+            self.clear()
+            
+        self.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.dialog = QtWidgets.QWidget()
+        self.dialog.ui = Ui_Form()
+        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
+        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.show()
+        super(LineEditP,self).mousePressEvent(event)
+        
+    def editTextFromSlot(self,button) :
+        self.insert(button.text())
+
+    def deleteCharFromSlot(self) :
+        self.backspace()
+
+class LineEdit(QtWidgets.QLineEdit):
+    
+    def mousePressEvent(self,event):
+        if(self.text() == 'Pin') :            
+            self.clear()
+        
+        self.dialog = QtWidgets.QWidget()
+        self.dialog.ui = Ui_Form()
+        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
+        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.show()
+        super(LineEdit,self).mousePressEvent(event)
+        
+    def editTextFromSlot(self,button) :
+        self.insert(button.text())
+
+    def deleteCharFromSlot(self) :
+        self.backspace()

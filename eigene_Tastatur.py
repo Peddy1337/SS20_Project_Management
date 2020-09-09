@@ -239,11 +239,21 @@ class Keyboard(object):
                 l.setText(l.text().upper())
             self.isUpper = True
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Keyboard()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
+class LineEdit(QtWidgets.QLineEdit):
+    
+    def mousePressEvent(self,event):
+        if(self.text() == 'Name' or self.text() == 'Adresse' or self.text() == 'Zweck der Fahrt') :            
+            self.clear()
+        
+        self.dialog = QtWidgets.QWidget()
+        self.dialog.ui = Keyboard()
+        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot, self.deleteCharFromSlot)
+        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.show()
+        super(LineEdit,self).mousePressEvent(event)
+        
+    def editTextFromSlot(self,text) :
+        self.insert(text)
+
+    def deleteCharFromSlot(self) :
+        self.backspace()

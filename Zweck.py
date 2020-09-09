@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from eigene_Tastatur import Keyboard
+from eigene_Tastatur import LineEdit
 
 class Zweck(object):
     def setupUi(self, Dialog):
@@ -63,26 +63,6 @@ class Zweck(object):
         self.pushButton.setText(_translate("Dialog", "Zurück"))
         self.pushButton_2.setText(_translate("Dialog", "Bestätigen"))
         self.lineEdit.setText(_translate("Dialog", "Zweck der Fahrt"))
-
-class LineEdit(QtWidgets.QLineEdit):
-    
-    def mousePressEvent(self,event):
-        if(self.text() == 'Zweck der Fahrt') :            
-            self.clear()
-        
-        self.dialog = QtWidgets.QWidget()
-        self.dialog.ui = Keyboard()
-        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot, self.deleteCharFromSlot)
-        self.dialog.move(self.pos().x(),self.pos().y()+80)
-        self.dialog.show()
-        super(LineEdit,self).mousePressEvent(event)
-        
-    def editTextFromSlot(self,text) :
-        self.insert(text)
-
-    def deleteCharFromSlot(self) :
-        self.backspace()
-
 
 if __name__ == "__main__":
     import sys

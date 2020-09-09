@@ -7,8 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from numblock import Ui_Form as Form
-from eigene_Tastatur import Keyboard
+from numblock import LineEdit as LineEditN
+from eigene_Tastatur import LineEdit as LineEditK
 
 class Mitarbeiter_anlegen(object):
     def setupUi(self, MainWindow):
@@ -108,44 +108,6 @@ class Mitarbeiter_anlegen(object):
         self.pushButton.setText(_translate("MainWindow", "Zurück"))
         self.pushButton_2.setText(_translate("MainWindow", "speichern"))
         self.Adresse.setText(_translate("MainWindow", "Adresse"))
-
-class LineEditK(QtWidgets.QLineEdit):
-    
-    def mousePressEvent(self,event):
-        if(self.text() == 'Name' or self.text() == 'Adresse') :            
-            self.clear()
-        
-        self.dialog = QtWidgets.QWidget()
-        self.dialog.ui = Keyboard()
-        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot, self.deleteCharFromSlot)
-        self.dialog.move(self.pos().x(),self.pos().y()+80)
-        self.dialog.show()
-        super(LineEditK,self).mousePressEvent(event)
-        
-    def editTextFromSlot(self,text) :
-        self.insert(text)
-
-    def deleteCharFromSlot(self) :
-        self.backspace()
-
-class LineEditN(QtWidgets.QLineEdit):
-    
-    def mousePressEvent(self,event):
-        if(self.text() == 'Pin') :            
-            self.clear()
-        
-        self.dialog = QtWidgets.QWidget()
-        self.dialog.ui = Form()
-        self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
-        self.dialog.move(self.pos().x(),self.pos().y()+80)
-        self.dialog.show()
-        super(LineEditN,self).mousePressEvent(event)
-        
-    def editTextFromSlot(self,button) :
-        self.insert(button.text())
-
-    def deleteCharFromSlot(self) :
-        self.backspace()
 
 
 if __name__ == "__main__":
