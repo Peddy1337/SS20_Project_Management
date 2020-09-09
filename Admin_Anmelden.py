@@ -41,6 +41,7 @@ class Admin_Anmelden(object):
         font.setPointSize(17)
         self.lineEdit.setFont(font)
         self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(10, 320, 200, 100))
         font = QtGui.QFont()

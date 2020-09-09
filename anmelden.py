@@ -95,6 +95,7 @@ class LineEdit(QtWidgets.QLineEdit):
     def mousePressEvent(self,event):
         if(self.text() == 'Pin') :            
             self.clear()
+            self.setEchoMode(QtWidgets.QLineEdit.Password)
         
         self.dialog = QtWidgets.QWidget()
         self.dialog.ui = Form()
