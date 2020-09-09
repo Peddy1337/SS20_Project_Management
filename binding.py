@@ -423,7 +423,7 @@ class Controlling(QtWidgets.QMainWindow):
         self.window.show()
 
     def zweckSelection(self,window) :
-        if window.lineEdit.text() != "Zweck der Fahrt" :
+        if window.lineEdit.text() != "Zweck der Fahrt" and window.lineEdit.text() != "" :
             self.backend.addPurposes(window.lineEdit.text())
             self.backend.setPurpose(window.lineEdit.text())
             self.backend.startRide()
