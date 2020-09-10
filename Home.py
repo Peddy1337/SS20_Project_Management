@@ -52,7 +52,7 @@ class Home(object):
         self.Profilbild.setWordWrap(True)
         self.Profilbild.setObjectName("Profilbild")
         self.Daten_Mitarbeiter = QtWidgets.QLabel(self.centralwidget)
-        self.Daten_Mitarbeiter.setGeometry(QtCore.QRect(130, 10, 200, 100))
+        self.Daten_Mitarbeiter.setGeometry(QtCore.QRect(130, 10, 265, 100))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.Daten_Mitarbeiter.setFont(font)
