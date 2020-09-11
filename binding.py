@@ -1,4 +1,5 @@
 import sys
+import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Admin_Anmelden import Admin_Anmelden
 from Altersabfrage import Altersabfrage
@@ -130,7 +131,8 @@ class Controlling(QtWidgets.QMainWindow):
 
     def export(self) :
         file = QtWidgets.QFileDialog.getExistingDirectory()
-        self.backend.exportLogbook(file)
+        if file != "" :
+            self.backend.exportLogbook(file)
         
     #adminmenu
     def adminmenu(self,modus):
@@ -347,10 +349,16 @@ class Controlling(QtWidgets.QMainWindow):
         self.window.showFullScreen()
 
     def changePicture(self,window) :
-        file = QtWidgets.QFileDialog.getOpenFileName()[0]
-        window.PIC.setText(file)
-        pixmap = QtGui.QPixmap(file)
-        window.label.setPixmap(pixmap.scaled(150,150))
+        fd = QtWidgets.QFileDialog()
+        file = fd.getOpenFileName(None,"choose a picture",os.getcwd(),"Images (*.png *.xpm *.jpg)" )[0]
+        if file == "" :
+            if window.PIC.text() == "" :
+                pixmap = QtGui.QPixmap("defaultUser.png")
+                window.label.setPixmap(pixmap.scaled(150,150))
+        else :    
+            window.PIC.setText(file)
+            pixmap = QtGui.QPixmap(file)
+            window.label.setPixmap(pixmap.scaled(150,150))
         
     
     #mitarbeiter_anlegen
