@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from numblock import LineEditP as LineEdit
+from frontend.numblock import LineEditP as LineEdit
 
 class Admin_Anmelden(object):
     def setupUi(self, Dialog):

@@ -1,7 +1,7 @@
 import os
-import route_simulator
-import json_reader_writer
-import pdf_writer
+import backend.route_simulator
+import backend.json_reader_writer
+import backend.pdf_writer
 from datetime import datetime
 import threading
 import time
@@ -19,10 +19,10 @@ class LogbookMonitor :
         self.endKm = ''
         self.routeKm = ''
         self.sleepTime = 5
-        self.rSim = route_simulator.RouteSimulator()
-        self.jRW = json_reader_writer.JsonReaderWriter(self.file)
+        self.rSim = backend.route_simulator.RouteSimulator()
+        self.jRW = backend.json_reader_writer.JsonReaderWriter(self.file)
         self.updateThread = threading.Thread(target = self.update , args=())
-        self.pdfExporter = pdf_writer.PDFWriter()
+        self.pdfExporter = backend.pdf_writer.PDFWriter()
 
     def setDriverName(self, name) :
         self.name = name

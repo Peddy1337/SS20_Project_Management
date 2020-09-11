@@ -1,8 +1,8 @@
-import logbook_monitor
+import backend.logbook_monitor
 
 import time
 
-logbook = logbook_monitor.LogbookMonitor('test.json')
+logbook = backend.logbook_monitor.LogbookMonitor('test.json')
 
 logbook.updateDate()
 

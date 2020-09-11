@@ -1,6 +1,6 @@
-import account_manager
+import backend.account_manager
 
-manager = account_manager.AccountManager('accounts.json')
+manager = backend.account_manager.AccountManager('accounts.json')
 
 templateAcc = {
     'name' : 'Max Mustermann',

@@ -7,8 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from numblock import LineEdit as LineEditN
-from eigene_Tastatur import LineEdit as LineEditK
+from frontend.numblock import LineEdit as LineEditN
+from frontend.eigene_Tastatur import LineEdit as LineEditK
 
 class Mitarbeiter_anlegen(object):
     def setupUi(self, MainWindow):

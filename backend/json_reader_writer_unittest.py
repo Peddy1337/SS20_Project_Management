@@ -1,7 +1,7 @@
-import json_reader_writer
+import backend.json_reader_writer
 
-readerAcc = json_reader_writer.JsonReaderWriter('accounts.json')
-readerRide = json_reader_writer.JsonReaderWriter('WWP399_2020.json')
+readerAcc = backend.json_reader_writer.JsonReaderWriter('accounts.json')
+readerRide = backend.json_reader_writer.JsonReaderWriter('WWP399_2020.json')
 
 readerAcc.writeAccountToFile('Patrick','whatever.png','1234','Neverland')
 readerAcc.writeAccountToFile('Bastian','default.png','4321','Somewhere')

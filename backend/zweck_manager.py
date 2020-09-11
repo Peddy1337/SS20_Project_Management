@@ -1,9 +1,9 @@
-import json_reader_writer
+import backend.json_reader_writer
 
 class ZweckManager :
     def __init__(self,file) :
         self.file = file
-        self.jsonRW = json_reader_writer.JsonReaderWriter(self.file)
+        self.jsonRW = backend.json_reader_writer.JsonReaderWriter(self.file)
         self.loadPurposeList()
 
     #load purpose list from file

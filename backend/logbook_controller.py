@@ -1,7 +1,7 @@
-from account_manager import AccountManager
-from logbook_monitor import LogbookMonitor
-from car_manager import CarManager
-from zweck_manager import ZweckManager
+from backend.account_manager import AccountManager
+from backend.logbook_monitor import LogbookMonitor
+from backend.car_manager import CarManager
+from backend.zweck_manager import ZweckManager
 
 class LogbookController :
     def __init__(self) :
