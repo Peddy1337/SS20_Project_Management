@@ -458,12 +458,3 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton_2.clicked.connect(lambda:self.zweckSelection(window))
         self.close()
         self.window.showFullScreen()
-
-        
-if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
-    gui = Controlling()
-    gui.showFullScreen()
-    app.exec_()
-
-    
