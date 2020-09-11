@@ -17,6 +17,7 @@ from frontend.adminmenu import adminmenu
 from frontend.Mitarbeiter_verwalten import Mitarbeiter_verwalten
 from frontend.Profilauswahl import Profilauswahl
 from frontend.Kennzeichen import Kennzeichen
+from frontend.infoPopup import Popup
 from backend.logbook_controller import LogbookController
 
 class Controlling(QtWidgets.QMainWindow):
@@ -132,7 +133,21 @@ class Controlling(QtWidgets.QMainWindow):
     def export(self) :
         file = QtWidgets.QFileDialog.getExistingDirectory()
         if file != "" :
-            self.backend.exportLogbook(file)
+            if self.backend.exportLogbook(file) :
+                self.popup = QtWidgets.QWidget()
+                self.popup.ui = Popup()
+                self.popup.ui.setupUi(self.popup)
+                self.popup.ui.label.setText("Export erfolgreich!")
+                self.popup.move(290,95)
+                self.popup.show()
+            else :
+                self.popup = QtWidgets.QWidget()
+                self.popup.ui = Popup()
+                self.popup.ui.setupUi(self.popup)
+                self.popup.ui.label.setText("Export fehlgeschlagen! \nEs wurden noch nicht alle Fahrten bestätigt")
+                self.popup.move(290,95)
+                self.popup.show()
+                
         
     #adminmenu
     def adminmenu(self,modus):

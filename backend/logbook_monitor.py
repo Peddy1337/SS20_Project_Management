@@ -182,6 +182,7 @@ class LogbookMonitor :
         if not(self.checkUnsignedRides()) :
             file = path + '/'+self.pdf_file
             self.pdfExporter.writeToPDF(file,self.logbook)
+            return True
         else :
             print ('Some rides havent been signed yet\n')
             return False
