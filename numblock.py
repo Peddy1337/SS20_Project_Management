@@ -94,7 +94,7 @@ class LineEditP(QtWidgets.QLineEdit):
         self.dialog = QtWidgets.QWidget()
         self.dialog.ui = Ui_Form()
         self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
-        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.move(290,150)
         self.dialog.show()
         super(LineEditP,self).mousePressEvent(event)
         
@@ -113,7 +113,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self.dialog = QtWidgets.QWidget()
         self.dialog.ui = Ui_Form()
         self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot,self.deleteCharFromSlot)
-        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.move(290,150)
         self.dialog.show()
         super(LineEdit,self).mousePressEvent(event)
         

@@ -248,7 +248,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self.dialog = QtWidgets.QWidget()
         self.dialog.ui = Keyboard()
         self.dialog.ui.setupUi(self.dialog,self.editTextFromSlot, self.deleteCharFromSlot)
-        self.dialog.move(self.pos().x(),self.pos().y()+80)
+        self.dialog.move(62.5,245)
         self.dialog.show()
         super(LineEdit,self).mousePressEvent(event)
         
