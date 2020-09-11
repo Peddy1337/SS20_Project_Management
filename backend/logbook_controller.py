@@ -9,6 +9,7 @@ class LogbookController :
         self.workAdress = 'Remagen, Joseph-Rovan-Allee 6'
         self.adminPin = '1234'
         self.carFile = 'car.json'
+        self.configured = False;
         self.carManager = CarManager(self.carFile)
         self.licensePlate = self.loadLicensePlateFromConfig()
         self.startKm = self.loadStartKmFromConfig()
@@ -33,20 +34,20 @@ class LogbookController :
     def loadStartKmFromConfig(self) :
         success = self.carManager.loadData()
         if success :
+            self.configured = True
             return self.carManager.data['headerParts'][0]['StartKm']
         else :
-            self.writeLicensePlateAndStartKmToConfig('Dummy Value', 'Dummy Value')
-            self.carManager.loadData()
-            return self.carManager.data['headerParts'][0]['StartKm']
+            self.configured = False;
+            return ""
 
     def loadLicensePlateFromConfig(self) :
         success = self.carManager.loadData()
         if success :
+            self.configured = True
             return self.carManager.data['headerParts'][0]['KFZ-Kennzeichen']
         else :
-            self.writeLicensePlateAndStartKmToConfig('Dummy Value', 'Dummy Value')
-            self.carManager.loadData()
-            return self.carManager.data['headerParts'][0]['KFZ-Kennzeichen']
+            self.configured = False
+            return ""
 
     def addPurposes(self,purpose) :
         self.purpManager.addPurpose(purpose)

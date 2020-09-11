@@ -39,6 +39,17 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton.clicked.connect(self.auswahl)
         self.close()
 
+    def checkConfig(self) :
+        if self.backend.configured :
+            self.anmelden()
+        else :
+            self.popup = QtWidgets.QWidget()
+            self.popup.ui = Popup()
+            self.popup.ui.setupUi(self.popup)
+            self.popup.ui.label.setText("Konfig nicht gesetzt!\nBitte von einem Admin den\nStartkilometerstand und\ndas Kennzeichen setzten lassen!")
+            self.popup.move(290,95)
+            self.popup.show()
+            
     #Profilauswahl
     def auswahl(self):
         self.window = QtWidgets.QMainWindow()
@@ -66,7 +77,7 @@ class Controlling(QtWidgets.QMainWindow):
     def selectedUser(self,window):
         accName = window.list.currentItem().text()
         self.backend.selectDriver(accName)
-        window.pushButton_2.clicked.connect(self.anmelden)
+        window.pushButton_2.clicked.connect(self.checkConfig)
         
     #anmelden
     def anmelden(self):
