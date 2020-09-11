@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Mitarbeiter_verwalten(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(800, 480)
         MainWindow.setStyleSheet("QWidget{\n"
 "    background-color: #404040;\n"
 "    color: #00CC00}\n"
@@ -30,7 +30,7 @@ class Mitarbeiter_verwalten(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Zuruck = QtWidgets.QPushButton(self.centralwidget)
-        self.Zuruck.setGeometry(QtCore.QRect(10, 490, 200, 50))
+        self.Zuruck.setGeometry(QtCore.QRect(10, 400, 200, 50))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.Zuruck.setFont(font)
@@ -64,7 +64,7 @@ class Mitarbeiter_verwalten(object):
         self.loschen.setIconSize(QtCore.QSize(50, 50))
         self.loschen.setObjectName("loschen")
         self.list = QtWidgets.QListWidget(self.centralwidget)
-        self.list.setGeometry(QtCore.QRect(10, 70, 781, 401))
+        self.list.setGeometry(QtCore.QRect(10, 70, 781, 310))
         self.list.setObjectName("listArea")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
