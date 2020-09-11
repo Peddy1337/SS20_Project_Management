@@ -307,7 +307,7 @@ class Controlling(QtWidgets.QMainWindow):
                 window.table.setItem(index,0,be)
             else :
                 window.listbutton = QtWidgets.QPushButton('bestätigen')
-                window.listbutton.clicked.connect(lambda : self.backend.signRideAfterwards(window.table.currentRow()))
+                window.listbutton.clicked.connect(lambda : self.backend.signRideAfterwards(window.table.currentRow()-1))
                 window.listbutton.clicked.connect(lambda : window.table.removeCellWidget(window.table.currentRow(),0))
                 window.listbutton.clicked.connect(lambda : self.createTableItem(window))
                 window.table.setCellWidget(index,0,window.listbutton)
