@@ -4,5 +4,5 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     gui = Controlling()
-    gui.showFullScreen()
+    gui.start()
     app.exec_()
