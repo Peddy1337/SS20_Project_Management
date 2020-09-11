@@ -72,6 +72,8 @@ class LogbookController :
         return self.accManager.checkPin(pin)
 
     def addAccount(self,name,picture,pin,adress) :
+        if picture == '':
+            picture = 'defaultUser.png'
         accDetails ={
             'name' : name,
             'picture' : picture,
