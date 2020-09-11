@@ -35,7 +35,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.setupUi(self.window)
         window.pushButton.clicked.connect(self.auswahl)
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #Profilauswahl
     def auswahl(self):
@@ -57,7 +57,7 @@ class Controlling(QtWidgets.QMainWindow):
             window.list.addItem(listItem)
         window.list.itemSelectionChanged.connect(lambda: self.selectedUser(window))
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #Nutzer wurde ausgewählt
     def selectedUser(self,window):
@@ -77,7 +77,7 @@ class Controlling(QtWidgets.QMainWindow):
         pixmap = QtGui.QPixmap(self.backend.accManager.selectedAccount['picture'])
         window.label.setPixmap(pixmap.scaled(161,161))
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     def verifyPin(self,window):
         if self.backend.checkPin(window.lineEdit_2.text()):
@@ -94,7 +94,7 @@ class Controlling(QtWidgets.QMainWindow):
             window.pushButton.clicked.connect(self.home)
         window.pushButton_2.clicked.connect(lambda: self.verifyAdminPin(window,modus))
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     def verifyAdminPin(self,window,modus):
         if self.backend.checkAdminPin(window.lineEdit.text()):
@@ -117,7 +117,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.comboBox.activated.connect(
             lambda: self.indexChanged(window))
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #Hilfsfunktion combobox
     def indexChanged(self,window):
@@ -145,7 +145,7 @@ class Controlling(QtWidgets.QMainWindow):
         else:
             window.zuruck.clicked.connect(self.home)
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #altersabfrage
     def altersabfrage(self):
@@ -157,7 +157,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton_2.clicked.connect(self.unter25)
         window.pushButton_3.clicked.connect(self.home)
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #fahrt
     def fahrt(self):
@@ -173,7 +173,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.Datum_feld.setText(self.backend.lbMonitor.date)
         window.Anfangs_KM_feld.setText(self.backend.lbMonitor.startKm)
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #fahrtbeginn
     def fahrtbeginn(self,back):
@@ -189,7 +189,7 @@ class Controlling(QtWidgets.QMainWindow):
             window.Zuruck.clicked.connect(self.home)
         window.Bestatigen.clicked.connect(lambda: self.changed(window))
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #Hilfsfunktion combobox 
     def changed(self,window):
@@ -316,7 +316,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.table.horizontalHeader().hide()
         window.table.resizeColumnsToContents()
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #fahrtende
     def fahrtende(self):
@@ -333,7 +333,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton_4.clicked.connect(self.backend.finishRideWithSignature)
         window.pushButton_4.clicked.connect(self.home)
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #kennzeichen
     def kennzeichen(self):
@@ -344,7 +344,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton_2.clicked.connect(lambda: self.backend.writeLicensePlateAndStartKmToConfig(window.lineEdit.text(),window.lineEdit_2.text()))
         window.pushButton_2.clicked.connect(self.adminmenu)
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     def changePicture(self,window) :
         file = QtWidgets.QFileDialog.getOpenFileName()[0]
@@ -375,7 +375,7 @@ class Controlling(QtWidgets.QMainWindow):
             window.pushButton_2.clicked.connect(lambda :self.backend.addAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.text()))
             window.pushButton_2.clicked.connect(self.mitarbeiter_verwalten)
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     def accountSelection(self,window) :
         if window.list.currentItem() :
@@ -411,7 +411,7 @@ class Controlling(QtWidgets.QMainWindow):
             window.list.addItem(listItem)
         window.list.itemSelectionChanged.connect(lambda: self.backend.selectAccount(window.list.currentItem().text()))
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     #unter25
     def unter25(self):
@@ -420,7 +420,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.setupUi(self.window)
         window.zuruck.clicked.connect(self.home)
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
     def zweckSelection(self,window) :
         if window.lineEdit.text() != "Zweck der Fahrt" and window.lineEdit.text() != "" :
@@ -449,13 +449,13 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton.clicked.connect(self.fahrtbeginn)
         window.pushButton_2.clicked.connect(lambda:self.zweckSelection(window))
         self.close()
-        self.window.show()
+        self.window.showFullScreen()
 
         
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     gui = Controlling()
-    gui.show()
+    gui.showFullScreen()
     app.exec_()
 
     
