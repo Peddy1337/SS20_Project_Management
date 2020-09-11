@@ -73,7 +73,6 @@ class Fahrten_Liste(object):
         self.Ende.setFont(font)
         self.Ende.setObjectName("Ende")
         self.horizontalLayout.addWidget(self.Ende)
-        self.horizontalLayout.addWidget(self.label)
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(Dialog)
         self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(0, 400, 801, 80))
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
