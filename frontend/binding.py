@@ -99,6 +99,13 @@ class Controlling(QtWidgets.QMainWindow):
                 self.fahrtenliste(1)
             else :
                 self.home()
+        else :
+            self.popup = QtWidgets.QWidget()
+            self.popup.ui = Popup()
+            self.popup.ui.setupUi(self.popup)
+            self.popup.ui.label.setText("falsche PIN!")
+            self.popup.move(290,95)
+            self.popup.show()
         
     #adminanmelden
     def adminanm(self,modus):
@@ -121,6 +128,13 @@ class Controlling(QtWidgets.QMainWindow):
     def verifyAdminPin(self,window,modus):
         if self.backend.checkAdminPin(window.lineEditPin.text()):
             self.adminmenu(modus)
+        else :
+            self.popup = QtWidgets.QWidget()
+            self.popup.ui = Popup()
+            self.popup.ui.setupUi(self.popup)
+            self.popup.ui.label.setText("falscher PIN!")
+            self.popup.move(290,95)
+            self.popup.show()
         
     #home
     def home(self):
