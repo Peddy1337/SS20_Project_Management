@@ -139,6 +139,13 @@ class Controlling(QtWidgets.QMainWindow):
         window.Buch.clicked.connect(lambda: self.fahrtenliste(0))
         window.comboBox.activated.connect(
             lambda: self.indexChanged(window))
+        if self.backend.checkIfUnsignedRides :
+            self.popup = QtWidgets.QWidget()
+            self.popup.ui = Popup()
+            self.popup.ui.setupUi(self.popup)
+            self.popup.ui.label.setText("Einige Fahrten sind unbestätigt!")
+            self.popup.move(290,95)
+            self.popup.show()
         self.close()
 
     #Hilfsfunktion combobox
