@@ -88,14 +88,17 @@ class Controlling(QtWidgets.QMainWindow):
         selectedAcc = str(self.backend.accManager.selectedAccount['name'])
         window.lineEdit.setText(selectedAcc)
         window.pushButton.clicked.connect(self.auswahl)
-        window.pushButton_2.clicked.connect(lambda: self.verifyPin(window))
+        window.pushButton_2.clicked.connect(lambda: self.verifyPin(window,0))
         pixmap = QtGui.QPixmap(self.backend.accManager.selectedAccount['picture'])
         window.label.setPixmap(pixmap.scaled(161,161))
         self.close()
 
-    def verifyPin(self,window):
-        if self.backend.checkPin(window.lineEdit_2.text()):
-            self.home()
+    def verifyPin(self,window,modus):
+        if self.backend.checkPin(window.lineEditPin.text()):
+            if modus == 1 :
+                self.fahrtenliste(1)
+            else :
+                self.home()
         
     #adminanmelden
     def adminanm(self,modus):
@@ -106,13 +109,17 @@ class Controlling(QtWidgets.QMainWindow):
         self.window.resize(800,480)
         if modus == 1:
             window.pushButton.clicked.connect(self.auswahl)
+            window.pushButton_2.clicked.connect(lambda: self.verifyAdminPin(window,modus))
+        elif modus == 2:
+            window.pushButton.clicked.connect(self.fahrtenliste)
+            window.pushButton_2.clicked.connect(lambda: self.verifyPin(window,1))
         else:
             window.pushButton.clicked.connect(self.home)
-        window.pushButton_2.clicked.connect(lambda: self.verifyAdminPin(window,modus))
+            window.pushButton_2.clicked.connect(lambda: self.verifyAdminPin(window,modus))
         self.close()
 
     def verifyAdminPin(self,window,modus):
-        if self.backend.checkAdminPin(window.lineEdit.text()):
+        if self.backend.checkAdminPin(window.lineEditPin.text()):
             self.adminmenu(modus)
         
     #home
@@ -129,7 +136,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.Neue_Fahrt.clicked.connect(self.backend.passDriverName)
         window.Neue_Fahrt.clicked.connect(lambda: self.fahrtbeginn(1))
         window.Angehoriger.clicked.connect(self.altersabfrage)
-        window.Buch.clicked.connect(self.fahrtenliste)
+        window.Buch.clicked.connect(lambda: self.fahrtenliste(0))
         window.comboBox.activated.connect(
             lambda: self.indexChanged(window))
         self.close()
@@ -242,13 +249,17 @@ class Controlling(QtWidgets.QMainWindow):
         window.table.setItem(window.table.currentRow(),0,be)
     
     #fahrtenliste
-    def fahrtenliste(self):
+    def fahrtenliste(self, modus):
         self.window = QtWidgets.QDialog()
         window = Fahrten_Liste()
         window.setupUi(self.window)
         self.window.showFullScreen()
         self.window.resize(800,480)
         window.pushButton.clicked.connect(self.home)
+        window.pushButtonPrivat.clicked.connect(lambda: self.adminanm(2))
+
+        if modus == 1 :
+            window.pushButtonPrivat.hide()
 
         self.backend.lbMonitor.loadLogbook()
         window.table.setRowCount(len(self.backend.lbMonitor.logbook['rides'])+1)
@@ -295,7 +306,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.table.setItem(0,7,h7)
         window.table.setItem(0,8,h8)
         window.table.setItem(0,9,h9)
-        index = 1
+        index = 0
 
         for j in self.backend.lbMonitor.logbook['header']:
             window.KFZ_feld.setText(j['KFZ-Kennzeichen'])
@@ -303,48 +314,96 @@ class Controlling(QtWidgets.QMainWindow):
             window.Ende.setText(j['Enddatum'])
             window.AnfangsKMStand_feld.setText(j['Anfangskilometerstand'])
             window.EndKMStand_feld.setText(j['Endkilometerstand'])
-            
+
+        self.rideIndex = []
+         
         for i in self.backend.lbMonitor.logbook['rides'] :
-            name = QtWidgets.QTableWidgetItem(i['Name'])
-            name.setFlags( QtCore.Qt.ItemIsSelectable)
-            date = QtWidgets.QTableWidgetItem(i['Datum'])
-            date.setFlags( QtCore.Qt.ItemIsSelectable)
-            skm = QtWidgets.QTableWidgetItem(i['Anfangskilometerstand'])
-            skm.setFlags( QtCore.Qt.ItemIsSelectable)
-            ekm = QtWidgets.QTableWidgetItem(i['Endkilometerstand'])
-            ekm.setFlags( QtCore.Qt.ItemIsSelectable)
-            gkm = QtWidgets.QTableWidgetItem(i['gefahrene Kilometer'])
-            gkm.setFlags( QtCore.Qt.ItemIsSelectable)
-            adf = QtWidgets.QTableWidgetItem(i['Art der Fahrt'])
-            adf.setFlags( QtCore.Qt.ItemIsSelectable)
-            zdf = QtWidgets.QTableWidgetItem(i['Zweck der Fahrt'])
-            zdf.setFlags( QtCore.Qt.ItemIsSelectable)
-            fa = QtWidgets.QTableWidgetItem(i['Fahrtanfang'])
-            fa.setFlags( QtCore.Qt.ItemIsSelectable)
-            fe = QtWidgets.QTableWidgetItem(i['Fahrtende'])
-            fe.setFlags( QtCore.Qt.ItemIsSelectable)
-            window.table.setItem(index,1,name)
-            window.table.setItem(index,2,date)
-            window.table.setItem(index,3,skm)
-            window.table.setItem(index,4,ekm)
-            window.table.setItem(index,5,gkm)
-            window.table.setItem(index,6,adf)
-            window.table.setItem(index,7,zdf)
-            window.table.setItem(index,8,fa)
-            window.table.setItem(index,9,fe)
-            if i['Bestaetigt'] == 'Ja' :
-                be = QtWidgets.QTableWidgetItem(i['Bestaetigt'])
-                be.setFlags( QtCore.Qt.ItemIsSelectable)
-                window.table.setItem(index,0,be)
+            if modus == 0 :
+                if i['Art der Fahrt'] != 'Privat' :
+                    self.rideIndex.append(index)
+                    pos = len(self.rideIndex)
+                    name = QtWidgets.QTableWidgetItem(i['Name'])
+                    name.setFlags( QtCore.Qt.ItemIsSelectable)
+                    date = QtWidgets.QTableWidgetItem(i['Datum'])
+                    date.setFlags( QtCore.Qt.ItemIsSelectable)
+                    skm = QtWidgets.QTableWidgetItem(i['Anfangskilometerstand'])
+                    skm.setFlags( QtCore.Qt.ItemIsSelectable)
+                    ekm = QtWidgets.QTableWidgetItem(i['Endkilometerstand'])
+                    ekm.setFlags( QtCore.Qt.ItemIsSelectable)
+                    gkm = QtWidgets.QTableWidgetItem(i['gefahrene Kilometer'])
+                    gkm.setFlags( QtCore.Qt.ItemIsSelectable)
+                    adf = QtWidgets.QTableWidgetItem(i['Art der Fahrt'])
+                    adf.setFlags( QtCore.Qt.ItemIsSelectable)
+                    zdf = QtWidgets.QTableWidgetItem(i['Zweck der Fahrt'])
+                    zdf.setFlags( QtCore.Qt.ItemIsSelectable)
+                    fa = QtWidgets.QTableWidgetItem(i['Fahrtanfang'])
+                    fa.setFlags( QtCore.Qt.ItemIsSelectable)
+                    fe = QtWidgets.QTableWidgetItem(i['Fahrtende'])
+                    fe.setFlags( QtCore.Qt.ItemIsSelectable)
+                    window.table.setItem(pos,1,name)
+                    window.table.setItem(pos,2,date)
+                    window.table.setItem(pos,3,skm)
+                    window.table.setItem(pos,4,ekm)
+                    window.table.setItem(pos,5,gkm)
+                    window.table.setItem(pos,6,adf)
+                    window.table.setItem(pos,7,zdf)
+                    window.table.setItem(pos,8,fa)
+                    window.table.setItem(pos,9,fe)
+                    if i['Bestaetigt'] == 'Ja' :
+                        be = QtWidgets.QTableWidgetItem(i['Bestaetigt'])
+                        be.setFlags( QtCore.Qt.ItemIsSelectable)
+                        window.table.setItem(pos,0,be)
+                    else :
+                        window.listbutton = QtWidgets.QPushButton('bestätigen')
+                        window.listbutton.clicked.connect(lambda : self.backend.signRideAfterwards(self.rideIndex[window.table.currentRow()-1]))
+                        window.listbutton.clicked.connect(lambda : window.table.removeCellWidget(window.table.currentRow(),0))
+                        window.listbutton.clicked.connect(lambda : self.createTableItem(window))
+                        window.table.setCellWidget(pos,0,window.listbutton)
             else :
-                window.listbutton = QtWidgets.QPushButton('bestätigen')
-                window.listbutton.clicked.connect(lambda : self.backend.signRideAfterwards(window.table.currentRow()-1))
-                window.listbutton.clicked.connect(lambda : window.table.removeCellWidget(window.table.currentRow(),0))
-                window.listbutton.clicked.connect(lambda : self.createTableItem(window))
-                window.table.setCellWidget(index,0,window.listbutton)
-                
+                if i['Art der Fahrt'] != 'Privat' or i['Name'] == self.backend.driverInfo['name'] :
+                    self.rideIndex.append(index)
+                    pos = len(self.rideIndex)
+                    name = QtWidgets.QTableWidgetItem(i['Name'])
+                    name.setFlags( QtCore.Qt.ItemIsSelectable)
+                    date = QtWidgets.QTableWidgetItem(i['Datum'])
+                    date.setFlags( QtCore.Qt.ItemIsSelectable)
+                    skm = QtWidgets.QTableWidgetItem(i['Anfangskilometerstand'])
+                    skm.setFlags( QtCore.Qt.ItemIsSelectable)
+                    ekm = QtWidgets.QTableWidgetItem(i['Endkilometerstand'])
+                    ekm.setFlags( QtCore.Qt.ItemIsSelectable)
+                    gkm = QtWidgets.QTableWidgetItem(i['gefahrene Kilometer'])
+                    gkm.setFlags( QtCore.Qt.ItemIsSelectable)
+                    adf = QtWidgets.QTableWidgetItem(i['Art der Fahrt'])
+                    adf.setFlags( QtCore.Qt.ItemIsSelectable)
+                    zdf = QtWidgets.QTableWidgetItem(i['Zweck der Fahrt'])
+                    zdf.setFlags( QtCore.Qt.ItemIsSelectable)
+                    fa = QtWidgets.QTableWidgetItem(i['Fahrtanfang'])
+                    fa.setFlags( QtCore.Qt.ItemIsSelectable)
+                    fe = QtWidgets.QTableWidgetItem(i['Fahrtende'])
+                    fe.setFlags( QtCore.Qt.ItemIsSelectable)
+                    window.table.setItem(pos,1,name)
+                    window.table.setItem(pos,2,date)
+                    window.table.setItem(pos,3,skm)
+                    window.table.setItem(pos,4,ekm)
+                    window.table.setItem(pos,5,gkm)
+                    window.table.setItem(pos,6,adf)
+                    window.table.setItem(pos,7,zdf)
+                    window.table.setItem(pos,8,fa)
+                    window.table.setItem(pos,9,fe)
+                    if i['Bestaetigt'] == 'Ja' :
+                        be = QtWidgets.QTableWidgetItem(i['Bestaetigt'])
+                        be.setFlags( QtCore.Qt.ItemIsSelectable)
+                        window.table.setItem(pos,0,be)
+                    else :
+                        window.listbutton = QtWidgets.QPushButton('bestätigen')
+                        window.listbutton.clicked.connect(lambda : self.backend.signRideAfterwards(self.rideIndex[window.table.currentRow()-1]))
+                        window.listbutton.clicked.connect(lambda : window.table.removeCellWidget(window.table.currentRow(),0))
+                        window.listbutton.clicked.connect(lambda : self.createTableItem(window))
+                        window.table.setCellWidget(pos,0,window.listbutton)
+
             index += 1
-        
+
+        window.table.setRowCount(len(self.rideIndex)+1)
         window.table.verticalHeader().hide()
         window.table.horizontalHeader().hide()
         window.table.resizeColumnsToContents()

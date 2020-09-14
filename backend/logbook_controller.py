@@ -110,7 +110,7 @@ class LogbookController :
             self.lbMonitor.setPurpose(purpose)
 
     def passNameFamilyMember(self):
-        self.lbMonitor.setDriverName(self.driverInfo['name']+ ' Angehörige/r')
+        self.lbMonitor.setDriverName(self.driverInfo['name'])
 
     def startRide(self) :
         self.lbMonitor.newRide()
