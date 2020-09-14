@@ -2,9 +2,9 @@
     "header": [
         {
             "Anfangsdatum": "03.09.2020",
-            "Enddatum": "11.09.2020",
+            "Enddatum": "14.09.2020",
             "Anfangskilometerstand": "71235",
-            "Endkilometerstand": "71239.0",
+            "Endkilometerstand": "71239.4",
             "KFZ-Kennzeichen": "WWP399"
         }
     ],
@@ -103,6 +103,30 @@
             "Zweck der Fahrt": "Extra kauen",
             "Fahrtanfang": "Koblenz, Konrad-Zuse-Stra\u00dfe 1",
             "Fahrtende": "Ransbach-Baumbach, Bergstra\u00dfe 39a",
+            "Bestaetigt": "Ja"
+        },
+        {
+            "Name": "Max Mustermann",
+            "Datum": "14.09.2020",
+            "Anfangskilometerstand": "71239.0",
+            "Endkilometerstand": "71239.1",
+            "gefahrene Kilometer": "0.1",
+            "Art der Fahrt": "Dienstlich",
+            "Zweck der Fahrt": "Trinken",
+            "Fahrtanfang": "Ransbach-Baumbach, Bergstra\u00dfe 39a",
+            "Fahrtende": "M\u00fclheim-K\u00e4rlich, Otto-Hahn-Stra\u00dfe 2-6",
+            "Bestaetigt": "Nein"
+        },
+        {
+            "Name": "Max Mustermann",
+            "Datum": "14.09.2020",
+            "Anfangskilometerstand": "71239.1",
+            "Endkilometerstand": "71239.4",
+            "gefahrene Kilometer": "0.3",
+            "Art der Fahrt": "Privat",
+            "Zweck der Fahrt": "Privat",
+            "Fahrtanfang": "Remagen, Joseph-Rovan-Allee 2",
+            "Fahrtende": "M\u00fclheim-K\u00e4rlich, Otto-Hahn-Stra\u00dfe 2-6",
             "Bestaetigt": "Ja"
         }
     ]

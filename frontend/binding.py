@@ -224,6 +224,7 @@ class Controlling(QtWidgets.QMainWindow):
         self.window.showFullScreen()
         window = Fahrt()
         window.setupUi(self.window)
+        window.Fahrart_andern.clicked.connect(self.backend.endRide)
         window.Fahrart_andern.clicked.connect(self.backend.finishRideWithoutSignature)
         window.Fahrart_andern.clicked.connect(lambda: self.fahrtbeginn(0))
         window.Fahrt_beenden.clicked.connect(self.backend.endRide)
