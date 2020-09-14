@@ -434,6 +434,18 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton_4.clicked.connect(self.home)
         self.close()
 
+    def saveConfig(self,window) :
+        if window.lineEdit.text() != "" and window.lineEdit_2.text() != "" :
+            self.backend.writeLicensePlateAndStartKmToConfig(window.lineEdit.text(),window.lineEdit_2.text())
+            self.adminmenu()
+        else :
+            self.popup = QtWidgets.QWidget()
+            self.popup.ui = Popup()
+            self.popup.ui.setupUi(self.popup)
+            self.popup.ui.label.setText("Bitte beide Felder füllen!")
+            self.popup.move(290,95)
+            self.popup.show()
+
     #kennzeichen
     def kennzeichen(self):
         self.window = QtWidgets.QDialog()
@@ -442,8 +454,7 @@ class Controlling(QtWidgets.QMainWindow):
         self.window.showFullScreen()
         self.window.resize(800,480)
         window.pushButton.clicked.connect(self.adminmenu)
-        window.pushButton_2.clicked.connect(lambda: self.backend.writeLicensePlateAndStartKmToConfig(window.lineEdit.text(),window.lineEdit_2.text()))
-        window.pushButton_2.clicked.connect(self.adminmenu)
+        window.pushButton_2.clicked.connect(lambda: self.saveConfig(window))
         self.close()
 
     def changePicture(self,window) :
@@ -451,6 +462,7 @@ class Controlling(QtWidgets.QMainWindow):
         file = fd.getOpenFileName(None,"choose a picture",os.getcwd(),"Images (*.png *.xpm *.jpg)" )[0]
         if file == "" :
             if window.PIC.text() == "" :
+                window.PIC.setText("defaultUser.png")
                 pixmap = QtGui.QPixmap("defaultUser.png")
                 window.label.setPixmap(pixmap.scaled(150,150))
         else :    
@@ -458,6 +470,53 @@ class Controlling(QtWidgets.QMainWindow):
             pixmap = QtGui.QPixmap(file)
             window.label.setPixmap(pixmap.scaled(150,150))
         
+    def addAccount(self, window) :
+        if window.Name.text() != "" and window.Name.text() != "Name" and window.Adresse.text() != "Adresse" and window.Adresse.text() != "" :
+            if window.PIC.text() == "" :
+                window.PIC.setText("defaultUser.png")
+                pixmap = QtGui.QPixmap("defaultUser.png")
+                window.label.setPixmap(pixmap.scaled(150,150))
+            if len(window.PIN_feld.text()) == 4 :
+                self.backend.addAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.text())
+                self.mitarbeiter_verwalten()
+            else :
+                self.popup = QtWidgets.QWidget()
+                self.popup.ui = Popup()
+                self.popup.ui.setupUi(self.popup)
+                self.popup.ui.label.setText("Pin muss 4-stellig sein!")
+                self.popup.move(290,95)
+                self.popup.show()
+        else :
+            self.popup = QtWidgets.QWidget()
+            self.popup.ui = Popup()
+            self.popup.ui.setupUi(self.popup)
+            self.popup.ui.label.setText("Bitte alle Felder füllen!")
+            self.popup.move(290,95)
+            self.popup.show()
+
+    def editAccount (self, window) :
+        if window.Name.text() != "" and window.Name.text() != "Name" and window.Adresse.text() != "Adresse" and window.Adresse.text() != "" :
+            if window.PIC.text() == "" :
+                window.PIC.setText("defaultUser.png")
+                pixmap = QtGui.QPixmap("defaultUser.png")
+                window.label.setPixmap(pixmap.scaled(150,150))
+            if len(window.PIN_feld.text()) == 4 :
+                self.backend.editAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.text())
+                self.mitarbeiter_verwalten()
+            else :
+                self.popup = QtWidgets.QWidget()
+                self.popup.ui = Popup()
+                self.popup.ui.setupUi(self.popup)
+                self.popup.ui.label.setText("Pin muss 4-stellig sein!")
+                self.popup.move(290,95)
+                self.popup.show()
+        else :
+            self.popup = QtWidgets.QWidget()
+            self.popup.ui = Popup()
+            self.popup.ui.setupUi(self.popup)
+            self.popup.ui.label.setText("Bitte alle Felder füllen!")
+            self.popup.move(290,95)
+            self.popup.show()
     
     #mitarbeiter_anlegen
     def mitarbeiter_anlegen(self, account = None):
@@ -474,13 +533,11 @@ class Controlling(QtWidgets.QMainWindow):
             window.label.setPixmap(pixmap.scaled(150,150))
             window.dir_button.clicked.connect(lambda: self.changePicture(window))
             window.pushButton.clicked.connect(self.mitarbeiter_verwalten)
-            window.pushButton_2.clicked.connect(lambda :self.backend.editAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.text()))
-            window.pushButton_2.clicked.connect(self.mitarbeiter_verwalten)
+            window.pushButton_2.clicked.connect(lambda :self.editAccount(window))
         else:
             window.dir_button.clicked.connect(lambda: self.changePicture(window))
             window.pushButton.clicked.connect(self.mitarbeiter_verwalten)
-            window.pushButton_2.clicked.connect(lambda :self.backend.addAccount(window.Name.text(),window.PIC.text(),window.PIN_feld.text(),window.Adresse.text()))
-            window.pushButton_2.clicked.connect(self.mitarbeiter_verwalten)
+            window.pushButton_2.clicked.connect(lambda : self.addAccount(window))
         self.close()
 
     def accountSelection(self,window) :
