@@ -468,7 +468,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.setupUi(self.window)
         self.window.showFullScreen()
         self.window.resize(800,480)
-        window.pushButton.clicked.connect(self.adminmenu)
+        window.pushButton.clicked.connect(lambda: self.adminmenu(1))
         window.pushButton_2.clicked.connect(lambda: self.saveConfig(window))
         self.close()
 
