@@ -162,14 +162,15 @@ class LogbookMonitor :
 
     # check if there are usnigned rides
     def checkUnsignedRides(self) :
+        self.loadLogbook()
         for p in self.logbook['rides'] :
             if p['Bestaetigt'] == 'Nein' :
                 return True
-        
         return False
 
     # sign all unsigned rides
     def signAllUnsignedRides(self) :
+        self.loadLogbook()
         for p in self.logbook['rides'] :
             if p['Bestaetigt'] == 'Nein' :
                 self.signRideAfterwards(self.logbook['rides'].index(p))

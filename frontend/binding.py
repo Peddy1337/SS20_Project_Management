@@ -153,7 +153,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.Buch.clicked.connect(lambda: self.fahrtenliste(0))
         window.comboBox.activated.connect(
             lambda: self.indexChanged(window))
-        if self.backend.checkIfUnsignedRides :
+        if self.backend.checkIfUnsignedRides() :
             self.popup = QtWidgets.QWidget()
             self.popup.ui = Popup()
             self.popup.ui.setupUi(self.popup)
