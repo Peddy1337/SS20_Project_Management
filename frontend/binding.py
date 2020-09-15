@@ -200,7 +200,7 @@ class Controlling(QtWidgets.QMainWindow):
         window = adminmenu()
         window.setupUi(self.window)
         window.Mitarbeiter_verwalten.clicked.connect(self.mitarbeiter_verwalten)
-        window.pushButton_2.clicked.connect(self.kennzeichen)
+        window.pushButton_2.clicked.connect(lambda : self.kennzeichen(modus))
         window.Daten_auslesen.clicked.connect(self.export)
         if modus == 1:
             window.zuruck.clicked.connect(self.auswahl)
@@ -473,10 +473,10 @@ class Controlling(QtWidgets.QMainWindow):
         window.pushButton_4.clicked.connect(self.home)
         self.close()
 
-    def saveConfig(self,window) :
+    def saveConfig(self,window,modus) :
         if window.lineEdit.text() != "" and window.lineEdit_2.text() != "" :
             self.backend.writeLicensePlateAndStartKmToConfig(window.lineEdit.text(),window.lineEdit_2.text())
-            self.adminmenu()
+            self.adminmenu(modus)
         else :
             self.popup = QtWidgets.QWidget()
             self.popup.ui = Popup()
@@ -486,14 +486,14 @@ class Controlling(QtWidgets.QMainWindow):
             self.popup.show()
 
     #kennzeichen
-    def kennzeichen(self):
+    def kennzeichen(self,modus):
         self.window = QtWidgets.QDialog()
         window = Kennzeichen()
         window.setupUi(self.window)
         self.window.showFullScreen()
         self.window.resize(800,480)
-        window.pushButton.clicked.connect(lambda: self.adminmenu(1))
-        window.pushButton_2.clicked.connect(lambda: self.saveConfig(window))
+        window.pushButton.clicked.connect(lambda: self.adminmenu(modus))
+        window.pushButton_2.clicked.connect(lambda: self.saveConfig(window,modus))
         self.close()
 
     def changePicture(self,window) :
