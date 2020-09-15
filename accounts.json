@@ -1,0 +1,10 @@
+{
+    "accounts": [
+        {
+            "name": "Max Mustermann",
+            "picture": "C:/git/semester_project/SS20_Project_Management/defaultUser.png",
+            "pin": "0000",
+            "adress": "Kappa1234"
+        }
+    ]
+}
