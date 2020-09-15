@@ -18,7 +18,7 @@ class LogbookMonitor :
         self.startKm = ''
         self.endKm = 0
         self.routeKm = 0
-        self.sleepTime = 5
+        self.sleepTime = 1
         self.rSim = backend.route_simulator.RouteSimulator()
         self.jRW = backend.json_reader_writer.JsonReaderWriter(self.file)
         self.updateThread = threading.Thread(target = self.update , args=())
@@ -48,7 +48,7 @@ class LogbookMonitor :
     def getPlace(self, without = None) :
         return self.rSim.randomPlace(without)
 
-    # update routeKm every 5 seconds
+    # update routeKm every 1 second/s
     def update(self) :
         while self.rideStarted :
             self.rSim.tlock.acquire()

@@ -5,7 +5,7 @@ import random
 class RouteSimulator :
     def __init__(self) :
         self.routeKm = 0
-        self.sleepTime = 5
+        self.sleepTime = 1
         self.running = False
         self.simThread = threading.Thread(target = self.simulate , args=())
         self.tlock = threading.Lock()
@@ -27,7 +27,7 @@ class RouteSimulator :
     def simulate(self) :
         while self.running :
             self.tlock.acquire()
-            self.routeKm += 0.1 # this is equal to 72 km/h
+            self.routeKm += 0.1 # this is equal to 360 km/h
             self.tlock.release()
             time.sleep(self.sleepTime)
             
