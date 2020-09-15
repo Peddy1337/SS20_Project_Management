@@ -20,7 +20,8 @@ class Unter25(object):
 "    background-color: #006600;\n"
 "    border-style: inset;\n"
 "    border-color:black;\n"
-"    border-width: 1px;}")
+"    border-width: 1px;\n"
+"    border-radius: 15px;}")
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(0, 70, 800, 140))
         font = QtGui.QFont()

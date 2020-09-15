@@ -16,7 +16,8 @@ class Keyboard(object):
 "    background-color: #006600;\n"
 "    border-style: inset;\n"
 "    border-color:black;\n"
-"    border-width: 1px;}")
+"    border-width: 1px;\n"
+"    border-radius: 15px;}")
         self.lL = []
         Dialog.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.Popup)
         self.b1 = QtWidgets.QPushButton(Dialog)

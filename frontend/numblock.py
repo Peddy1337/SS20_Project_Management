@@ -18,7 +18,8 @@ class Ui_Form(object):
 "    background-color: #4FC44F;\n"
 "    border-style: inset;\n"
 "    border-color:black;\n"
-"    border-width: 1px;}")
+"    border-width: 1px;\n"
+"    border-radius: 15px;}")
         Form.setWindowFlags(QtCore.Qt.FramelessWindowHint| QtCore.Qt.Popup)
         self.pushButton = QtWidgets.QPushButton(Form)
         self.pushButton.setGeometry(QtCore.QRect(10, 10, 60, 60))

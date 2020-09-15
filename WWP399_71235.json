@@ -2,9 +2,9 @@
     "header": [
         {
             "Anfangsdatum": "03.09.2020",
-            "Enddatum": "14.09.2020",
+            "Enddatum": "15.09.2020",
             "Anfangskilometerstand": "71235",
-            "Endkilometerstand": "71239.4",
+            "Endkilometerstand": "71240.1",
             "KFZ-Kennzeichen": "WWP399"
         }
     ],
@@ -67,7 +67,7 @@
             "Zweck der Fahrt": "zur Arbeit",
             "Fahrtanfang": "Koblenz-G\u00fcls, Am Zehnthof 12",
             "Fahrtende": "Remagen, Joseph-Rovan-Allee 6",
-            "Bestaetigt": "Nein"
+            "Bestaetigt": "Ja"
         },
         {
             "Name": "Max Mustermann",
@@ -98,7 +98,7 @@
             "Datum": "11.09.2020",
             "Anfangskilometerstand": "71238.7",
             "Endkilometerstand": "71239.0",
-            "gefahrene Kilometer": "0.4",
+            "gefahrene Kilometer": "0.3",
             "Art der Fahrt": "Dienstlich",
             "Zweck der Fahrt": "Extra kauen",
             "Fahrtanfang": "Koblenz, Konrad-Zuse-Stra\u00dfe 1",
@@ -115,7 +115,7 @@
             "Zweck der Fahrt": "Trinken",
             "Fahrtanfang": "Ransbach-Baumbach, Bergstra\u00dfe 39a",
             "Fahrtende": "M\u00fclheim-K\u00e4rlich, Otto-Hahn-Stra\u00dfe 2-6",
-            "Bestaetigt": "Nein"
+            "Bestaetigt": "Ja"
         },
         {
             "Name": "Max Mustermann",
@@ -127,6 +127,42 @@
             "Zweck der Fahrt": "Privat",
             "Fahrtanfang": "Remagen, Joseph-Rovan-Allee 2",
             "Fahrtende": "M\u00fclheim-K\u00e4rlich, Otto-Hahn-Stra\u00dfe 2-6",
+            "Bestaetigt": "Ja"
+        },
+        {
+            "Name": "Max Mustermann",
+            "Datum": "15.09.2020",
+            "Anfangskilometerstand": "71239.4",
+            "Endkilometerstand": "71239.5",
+            "gefahrene Kilometer": "0.1",
+            "Art der Fahrt": "Privat",
+            "Zweck der Fahrt": "Privat",
+            "Fahrtanfang": "Koblenz-G\u00fcls, Am Zehnthof 12",
+            "Fahrtende": "Koblenz, Konrad-Zuse-Stra\u00dfe 1",
+            "Bestaetigt": "Ja"
+        },
+        {
+            "Name": "Max Mustermann",
+            "Datum": "15.09.2020",
+            "Anfangskilometerstand": "71239.5",
+            "Endkilometerstand": "71239.8",
+            "gefahrene Kilometer": "0.3",
+            "Art der Fahrt": "zur Arbeit",
+            "Zweck der Fahrt": "zur Arbeit",
+            "Fahrtanfang": "Koblenz, Bahnhofplatz 2",
+            "Fahrtende": "Remagen, Joseph-Rovan-Allee 6",
+            "Bestaetigt": "Ja"
+        },
+        {
+            "Name": "Max Mustermann",
+            "Datum": "15.09.2020",
+            "Anfangskilometerstand": "71239.8",
+            "Endkilometerstand": "71240.1",
+            "gefahrene Kilometer": "0.3",
+            "Art der Fahrt": "nach Hause",
+            "Zweck der Fahrt": "nach Hause",
+            "Fahrtanfang": "M\u00fclheim-K\u00e4rlich, Otto-Hahn-Stra\u00dfe 2-6",
+            "Fahrtende": "Kappa1234",
             "Bestaetigt": "Ja"
         }
     ]

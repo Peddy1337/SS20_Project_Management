@@ -20,7 +20,8 @@ class Fahrten_Liste(object):
 "    background-color: #006600;\n"
 "    border-style: inset;\n"
 "    border-color:black;\n"
-"    border-width: 1px;}\n"
+"    border-width: 1px;\n"
+"    border-radius: 15px;}"
 "QLineEdit, QLabel{\n"
 "    color: #FFFFCC;}")
         self.horizontalLayoutWidget = QtWidgets.QWidget(Dialog)

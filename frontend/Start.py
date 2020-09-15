@@ -20,7 +20,8 @@ class Start(object):
 "    background-color: #006600;\n"
 "    border-style: inset;\n"
 "    border-color:black;\n"
-"    border-width: 1px;}")
+"    border-width: 1px;\n"
+"    border-radius: 15px;}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)

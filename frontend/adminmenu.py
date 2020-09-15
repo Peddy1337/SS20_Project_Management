@@ -18,9 +18,10 @@ class adminmenu(object):
 "QPushButton{\n"
 "    color: #FFFFCC; \n"
 "    background-color: #006600;\n"
-"    border-style: inset;\n"
+"    border-style: solid;\n"
 "    border-color:black;\n"
-"    border-width: 1px;}")
+"    border-width: 1px;\n"
+"    border-radius: 15px;}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Mitarbeiter_verwalten = QtWidgets.QPushButton(self.centralwidget)
