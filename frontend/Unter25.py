@@ -25,7 +25,7 @@ class Unter25(object):
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(0, 70, 800, 140))
         font = QtGui.QFont()
-        font.setPointSize(40)
+        font.setPointSize(32)
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.label.setWordWrap(True)
@@ -43,7 +43,7 @@ class Unter25(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label.setText(_translate("Dialog", "Fur Fahrer unter 25 gilt kein Versicherungsschutz!!!"))
+        self.label.setText(_translate("Dialog", "Für Fahrer unter 25 gilt kein Versicherungsschutz!!!"))
         self.zuruck.setText(_translate("Dialog", "Zurück"))
 
 
