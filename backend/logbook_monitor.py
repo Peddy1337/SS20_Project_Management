@@ -15,7 +15,7 @@ class LogbookMonitor :
         self.purpose = ''
         self.signed = False
         self.date = ''
-        self.startKm = ''
+        self.startKm = 0
         self.endKm = 0
         self.routeKm = 0
         self.sleepTime = 1
