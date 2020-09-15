@@ -18,12 +18,15 @@ from frontend.Mitarbeiter_verwalten import Mitarbeiter_verwalten
 from frontend.Profilauswahl import Profilauswahl
 from frontend.Kennzeichen import Kennzeichen
 from frontend.infoPopup import Popup
+from frontend.blank import Blank
 from backend.logbook_controller import LogbookController
 
 class Controlling(QtWidgets.QMainWindow):
         
     def __init__(self, parent=None):
         self.backend = LogbookController()
+        self.bg = QtWidgets.QMainWindow()
+        self.blank()
         super(Controlling, self).__init__(parent)
 
         start = Start()
@@ -265,6 +268,13 @@ class Controlling(QtWidgets.QMainWindow):
             self.backend.startRide()
             self.fahrt()
 
+    def blank(self) :
+        self.window = QtWidgets.QDialog(self.bg)
+        window = Blank()
+        window.setupUi(self.window)
+        self.window.showFullScreen()
+        self.window.resize(800,480)
+    
     def createTableItem(self,window) :
         be = QtWidgets.QTableWidgetItem('Ja')
         be.setFlags( QtCore.Qt.NoItemFlags)
