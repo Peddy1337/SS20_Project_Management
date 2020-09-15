@@ -222,20 +222,20 @@ class Controlling(QtWidgets.QMainWindow):
         self.close()
 
     #fahrt
-    def fahrt(self):
+    def fahrt(self, modus):
         self.window = QtWidgets.QMainWindow()
         self.window.showFullScreen()
         window = Fahrt()
         window.setupUi(self.window)
-        window.Fahrart_andern.clicked.connect(self.backend.endRide)
-        window.Fahrart_andern.clicked.connect(self.backend.finishRideWithoutSignature)
-        window.Fahrart_andern.clicked.connect(lambda: self.fahrtbeginn(0))
+        window.Fahrart_andern.clicked.connect(lambda: self.fahrtbeginn(3))
         window.Fahrt_beenden.clicked.connect(self.backend.endRide)
         window.Fahrt_beenden.clicked.connect(self.fahrtende)
         window.Name.setText(self.backend.lbMonitor.name)
         window.Art_der_Fahrt.setText(self.backend.lbMonitor.typeOfRide)
         window.Datum_feld.setText(self.backend.lbMonitor.date)
         window.Anfangs_KM_feld.setText(self.backend.lbMonitor.skm)
+        if modus == 1 :
+            window.Fahrart_andern.hide()
         self.close()
 
     #fahrtbeginn
@@ -251,22 +251,31 @@ class Controlling(QtWidgets.QMainWindow):
             window.Zuruck.clicked.connect(self.home)
         elif back == 0:
             window.Zuruck.clicked.connect(self.home)
-        window.Bestatigen.clicked.connect(lambda: self.changed(window))
+        else :
+            window.Zuruck.clicked.connect(lambda: self.fahrt(0))
+        window.Bestatigen.clicked.connect(lambda: self.changed(window, back))
         self.close()
 
     #Hilfsfunktion combobox 
-    def changed(self,window):
+    def changed(self,window, modus):
         text = window.comboBox.currentText()
         if text == "Dienstlich":
-            self.backend.setTypeOfRide(text)
-            self.zweck()
+            self.zweck(modus)
         elif text == "Art der Fahrt":
             window.textandern.setHidden(False)
-        else:
+        elif modus == 2 :
             self.backend.setTypeOfRide(text)
             self.backend.setPurpose(text)
             self.backend.startRide()
-            self.fahrt()
+            self.fahrt(1)
+        else:
+            if modus == 3 :
+                self.backend.endRide()
+                self.backend.finishRideWithoutSignature()
+            self.backend.setTypeOfRide(text)
+            self.backend.setPurpose(text)
+            self.backend.startRide()
+            self.fahrt(0)
 
     def blank(self) :
         self.window = QtWidgets.QDialog(self.bg)
@@ -611,19 +620,27 @@ class Controlling(QtWidgets.QMainWindow):
         window.zuruck.clicked.connect(self.home)
         self.close()
 
-    def zweckSelection(self,window) :
+    def zweckSelection(self,window,modus) :
         if window.lineEdit.text() != "Zweck der Fahrt" and window.lineEdit.text() != "" :
+            if modus == 3 :
+                self.backend.endRide()
+                self.backend.finishRideWithoutSignature()
+            self.backend.setTypeOfRide('Dienstlich')
             self.backend.addPurposes(window.lineEdit.text())
             self.backend.setPurpose(window.lineEdit.text())
             self.backend.startRide()
-            self.fahrt()
+            self.fahrt(0)
         elif len(window.listView.selectedItems()) != 0 :
+            if modus == 3 :
+                self.backend.endRide()
+                self.backend.finishRideWithoutSignature()
+            self.backend.setTypeOfRide('Dienstlich')
             self.backend.setPurpose(window.listView.currentItem().text())
             self.backend.startRide()
-            self.fahrt()
+            self.fahrt(0)
 
     #zweck
-    def zweck(self):
+    def zweck(self, modus):
         self.window = QtWidgets.QDialog()
         window = Zweck()
         window.setupUi(self.window)
@@ -637,6 +654,6 @@ class Controlling(QtWidgets.QMainWindow):
             listItem.setTextAlignment(0x0004)
             listItem.setFont(QtGui.QFont("MS Shell Dlg 2",17))
             window.listView.addItem(listItem)
-        window.pushButton.clicked.connect(self.fahrtbeginn)
-        window.pushButton_2.clicked.connect(lambda:self.zweckSelection(window))
+        window.pushButton.clicked.connect(lambda: self.fahrtbeginn(modus))
+        window.pushButton_2.clicked.connect(lambda:self.zweckSelection(window,modus))
         self.close()

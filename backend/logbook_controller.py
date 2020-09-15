@@ -116,11 +116,11 @@ class LogbookController :
         self.lbMonitor.newRide()
 
     def endRide(self) :
-        if self.lbMonitor.typeOfRide == 'Dienstlich' or self.lbMonitor.typeOfRide == 'Privat' :
+        if self.lbMonitor.currentRide['Art der Fahrt'] == 'Dienstlich' or self.lbMonitor.currentRide['Art der Fahrt'] == 'Privat' :
             self.lbMonitor.endRide()
-        elif self.lbMonitor.typeOfRide == 'nach Hause' :
+        elif self.lbMonitor.currentRide['Art der Fahrt'] == 'nach Hause' :
             self.lbMonitor.endRide(self.driverInfo['adress'])
-        elif self.lbMonitor.typeOfRide == 'zur Arbeit' :
+        elif self.lbMonitor.currentRide['Art der Fahrt'] == 'zur Arbeit' :
             self.lbMonitor.endRide(self.workAdress)
         else :
             print('Type of Ride doesnt match known types\n')
