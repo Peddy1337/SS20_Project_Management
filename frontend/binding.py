@@ -232,7 +232,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.Name.setText(self.backend.lbMonitor.name)
         window.Art_der_Fahrt.setText(self.backend.lbMonitor.typeOfRide)
         window.Datum_feld.setText(self.backend.lbMonitor.date)
-        window.Anfangs_KM_feld.setText(self.backend.lbMonitor.startKm)
+        window.Anfangs_KM_feld.setText(self.backend.lbMonitor.skm)
         self.close()
 
     #fahrtbeginn
@@ -438,7 +438,7 @@ class Controlling(QtWidgets.QMainWindow):
         window.setupUi(self.window)
         self.window.showFullScreen()
         self.window.resize(800,480)
-        window.End_KMStand_feld.setText(self.backend.lbMonitor.endKm)
+        window.End_KMStand_feld.setText(self.backend.lbMonitor.ekm)
         window.plus.clicked.connect(self.backend.adjustKmPositive)
         window.plus.clicked.connect(lambda: window.End_KMStand_feld.setText(self.backend.lbMonitor.endKm))
         window.minus.clicked.connect(self.backend.adjustKmNegative)

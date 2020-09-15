@@ -4,7 +4,7 @@
             "Anfangsdatum": "03.09.2020",
             "Enddatum": "15.09.2020",
             "Anfangskilometerstand": "71235",
-            "Endkilometerstand": "71240.1",
+            "Endkilometerstand": "71240.3",
             "KFZ-Kennzeichen": "WWP399"
         }
     ],
@@ -163,6 +163,18 @@
             "Zweck der Fahrt": "nach Hause",
             "Fahrtanfang": "M\u00fclheim-K\u00e4rlich, Otto-Hahn-Stra\u00dfe 2-6",
             "Fahrtende": "Kappa1234",
+            "Bestaetigt": "Ja"
+        },
+        {
+            "Name": "Max Mustermann",
+            "Datum": "15.09.2020",
+            "Anfangskilometerstand": "71240.1",
+            "Endkilometerstand": "71240.3",
+            "gefahrene Kilometer": "0.2",
+            "Art der Fahrt": "Dienstlich",
+            "Zweck der Fahrt": "Kundentermin",
+            "Fahrtanfang": "Ransbach-Baumbach, Bergstra\u00dfe 39a",
+            "Fahrtende": "Koblenz-G\u00fcls, Am Zehnthof 12",
             "Bestaetigt": "Ja"
         }
     ]

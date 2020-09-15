@@ -16,8 +16,8 @@ class LogbookMonitor :
         self.signed = False
         self.date = ''
         self.startKm = ''
-        self.endKm = ''
-        self.routeKm = ''
+        self.endKm = 0
+        self.routeKm = 0
         self.sleepTime = 5
         self.rSim = backend.route_simulator.RouteSimulator()
         self.jRW = backend.json_reader_writer.JsonReaderWriter(self.file)
@@ -39,7 +39,8 @@ class LogbookMonitor :
     def updateStartKm(self) :
         self.loadLogbook()
         # startKm needs to be set to the endKm of the last ride
-        self.startKm = self.logbook['header'][0]['Endkilometerstand']
+        self.skm = self.logbook['header'][0]['Endkilometerstand']
+        self.startKm = float(self.skm)
 
     def updateDate(self) :
         self.date = datetime.today().strftime('%d.%m.%Y')
@@ -51,9 +52,7 @@ class LogbookMonitor :
     def update(self) :
         while self.rideStarted :
             self.rSim.tlock.acquire()
-            self.routeKm = str(self.rSim.routeKm)
-            index = self.routeKm.find('.')
-            self.routeKm = self.routeKm[0:index+2:]
+            self.routeKm = self.rSim.routeKm
             self.rSim.tlock.release()
             time.sleep(self.sleepTime)
 
@@ -62,11 +61,13 @@ class LogbookMonitor :
         self.rideStarted = True
         self.updateStartKm()
         self.updateDate()
+        index = self.skm.find('.')
+        self.skm = self.skm[0:index+2:]
         self.startPlace = place or self.getPlace()
         self.currentRide = {
             'Name' : self.name,
             'Datum' : self.date,
-            'Anfangskilometerstand' : self.startKm,
+            'Anfangskilometerstand' : self.skm,
             'Endkilometerstand' : '0',
             'gefahrene Kilometer' : '0',
             'Art der Fahrt' : self.typeOfRide,
@@ -80,9 +81,7 @@ class LogbookMonitor :
 
     # calculate endKm from startKm and routeKm
     def calculateKm(self) :
-        self.endKm = str(float(self.startKm) +  float(self.routeKm))
-        index = self.endKm.find('.')
-        self.endKm = self.endKm[0:index+2:]
+        self.endKm = self.startKm + self.routeKm
 
     # check if signed is set and return the corresponding string
     def applySignature(self) :
@@ -94,14 +93,16 @@ class LogbookMonitor :
     # adjustment stop for endKm
     def adjustEndKm(self,adjustment) :
         # adjustment should be of type float
-        self.endKm = str(float(self.endKm)+ adjustment)
-        index = self.endKm.find('.')
-        self.endKm = self.endKm[0:index+2:]
-        self.currentRide['Endkilometerstand'] = self.endKm
-        self.routeKm = str(float(self.routeKm)+ adjustment)
-        index = self.routeKm.find('.')
-        self.routeKm = self.routeKm[0:index+2:]
-        self.currentRide['gefahrene Kilometer'] = self.routeKm
+        self.endKm = self.endKm + adjustment
+        self.ekm = str(self.endKm)
+        index = self.ekm.find('.')
+        self.ekm = self.ekm[0:index+2:]
+        self.currentRide['Endkilometerstand'] = self.ekm
+        self.routeKm = self.routeKm + adjustment
+        self.rkm = str(self.routeKm)
+        index = self.rkm.find('.')
+        self.rkm = self.rkm[0:index+2:]
+        self.currentRide['gefahrene Kilometer'] = self.rkm
 
     # stop ride and stop both threads
     def endRide(self, place = None) :
@@ -110,14 +111,20 @@ class LogbookMonitor :
         self.rSim.stopThread()
         self.updateThread = threading.Thread(target = self.update , args=())
         self.calculateKm()
-        self.currentRide['Endkilometerstand'] = self.endKm
-        self.currentRide['gefahrene Kilometer'] = self.routeKm
+        self.ekm = str(self.endKm)
+        index = self.ekm.find('.')
+        self.ekm = self.ekm[0:index+2:]
+        self.rkm = str(self.routeKm)
+        index = self.rkm.find('.')
+        self.rkm = self.rkm[0:index+2:]
+        self.currentRide['Endkilometerstand'] = self.ekm
+        self.currentRide['gefahrene Kilometer'] = self.rkm
         self.currentRide['Fahrtende'] = place or self.getPlace(self.startPlace)
 
     # document ride to json file
     def documentRide(self) :
         self.currentRide['Bestaetigt'] = self.applySignature()
-        self.updateHeader(self.endKm)
+        self.updateHeader(self.ekm)
         self.jRW.writeRideToJson(self.currentRide['Name'],
                                  self.currentRide['Datum'],
                                  self.currentRide['Anfangskilometerstand'],
